@@ -1,0 +1,329 @@
+# -*- mode:python;indent-tabs-mode:t;show-trailing-whitespace:t; -*-
+#
+# Project settings for rosetta sources
+# (c) Copyright Rosetta Commons Member Institutions.
+# (c) This file is part of the Rosetta software suite and is made available under license.
+# (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+# (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+# (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+#This source settings file is for public and curated applications only
+#For pilot apps please see pilot_apps.src.settings.template
+#for instructions
+
+#NOTE public and curated apps cannot depend on sources in the devel project.
+#Sources in the devel project are experimental protocols and thus may be
+#unstable
+
+#Each time you add a source for an application to this list please add
+#a comment giving the location of the documentation for this application.
+#Public applications require an command line and tutorial.
+#Curated applications require a command line, tutorial, a description of
+#the scientific benchmark, a literature reference if the application has
+#been published, and the revision number from trunk with which the
+#benchmark was completed..
+#
+# Helpful hint: if you don't want to compile everything in here, create a apps.src.settings.my file.
+#  When using cmake, this file will override the current .settings file as the list of .cc files to compile
+#  It will not be checked into git (it is listed in .gitignore).
+#  When ready for primetime, move your apps into this .settings file.
+#
+
+########### KEEP DIRECTORIES AND FILES IN ALPHABETICAL ORDER ###########
+
+sources = {
+	"": [
+	],
+	"benchmark": [
+		"performance/performance_benchmark",
+	],
+	"benchmark/scientific": [
+		"ddg_benchmark",
+		"design_contrast_and_statistic",
+		"rotamer_recovery",
+	],
+	"public": [
+		"AbinitioRelax",
+		"backrub",
+		"calculate_sasa",
+		"combine_silent",
+		"extract_pdbs",
+		"fragment_picker",
+		"idealize_jd2",
+		"minimize",
+		"minimize_ppi",
+		"packstat",
+		"relax",
+		"remodel",
+		"sequence_tolerance",
+		"SymDock",
+		"vip",
+		"struc_set_fragment_picker",
+		"pH_protocol",
+	],
+	"public/analysis": [
+		"batch_distances",
+		"contactMap",
+		"cst_info",
+                "ensemble_analysis",
+                "fast_clustering",
+		"InterfaceAnalyzer",
+		"PeptideDeriver",
+		"per_residue_energies",
+		"residue_energy_breakdown",
+		"score",
+		"score_jd2",
+	],
+	"public/antibody": [
+		"antibody",
+		"antibody_legacy",
+		"antibody_graft",
+		"antibody_H3",
+		"antibody_numbering_converter",
+		"antibody_CR_paratope",
+		"snugdock",
+		"packing_angle",
+		"identify_cdr_clusters",
+	],
+	"public/boinc": [
+		"minirosetta",
+		"minirosetta_graphics",
+	],
+	"public/clustering": [
+		"calibur",
+		"cluster",
+	],
+	"public/comparative_modeling": [
+		"cluster_alns",
+		#"fast_cm",
+		"fix_alignment_to_match_pdb",
+		"full_length_model",
+		"partial_thread",
+		"score_aln",
+		"score_aln2",
+		"super_aln",
+		"template_features",
+		"validate_silent",
+	],
+	"public/coupled_moves": [
+		"coupled_moves",
+	],
+	"public/cyclic_peptide": [
+		"simple_cycpep_predict",
+	],
+	"public/darc": [
+		"DARC",
+		"make_ray_files",
+		"theta_ligand",
+	],
+	"public/ddg": [
+		"ddg_monomer",
+		"ensemble_generator_score12_sidechain_ver2",
+		"minimize_with_cst",
+		"cartesian_ddg",
+	],
+	"public/design": [
+		"fixbb",
+		"mpi_msd",
+		"pmut_scan_parallel",
+		"sequence_recovery",
+		"beta_peptide_modeling",
+		"rna_design",
+		"supercharge",
+		"zinc_heterodimer_design",
+		#"zinc1_homodimer_setup", #protein interface with one zinc
+		#"zinc1_homodimer_design",
+		"zinc2_homodimer_setup",  #protein interface with two zincs
+		"zinc2_homodimer_design",
+	],
+	"public/docking": [
+		"docking_prepack_protocol",
+		"docking_protocol",
+	],
+	"public/electron_density": [
+		"denovo_density",
+		"density_tools",
+		"mr_protocols",
+	],
+	"public/enzdes": [
+		"CstfileToTheozymePDB",
+		"enzyme_design",
+	],
+	"public/farna": [
+		"rna_cluster",
+		"rna_database",
+		"rna_denovo",
+		"rna_extract",
+		"rna_minimize",
+		"rna_score",
+		"cs_rosetta_rna"
+	],
+	"public/fiber_diffraction": [
+		"FiberDiffractionFreeSet",
+	],
+	"public/flexpep_docking": [
+		"BuildPeptide",
+		"FlexPepDocking", # /* Barak,doc/public/flexpep_docking/barak/FlexPepDocking.dox, test/integration/tests/flexpepdock/ */
+	],
+	"public/interface_design/anchored_design": [
+		"AnchoredDesign", # /* Steven Lewis, doc/apps/pilot/smlewis/anchored_design.dox, test/integration/tests/anchored_design/ */
+		"AnchoredPDBCreator", # /* Steven Lewis, doc/apps/pilot/smlewis/AnchoredPDBCreator.dox, test/integration/tests/AnchoredPDBCreator/ */
+		"AnchorFinder", # /* Steven Lewis, doc/apps/pilot/smlewis/AnchorFinder.dox, test/integration/tests/AnchorFinder/ */
+	],
+	"public/internal": [
+		"validate_database",
+	],
+	"public/ligand_docking": [
+		"extract_atomtree_diffs",
+		"ligand_dock",
+		"ligand_rpkmin",
+		"select_best_unique_ligand_poses", # /* Ian Davis/Rocco Moretti, doc/apps/public/ligand_dock.dox, test/integration/tests/select_best_unique_ligand_poses/ */
+	],
+	"public/loop_modeling": [
+		"loopmodel",
+	],
+	"public/match": [
+		"gen_apo_grids",
+		"gen_lig_grids",
+		"match",
+	],
+	"public/magnesium" : [
+		"mg_modeler", # Rhiju Das, 2015.
+	],
+	"public/membrane" : [
+		"helix_from_sequence",
+		"mp_dock",
+		"mp_dock_setup",
+		"mp_lipid_acc",
+		"mp_mutate_relax",
+		"mp_range_relax",
+		"mp_transform",
+		"mp_symdock",
+		"mp_span_from_pdb",
+		"mp_viewer",
+	],
+	"public/membrane_abinitio": [
+		"membrane_abinitio2",
+	],
+	"public/motif_tools": [
+		"extract_motifs",
+		"incorporate_motifs",
+	],
+	"public/ncaa_utilities": [
+		"MakeRotLib",
+		"UnfoldedStateEnergyCalculator",
+	],
+	"public/nmr": [
+		"r_noe_assign",
+	],
+	"public/noncanonical_backbones": [
+		"hbs_design",
+		"oop_design",
+		"peptoid_design",
+	],
+	"public/pepspec": [
+		"pepspec",
+		"pepspec_anchor_dock",
+	],
+	"public/pocket": [
+	        "pocket_relax",
+		"pocket_suggest_target_residues_by_ddg",
+		"pocket_measure",
+		"make_exemplar",
+	],
+	"public/recces": [
+		"recces",
+	],
+	"public/recces/legacy": [
+		"recces_turner",
+		"thermal_sampler",
+	    ],
+	"public/rna_util": [
+		"analyze_base_pairing",
+		"nucleobase_sample_around",
+		"rna_features",
+		"rna_graft",
+		"rna_helix",
+		"rna_idealize",
+		"rna_predict_chem_map",
+		"rna_suitename",
+		"rna_thread",
+		"rna_thread_and_minimize",
+		"erraser_minimizer",
+	],
+	"public/sewing": [
+		"sewing_hasher",
+	],
+	"public/surface_docking": [
+		"surface_docking",
+	],
+	"public/stepwise/legacy": [
+		"swa_protein_main",
+		"swa_rna_main",
+		"swa_rna_util",
+	],
+	"public/stepwise/": [
+		"stepwise",
+		"build_full_model",
+		"resample_full_model",
+	],
+	"public/rosetta_scripts": [
+		"revert_design_to_native",
+		"rosetta_scripts",
+	],
+	"public/rosettaDNA": [
+		"rosettaDNA",
+	],
+	"public/scenarios": [
+		"beta_strand_homodimer_design/exposed_strand_finder",
+		"beta_strand_homodimer_design/homodimer_design",
+		"beta_strand_homodimer_design/homodimer_maker",
+		"ca_to_allatom", # /* Frank DiMaio, doc/apps/public/scenarios/ca_to_allatom.dox */
+		"doug_dock_design_min_mod2_cal_cal",
+		"FloppyTail", # /* Steven Lewis, doc/apps/public/scenarios/FloppyTail.dox, test/integration/tests/FloppyTail/ */
+		"chemically_conjugated_docking/UBQ_E2_thioester", # /* Steven Lewis, doc/apps/public/scenarios/UBQ_conjugated.dox, test/integration/tests/UBQ_E2_thioester/ */
+		"chemically_conjugated_docking/UBQ_Gp_CYD-CYD"  , # /* Steven Lewis, doc/apps/public/scenarios/UBQ_conjugated.dox, test/integration/tests/UBQ_Gp_CYD-CYD/   */
+		"chemically_conjugated_docking/UBQ_Gp_LYX-Cterm", # /* Steven Lewis, doc/apps/public/scenarios/UBQ_conjugated.dox, test/integration/tests/UBQ_Gp_LYX-Cterm/ */
+	],
+	"public/weight_optimization": [
+		"optE_parallel",
+		"torsional_potential_corrections",
+	],
+}
+include_path = [
+]
+library_path = [
+]
+libraries = [
+]
+subprojects = [
+	"devel",
+	"protocols.7",
+	"protocols.6",
+	"protocols_e.5",
+	"protocols_d.5",
+	"protocols_c.5",
+	"protocols_b.5",
+	"protocols_a.5",
+	"protocols_h.4",
+	"protocols_g.4",
+	"protocols_f.4",
+	"protocols_e.4",
+	"protocols_d.4",
+	"protocols_c.4",
+	"protocols_b.4",
+	"protocols_a.4",
+	"protocols.3",
+	"protocols_b.2",
+	"protocols_a.2",
+	"protocols.1",
+	"core.5",
+	"core.4",
+	"core.3",
+	"core.2",
+	"core.1",
+	"basic",
+	"numeric",
+	"utility",
+	"ObjexxFCL",
+]
