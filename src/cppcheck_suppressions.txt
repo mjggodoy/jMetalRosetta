@@ -1,0 +1,21 @@
+// This is a file to list the suppressions for the cppcheck system
+// The format of each suppression line is:
+
+//        error_id:filename:line
+
+// where you can truncate each trailing part. e.g.
+
+//  unusedScopedObject:protocols/sparta/ANN.cc:58
+//  unusedScopedObject:protocols/sparta/ANN.cc
+//  unusedScopedObject
+
+// Use the --xml option of cppcheck to get the error_id of a particular error.
+//
+// Alternatively, use `cppcheck --errorlist` and look for the corresponding error message.
+//
+// When supressing errors here, please leave a comment explaining why
+// what you're suppressing isn't really an error.
+
+
+// This is a check that's error prone, and has been removed from more recent versions of cppcheck.
+unnecessaryForwardDeclaration

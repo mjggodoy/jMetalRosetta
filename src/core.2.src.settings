@@ -1,0 +1,241 @@
+# -*- mode:python;indent-tabs-mode:t;show-trailing-whitespace:t; -*-
+#
+# Project settings for Rosetta sources
+# (c) Copyright Rosetta Commons Member Institutions.
+# (c) This file is part of the Rosetta software suite and is made available under license.
+# (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+# (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+# (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+########### KEEP DIRECTORIES AND FILES IN ALPHABETICAL ORDER ###########
+
+sources = {
+	"core/chemical": [
+		"AA",
+		"Adduct",
+		"adduct_util",
+		"Atom",
+		"AtomICoor",
+		"AtomProperties",
+		"AtomPropertiesManager",
+		"AtomProperty_mappings",
+		"AtomType",
+		"AtomTypeDatabaseIO",
+		"AtomTypeSet",
+		"atomtype_support",
+		"automorphism",
+		"Bond",
+		"bond_support",
+		"CacheableResidueTypeSets",
+		"ChemicalManager",
+		"Element",
+		"Elements",
+		"ElementSet",
+		"ElectronConfiguration",
+		"icoor_support",
+		"IdealBondLengthSet",
+		"GlobalResidueTypeSet",
+		"Metapatch",
+		"MergeBehaviorManager",
+		"MMAtomType",
+		"MMAtomTypeSet",
+		"NucleotideTools",
+		"Orbital",
+		"Patch",
+		"PatchOperation",
+		"PoseResidueTypeSet",
+		"ResConnID",
+		"ResidueConnection",
+		"residue_io",
+		"ResidueDatabaseIO",
+		"ResidueGraphTypes",
+		"ResidueLoader",
+		"ResidueLoaderOptions",
+		"ResidueProperties",
+		"ResidueProperty_mappings",
+		"ResidueTypeSelector",
+		"ResidueType",
+		"ResidueType.srlz",
+		"ResidueTypeFinder",
+		"ResidueTypeKinWriter",
+		"ResidueTypeSet",
+		"ResidueTypeSet.srlz",
+		"ResidueTypeSetCache",
+		"residue_support",
+		"util",
+		"VariantType_mappings",
+	],
+
+	"core/chemical/carbohydrates": [
+		"CarbohydrateInfo",
+		"CarbohydrateInfoManager",
+		"database_io",
+	],
+
+	"core/chemical/gasteiger": [
+		"GasteigerAtomTypeData",
+		"GasteigerAtomTypeSet",
+		"GasteigerAtomTyper",
+		#"ElectronConfiguration",
+		#"Element",
+		#"ElementTypeSet",
+	],
+	"core/chemical/mainchain_potential": [
+		"MainchainScoreTable",
+		"util",
+	],
+	"core/chemical/rings": [
+		"ring_conformer_io",
+		"RingConformerManager",
+		"RingConformerSet",
+		"util",
+	],
+
+	"core/chemical/rna": [
+		"RNA_Info",
+		"RNA_FittedTorsionInfo",
+		"RNA_SamplerUtil",
+		"util",
+	],
+
+	"core/chemical/rotamers": [
+		"BasicRotamerLibrarySpecification",
+		"CenrotRotamerLibrarySpecification",
+		"DunbrackRotamerLibrarySpecification",
+		"NCAARotamerLibrarySpecification",
+		"PDBRotamerLibrarySpecification",
+		"PeptoidRotamerLibrarySpecification",
+		"RotamerLibrarySpecification",
+		"RotamerLibrarySpecificationFactory",
+		"StoredRotamerLibrarySpecification",
+	],
+
+
+	"core/chemical/orbitals": [
+		"AssignOrbitals",
+		"ICoorOrbitalData",
+		"OrbitalType",
+		"OrbitalTypeMapper",
+		"OrbitalTypeSet",
+	],
+	"core/chemical/sdf": [
+		"mol_util",
+		"mol_writer",
+		#"CtabParserBase", #Unimplemented base class
+		"CtabV2000Parser",
+		"CtabV3000Parser",
+		"MolFileIOData",
+		"MolFileIOReader",
+		"SDFParser",
+	],
+	"core/chemical/mmCIF": [
+		"mmCIFParser",
+	],
+	"core/conformation": [
+		"AbstractRotamerTrie",
+		"Atom",
+		"AtomGraph",
+		"Conformation",
+		"ppo_torsion_bin",
+		"PointGraph",
+		"PointGraphData",
+		"PseudoBond",
+		"Residue",
+		"Residue.functions",
+		"ResidueFactory",
+		"ResidueKinWriter",
+		"ResidueMatcher",
+		"RotamerSetBase",
+		"util",
+		"UltraLightResidue"
+	],
+	"core/conformation/carbohydrates": [
+		"GlycanNode",
+		"GlycanTree",
+		"GlycanTreeSet",
+		"util",
+	],
+	"core/conformation/membrane": [
+		"Span",
+		"SpanningTopology",
+		"LipidAccInfo",
+		"MembraneInfo",
+		"util",
+	],
+	"core/conformation/orbitals": [
+		"OrbitalXYZCoords",
+	],
+	"core/conformation/parametric": [
+		"Parameters",
+		"ParametersSet",
+	],
+	"core/conformation/signals": [
+		"LengthEvent",
+	],
+	"core/conformation/symmetry": [
+		"MirrorSymmetricConformation",
+		"SymDof",
+		"SymmData",
+		"SymmDataLoader",
+		"SymmetricConformation",
+		"SymmetryInfo",
+		"SymmetryTransform",
+		"SymSlideInfo",
+		"util",
+		"VirtualCoordinate",
+	],
+	"core/environment": [
+		"DofPassport",
+		"FoldTreeSketch",
+		"EnvCore",
+		"LocalPosition",
+		"SequenceAnnotation",
+	],
+	"core/id": [
+		"AtomID",
+		"CacheableAtomID_MapVector",
+		"DOF_ID",
+		"DOF_ID_Range",
+		"Exceptions",
+		"JumpID",
+		"NamedAtomID",
+		"NamedStubID",
+		"SequenceMapping",
+		"TorsionID",
+		"TorsionID_Range",
+	],
+	"core/kinematics": [
+		"AtomTree",
+		"AtomWithDOFChange",
+		"constants",
+		"Edge",
+		"FoldTree",
+		"Jump",
+		"MinimizerMapBase",
+		"MoveMap",
+		"ResidueCoordinateChangeList",
+		"RT",
+		"ShortestPathInFoldTree",
+		"Stub",
+		"util",
+	],
+	"core/kinematics/tree": [
+		"Atom_",
+		"BondedAtom",
+		"JumpAtom",
+	],
+}
+include_path = [
+]
+library_path = [
+]
+libraries = [
+]
+subprojects = [
+	"basic",
+	"numeric",
+	"core.1",
+	"utility",
+	"ObjexxFCL",
+	"cifparse"
+]

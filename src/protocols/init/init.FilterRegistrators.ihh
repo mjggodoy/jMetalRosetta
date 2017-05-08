@@ -1,0 +1,179 @@
+// -*- mode:c++;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t -*-
+// vi: set ts=2 noet:
+//
+// (c) Copyright Rosetta Commons Member Institutions.
+// (c) This file is part of the Rosetta software suite and is made available under license.
+// (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+// (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+// (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+/// @file   src/protocols/init/init.FilterRegistrators.ihh
+/// @brief  Declare WidgetRegistrators as static (global) variables in this .cc file
+///         so that at load time, they will be initialized, and the Creator classes
+///         they register will be handed to the appropriate WidgetFactory.
+///         This is for FilterRegistrators ONLY.
+/// @author Steven Lewis smlewi@gmail.com
+
+namespace protocols {
+
+using protocols::filters::FilterRegistrator;
+
+static FilterRegistrator< protocols::analysis::PeptideDeriverFilterCreator > reg_PeptideDeriverFilterCreator;
+
+static FilterRegistrator< protocols::cyclic_peptide::CycpepSymmetryFilterCreator > reg_CycpepSymmetryFilterCreator;
+static FilterRegistrator< protocols::cyclic_peptide::OversaturatedHbondAcceptorFilterCreator > reg_OversaturatedHbondAcceptorFilterCreator;
+
+static FilterRegistrator< protocols::enzdes::DiffAtomSasaFilterCreator > reg_DiffAtomSasaFilterCreator;
+static FilterRegistrator< protocols::enzdes::EnzdesScorefileFilterCreator > reg_EnzdesScorefileFilterCreator;
+static FilterRegistrator< protocols::enzdes::EnzScoreFilterCreator > reg_EnzScoreFilterCreator;
+static FilterRegistrator< protocols::enzdes::ResidueConformerFilterCreator > reg_ResidueConformerFilterCreator;
+static FilterRegistrator< protocols::enzdes::LigBurialFilterCreator > reg_LigBurialFilterCreator;
+static FilterRegistrator< protocols::enzdes::LigDSasaFilterCreator > reg_LigDSasaFilterCreator;
+static FilterRegistrator< protocols::enzdes::LigInterfaceEnergyFilterCreator > reg_LigInterfaceEnergyFilterCreator;
+static FilterRegistrator< protocols::enzdes::RepackWithoutLigandFilterCreator > reg_RepackWithoutLigandFilterCreator;
+static FilterRegistrator< protocols::enzdes::RemoveLigandFilterCreator > reg_RemoveLigandFilterCreator;
+
+static FilterRegistrator< protocols::filters::CalculatorFilterCreator > reg_CalculatorFilterCreator;
+static FilterRegistrator< protocols::filters::CombinedFilterCreator > reg_CombinedFilterCreator;
+static FilterRegistrator< protocols::filters::CompoundFilterCreator > reg_CompoundFilterCreator;
+static FilterRegistrator< protocols::filters::ContingentFilterCreator > reg_ContingentFilterCreator;
+static FilterRegistrator< protocols::filters::FalseFilterCreator > reg_FalseFilterCreator;
+static FilterRegistrator< protocols::filters::IfThenFilterCreator > reg_IfThenFilterCreator;
+static FilterRegistrator< protocols::filters::MoveBeforeFilterCreator > reg_MoveBeforeFilterCreator;
+static FilterRegistrator< protocols::filters::ReplicateFilterCreator > reg_ReplicateFilterCreator;
+static FilterRegistrator< protocols::filters::StochasticFilterCreator > reg_StochasticFilterCreator;
+static FilterRegistrator< protocols::filters::TimeFilterCreator > reg_TimeFilterCreator;
+static FilterRegistrator< protocols::simple_filters::RelativePoseFilterCreator > reg_RelativePoseFilterCreator;
+static FilterRegistrator< protocols::simple_filters::StemFinderFilterCreator > reg_StemFinderFilterCreator;
+static FilterRegistrator< protocols::simple_filters::SSMotifFinderFilterCreator > reg_SSMotifFinderFilterCreator;
+static FilterRegistrator< protocols::simple_filters::AngleToVectorFilterCreator > reg_AngleToVectorFilterCreator;
+
+static FilterRegistrator< protocols::fldsgn::filters::CoreDunbrackFilterCreator > reg_CoreDunbrackFilterCreator;
+static FilterRegistrator< protocols::fldsgn::filters::FragQualFilterCreator > reg_FragQualFilterCreator;
+static FilterRegistrator< protocols::fldsgn::filters::HelixBendFilterCreator > reg_HelixBendFilterCreator;
+static FilterRegistrator< protocols::fldsgn::filters::HelixKinkFilterCreator > reg_HelixKinkFilterCreator;
+static FilterRegistrator< protocols::fldsgn::filters::HelixPairingFilterCreator > reg_HelixPairingFilterCreator;
+static FilterRegistrator< protocols::fldsgn::filters::HSSTripletFilterCreator > reg_HSSTripletFilterCreator;
+static FilterRegistrator< protocols::fldsgn::filters::InterlockingAromaFilterCreator > reg_InterlockingAromaFilterCreator;
+static FilterRegistrator< protocols::fldsgn::filters::NcontactsFilterCreator > reg_NcontactsFilterCreator;
+static FilterRegistrator< protocols::fldsgn::filters::ParallelBetaPairingPreferenceFilterCreator > reg_ParallelBetaPairingPreferenceFilterCreator;
+static FilterRegistrator< protocols::fldsgn::filters::SecondaryStructureFilterCreator > reg_SecondaryStructureFilterCreator;
+static FilterRegistrator< protocols::fldsgn::filters::SecondaryStructureCountFilterCreator > reg_SecondaryStructureFilterCountCreator;
+static FilterRegistrator< protocols::fldsgn::filters::SecondaryStructureHasResidueFilterCreator > reg_SecondaryStructureFilterHasResidueCreator;
+static FilterRegistrator< protocols::fldsgn::filters::SheetTopologyFilterCreator > reg_SheetTopologyFilterCreator;
+static FilterRegistrator< protocols::fldsgn::filters::StrandCurvatureByLevelsCreator > reg_StrandCurvatureByLevelsCreator;
+static FilterRegistrator< protocols::fldsgn::filters::StrandHelixGeometryFilterCreator > reg_StrandHelixGeometryFilterCreator;
+
+static FilterRegistrator< protocols::denovo_design::filters::ExposedHydrophobicsFilterCreator > reg_ExposedHydrophobicsFilterCreator;
+static FilterRegistrator< protocols::denovo_design::filters::PreProlineFilterCreator > reg_PreProlineFilterCreator;
+static FilterRegistrator< protocols::denovo_design::filters::SSPredictionFilterCreator > reg_SSPredictionFilterCreator;
+
+static FilterRegistrator< protocols::helical_bundle::BundleReporterFilterCreator > reg_BundleReporterFilterCreator;
+
+static FilterRegistrator< protocols::indexed_structure_store::filters::FragmentLookupFilterCreator > reg_FragmentLookupFilterCreator;
+
+static FilterRegistrator< protocols::ligand_docking::AtomCountFilterCreator > reg_AtomCountFilterCreator;
+static FilterRegistrator< protocols::ligand_docking::CompleteConnectionsFilterCreator > reg_CompleteConnectionsFilterCreator;
+static FilterRegistrator< protocols::ligand_docking::ChainExistsFilterCreator > reg_ChainExistsFilterCreator;
+static FilterRegistrator< protocols::ligand_docking::HeavyAtomFilterCreator > reg_HeavyAtomFilterCreator;
+static FilterRegistrator< protocols::ligand_docking::HBondAcceptorFilterCreator > reg_HBondAcceptorFilterCreator;
+static FilterRegistrator< protocols::ligand_docking::HBondDonorFilterCreator > reg_HBondDonorFilterCreator;
+static FilterRegistrator< protocols::ligand_docking::MolecularMassFilterCreator > reg_MolecularMassFilterCreator;
+static FilterRegistrator< protocols::ligand_docking::MolarMassFilterCreator > reg_MolarMassFilterCreator;
+
+static FilterRegistrator< protocols::loops::filters::LoopAnalyzerFilterCreator > reg_LoopAnalyzerFilterCreator;
+
+static FilterRegistrator< protocols::matdes::ClashCheckFilterCreator > reg_ClashCheckFilterCreator;
+static FilterRegistrator< protocols::matdes::GetRBDOFValuesCreator > reg_GetRBDOFValuesCreator;
+static FilterRegistrator< protocols::matdes::InterfacePackingFilterCreator > reg_InterfacePackingFilterCreator;
+static FilterRegistrator< protocols::matdes::OligomericAverageDegreeFilterCreator > reg_OligomericAverageDegreeFilterCreator;
+static FilterRegistrator< protocols::matdes::SymUnsatHbondFilterCreator > reg_SymUnsatHbondFilterCreator;
+
+static FilterRegistrator< protocols::protein_interface_design::filters::AtomicContactCountFilterCreator > reg_AtomicContactCountFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::AverageDegreeFilterCreator > reg_AverageFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::BindingStrainFilterCreator > reg_BindingStrainFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::BoltzmannFilterCreator > reg_BoltzmannCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::DesignableResiduesFilterCreator > reg_DesignableResiduesFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::DisulfideFilterCreator > reg_DisulfideFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::FilterScanFilterCreator > reg_FilterScanFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::HbondsToResidueFilterCreator > reg_HbondsToResidueFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::HbondsToAtomFilterCreator > reg_HbondsToAtomFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::InterfaceHolesFilterCreator > reg_InterfaceHolesFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::RelativeSegmentFilterCreator > reg_RelativeSegmentFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::RmsdFilterCreator > reg_RmsdFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::RmsdSimpleFilterCreator > reg_RmsdSimpleFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::ClashWithTargetFilterCreator > reg_ClashWithTargetFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::LRmsdFilterCreator > reg_LRmsdFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::IRmsdFilterCreator > reg_IRmsdFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::FNatFilterCreator > reg_FNatFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::SequenceRecoveryFilterCreator > reg_SequenceRecoveryFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::SpecificResiduesNearInterfaceFilterCreator > reg_SpecificResiduesNearInterfaceFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::SSamountFilterCreator > reg_SSamountFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::StubScoreFilterCreator > reg_StubScoreFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::StubScoreLoopsFilterCreator > reg_StubScoreLoopsFilterCreator;
+static FilterRegistrator< protocols::protein_interface_design::filters::TorsionCreator > reg_TorsionCreator;
+
+static FilterRegistrator< protocols::simple_filters::AlaScanFilterCreator > reg_AlaScanFilterCreator;
+static FilterRegistrator< protocols::simple_filters::AtomicContactFilterCreator > reg_AtomicContactFilterCreator;
+static FilterRegistrator< protocols::simple_filters::AtomicDistanceFilterCreator > reg_AtomicDistanceFilterCreator;
+static FilterRegistrator< protocols::simple_filters::AveragePathLengthFilterCreator > reg_AveragePathLengthFilterCreator;
+static FilterRegistrator< protocols::simple_filters::BuriedUnsatHbondFilterCreator > reg_BuriedUnsatHbondFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ConservedPosMutationFilterCreator > reg_ConservedPosMutationFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ConstraintScoreFilterCreator > reg_ConstraintScoreFilterCreator;
+static FilterRegistrator< protocols::simple_filters::DdgFilterCreator > reg_DdgFilterCreator;
+static FilterRegistrator< protocols::simple_filters::DeltaFilterCreator > reg_DeltaFilterCreator;
+static FilterRegistrator< protocols::simple_filters::DisulfideEntropyFilterCreator > reg_DisulfideEntropyFilterCreator;
+static FilterRegistrator< protocols::simple_filters::EnergyPerResidueFilterCreator > reg_EnergyPerResidueFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ExpiryFilterCreator > reg_ExpiryFilterCreator;
+static FilterRegistrator< protocols::simple_filters::NonSequentialNeighborsFilterCreator > reg_NonSequentialNeighborsFilterCreator;
+static FilterRegistrator< protocols::simple_filters::FileExistFilterCreator > reg_FileExistFilterCreator;
+static FilterRegistrator< protocols::simple_filters::FileRemoveFilterCreator > reg_FileRemoveFilterCreator;
+static FilterRegistrator< protocols::simple_filters::GeometryFilterCreator > reg_GeometryFilterCreator;
+static FilterRegistrator< protocols::simple_filters::HolesFilterCreator > reg_HolesFilterCreator;
+static FilterRegistrator< protocols::simple_filters::InterfaceSasaFilterCreator > reg_InterfaceSasaFilterCreator;
+static FilterRegistrator< protocols::simple_filters::InterfaceBindingEnergyDensityFilterCreator > reg_InterfaceBindingEnergyDensityFilterCreator;
+static FilterRegistrator< protocols::simple_filters::InterRepeatContactFilterCreator > reg_InterRepeatContactFilterCreator;
+static FilterRegistrator< protocols::simple_filters::IntraRepeatContactFilterCreator > reg_IntraRepeatContactFilterCreator;
+static FilterRegistrator< protocols::simple_filters::LeastNativeLike9merFilterCreator > reg_LeastNativeLike9merFilterCreator;
+static FilterRegistrator< protocols::simple_filters::MotifScoreFilterCreator > reg_MotifScoreFilterCreator;
+static FilterRegistrator< protocols::simple_filters::MultipleSigmoidsFilterCreator > reg_MultipleSigmoidsFilterCreator;
+static FilterRegistrator< protocols::simple_filters::MutationsFilterCreator > reg_MutationsFilterCreator;
+static FilterRegistrator< protocols::simple_filters::NeighborTypeFilterCreator > reg_NeighborTypeFilterCreator;
+static FilterRegistrator< protocols::simple_filters::NetChargeFilterCreator > reg_NetChargeFilterCreator;
+static FilterRegistrator< protocols::simple_filters::NMerPSSMEnergyFilterCreator > reg_NMerPSSMEnergyFilterCreator;
+static FilterRegistrator< protocols::simple_filters::NMerSVMEnergyFilterCreator > reg_NMerSVMEnergyFilterCreator;
+static FilterRegistrator< protocols::simple_filters::OperatorFilterCreator > reg_OperatorFilterCreator;
+static FilterRegistrator< protocols::simple_filters::PackStatFilterCreator > reg_PackStatFilterCreator;
+static FilterRegistrator< protocols::simple_filters::PoseCommentFilterCreator > reg_PoseCommentFilterCreator;
+static FilterRegistrator< protocols::simple_filters::PoseInfoFilterCreator > reg_PoseInfoFilterCreator;
+static FilterRegistrator< protocols::simple_filters::RangeFilterCreator > reg_RangeFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ReportFilterCreator > reg_ReportFilterCreator;
+static FilterRegistrator< protocols::simple_filters::RepeatParameterFilterCreator > reg_RepeatParameterFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ResidueBurialFilterCreator > reg_ResidueBurialFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ResidueCountFilterCreator > reg_ResidueCountFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ResidueDistanceFilterCreator > reg_ResidueDistanceFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ResidueDepthFilterCreator > reg_ResidueDepthFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ResidueIEFilterCreator > reg_ResidueIEFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ResiduesInInterfaceFilterCreator > reg_ResiduesInInterfaceFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ResidueSelectionDistanceFilterCreator > reg_ResidueSelectionDistanceFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ResidueSetChainEnergyFilterCreator > reg_ResidueSetChainEnergyFilterCreator;
+static FilterRegistrator< protocols::simple_filters::RotamerBoltzmannWeightFilterCreator > reg_RotamerBoltzmannWeightFilterCreator;
+static FilterRegistrator< protocols::simple_filters::RotamerBoltzmannWeight2Creator > reg_RotamerBoltzmannWeight2Creator;
+static FilterRegistrator< protocols::simple_filters::SavePoseConstraintToFileFilterCreator > reg_SavePoseConstraintToFileFilterCreator;
+static FilterRegistrator< protocols::simple_filters::SSElementMotifContactFilterCreator > reg_SSElementMotifContactFilterCreator;
+static FilterRegistrator< protocols::simple_filters::SSElementBisectddGFilterCreator > reg_SSElementBisectddGFilterCreator;
+static FilterRegistrator< protocols::simple_filters::SaveResfileToDiskFilterCreator > reg_SaveResfileToDiskFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ScoreCutoffFilterCreator > reg_ScoreCutoffFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ScoreTypeFilterCreator > reg_ScoreTypeFilterCreator;
+static FilterRegistrator< protocols::simple_filters::ShapeComplementarityFilterCreator > reg_ScFilterCreator;
+static FilterRegistrator< protocols::simple_filters::SigmoidFilterCreator > reg_SigmoidFilterCreator;
+static FilterRegistrator< protocols::simple_filters::SimpleHbondsToAtomFilterCreator > reg_SimpleHbondsToAtomFilterCreator;
+static FilterRegistrator< protocols::simple_filters::SymmetricMotifFilterCreator > reg_SymmetricMotifFilterCreator;
+static FilterRegistrator< protocols::simple_filters::SidechainRmsdFilterCreator > reg_SidechainRmsdFilterCreator;
+static FilterRegistrator< protocols::simple_filters::DdGScanCreator > reg_DdGScanCreator;
+static FilterRegistrator< protocols::simple_filters::TaskAwareSASAFilterCreator > reg_TaskAwareSASAFilterCreator;
+static FilterRegistrator< protocols::simple_filters::TaskAwareScoreTypeFilterCreator > reg_TaskAwareScoreTypeFilterCreator;
+static FilterRegistrator< protocols::simple_filters::TerminusDistanceFilterCreator > reg_TerminusDistanceFilterCreator;
+static FilterRegistrator< protocols::simple_filters::TotalSasaFilterCreator > reg_TotalSasaFilterCreator;
+
+} //namespace protocols

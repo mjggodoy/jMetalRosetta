@@ -1,0 +1,142 @@
+# -*- mode:python;indent-tabs-mode:t;show-trailing-whitespace:t; -*-
+#
+# Project settings for rosetta sources
+# (c) Copyright Rosetta Commons Member Institutions.
+# (c) This file is part of the Rosetta software suite and is made available under license.
+# (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+# (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+# (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+########### KEEP DIRECTORIES AND FILES IN ALPHABETICAL ORDER ###########
+
+sources = {
+	"basic": [
+		"basic",
+		"ComparingTracer",
+		"Emitter",
+		"execute",
+		"interpolate",
+		'init',
+		"MemTracer",
+		"MetricValueIO",
+		"prof",
+		"pymol_chains",
+		"report",
+		"Tracer",
+		"TracerToFile",
+	],
+	"basic/database": [
+		"DatabaseSessionLoader",
+		"DatabaseSessionOptions",
+		"open",
+		"sql_utils",
+	],
+	"basic/database/schema_generator": [
+		"Column",
+		"Constraint",
+		"DbDataType",
+		"ForeignKey",
+		"Index",
+		"PrimaryKey",
+		"Schema",
+	],
+	"basic/database/insert_statement_generator": [
+		"InsertGenerator",
+		"RowData",
+	],
+	"basic/datacache": [
+		"BasicDataCache",
+		"CacheableData",
+		"CacheableStringFloatMap",
+		"CacheableString",
+		"CacheableStringMap",
+		"DiagnosticData",
+		"ConstDataMap",
+		"DataMap",
+		"DataMapObj",
+		"HierarchicalDataMap",
+		"WriteableCacheableData",
+		"WriteableCacheableDataCreator",
+		"WriteableCacheableDataFactory",
+		"WriteableCacheableMap",
+	],
+	"basic/gpu": [
+		"GPU",
+		"Timer",
+	],
+	"basic/mpi": [
+		"DbMoverMessageListener",
+		"MessageListenerFactory",
+		"util",
+	],
+	"basic/options": [
+		"after_opts",
+		"option",
+		"PyRosettaFunctions",
+		"util",
+	],
+	"basic/options/keys": [
+		"OptionKeys0",
+		"OptionKeys1",
+		"OptionKeys2",
+		"OptionKeys3",
+		"OptionKeys4",
+		"OptionKeys5",
+		"OptionKeys6",
+		"OptionKeys7",
+		"OptionKeys8",
+		"OptionKeys9",
+		"OptionKeys10",
+		"OptionKeys11",
+		"OptionKeys12",
+		"OptionKeys13",
+		"OptionKeys14",
+		"OptionKeys15",
+	],
+	"basic/resource_manager" : [
+		"FallbackConfiguration",
+		"FallbackConfigurationCreator",
+		"FallbackConfigurationFactory",
+		"JobOptions",
+		"LazyResourceManager",
+		"ResourceLoader",
+		"ResourceLoaderCreator",
+		"ResourceLoaderFactory",
+		"ResourceLocator",
+		"ResourceLocatorCreator",
+		"ResourceLocatorFactory",
+		"ResourceManager",
+		"ResourceManagerCreator",
+		"ResourceManagerFactory",
+		"ResourceOptions",
+		"ResourceOptionsCreator",
+		"ResourceOptionsFactory",
+	],
+	"basic/resource_manager/locator" : [
+		"DatabaseResourceLocator",
+		"FileListResourceLocator",
+		"FileSystemResourceLocator",
+		"NullResourceLocator",
+		"StringResourceStream",
+	],
+	"basic/resource_manager/fallback_configuration" : [
+		"NativeFallbackConfiguration",
+	],
+        "basic/sampling/orientations": [
+		"QuaternionGrid",
+	],
+	"basic/svd": [
+		"SVD_Solver",
+	],
+}
+include_path = [
+]
+library_path = [
+]
+libraries = [
+]
+subprojects = [
+	"numeric",
+	"utility",
+	"ObjexxFCL",
+]

@@ -1,0 +1,92 @@
+// -*- mode:c++;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t -*-
+// vi: set ts=2 noet:
+//
+// (c) Copyright Rosetta Commons Member Institutions.
+// (c) This file is part of the Rosetta software suite and is made available under license.
+// (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+// (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+// (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+/// @file   src/protocols/init/init.TaskOperationRegistrators.ihh
+/// @brief  Declare WidgetRegistrators as static (global) variables in this .cc file
+///         so that at load time, they will be initialized, and the Creator classes
+///         they register will be handed to the appropriate WidgetFactory.
+///         This is for TaskOperationRegistrators ONLY.
+/// @author Steven Lewis smlewi@gmail.com
+
+namespace protocols {
+using core::pack::task::operation::TaskOperationRegistrator;
+
+static TaskOperationRegistrator< protocols::antibody::task_operations::AddCDRProfilesOperationCreator > AddCDRProfilesOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::antibody::task_operations::AddCDRProfileSetsOperationCreator > AddCDRProfileSetsOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::antibody::task_operations::DisableAntibodyRegionOperationCreator > DisableAntibodyRegionOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::antibody::task_operations::DisableCDRsOperationCreator > DisableCDRsOperationCreator;
+static TaskOperationRegistrator< protocols::antibody::task_operations::RestrictToCDRsAndNeighborsCreator > RestrictToCDRsAndNeighborsCreator_registrator;
+
+static TaskOperationRegistrator< protocols::denovo_design::task_operations::ConsensusLoopDesignOperationCreator > ConsensusLoopDesignOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::dna::RestrictDesignToProteinDNAInterfaceCreator > RestrictDesignToProteinDNAInterfaceCreator_registrator;
+static TaskOperationRegistrator< protocols::dna::WatsonCrickRotamerCouplingsCreator > WatsonCrickRotamerCouplingsCreator_registrator;
+
+static TaskOperationRegistrator< protocols::enzdes::AddLigandMotifRotamersOperationCreator > AddLigandMotifRotamersOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::enzdes::AddRigidBodyLigandConfsCreator > AddRigidBodyLigandConfsCreator_registrator;
+static TaskOperationRegistrator< protocols::enzdes::DetectProteinLigandInterfaceOperationCreator > DetectProteinLigandInterfaceOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::enzdes::ProteinLigandInterfaceUpweighterOperationCreator > ProteinLigandInterfaceUpweighterOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::enzdes::SetCatalyticResPackBehaviorCreator > SetCatalyticResPackBehaviorCreator_registrator;
+
+static TaskOperationRegistrator< protocols::flxbb::LayerDesignOperationCreator > LayerDesignOperationCreator_registrator;
+
+static TaskOperationRegistrator< protocols::forge::remodel::RemodelRotamerLinksCreator > RemodelRotamerLinksCreator_registrator;
+
+static TaskOperationRegistrator< protocols::hbnet::ConstrainHBondNetworkCreator > ConstrainHBondNetworkCreator_registrator;
+
+static TaskOperationRegistrator< protocols::matdes::BuildingBlockInterfaceOperationCreator > BuildingBlockInterfaceOperationCreator_registrator;
+
+static TaskOperationRegistrator< protocols::sewing::ReadNativeRotamersFileCreator > reg_ReadNativeRotamersFileCreator;
+static TaskOperationRegistrator< protocols::sewing::ReadRepeatNativeRotamersFileCreator > reg_ReadRepeatNativeRotamersFileCreator;
+
+static TaskOperationRegistrator< protocols::toolbox::task_operations::CrystalContactsOperationCreator > CrystalContactsOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::DatabaseThreadCreator > DatabaseThreadCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::DesignAroundOperationCreator > DesignAroundOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::DsspDesignOperationCreator > DsspDesignOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::ImportUnboundRotamersOperationCreator > ImportUnboundRotamersOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::InteractingRotamerExplosionCreator > InteractingRotamerExplosionCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::JointSequenceOperationCreator > JointSequenceOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::LimitAromaChi2OperationCreator > LimitAromaChi2OperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::LinkResiduesCreator > LinkResiduesCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::ModifyAnnealerCreator > ModifyAnnealerCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::PreventChainFromRepackingOperationCreator > PreventChainFromRepackingOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::PreventResiduesFromRepackingOperationCreator > PreventResiduesFromRepackingOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::ProteinInterfaceDesignOperationCreator > ProteinInterfaceDesignOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::ReadResfileFromDBCreator > ReadResfileFromDBCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictByCalculatorsOperationCreator > RestrictByCalculatorsOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictChainToRepackingOperationCreator > RestrictChainToRepackingOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictConservedLowDdgOperationCreator > RestrictConservedLowDdgOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictInterGroupVectorOperationCreator > RestrictInterGroupVectorOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictIdentitiesAtAlignedPositionsOperationCreator > RestrictIdentitiesAtAlignedPositionsCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictIdentitiesOperationCreator > RestrictIdentitiesOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictNativeResiduesOperationCreator > RestrictNativeResiduesOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictNonSurfaceToRepackingOperationCreator > RestrictNonSurfaceToRepackingOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictToAlignedSegmentsOperationCreator > RestrictToAlignedSegmentsOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictResiduesToRepackingOperationCreator > RestrictResiduesToRepackingOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictToCDRH3LoopCreator > RestrictToCDRH3LoopCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictToInterfaceCreator > RestrictToInterfaceCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictToInterfaceOperationCreator > RestrictToInterfaceOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictToInterfaceVectorOperationCreator > RestrictToInterfaceVectorOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictToLoopsCreator > RestrictToLoopsCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictToLoopsAndNeighborsCreator > RestrictToLoopsAndNeighborsCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictToNeighborhoodOperationCreator > RestrictToNeighborhoodOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RestrictToTerminiOperationCreator > RestrictToTerminiOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::RetrieveStoredTaskOperationCreator > RetrieveStoredTaskOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::SeqprofConsensusOperationCreator > SeqprofConsensusOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::SelectBySASAOperationCreator > SelectBySASAOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::SelectByDeltaScoreOperationCreator > SelectByDeltaScoreOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::SelectByDensityFitOperationCreator > SelectByDensityFitOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::SelectResiduesWithinChainOperationCreator > SelectResiduesWithinChainCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::SetIGTypeOperationCreator > SetIGTypeOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::ThreadSequenceOperationCreator > ThreadSequenceOperationCreator_registrator;
+static TaskOperationRegistrator< protocols::toolbox::task_operations::AlignedThreadOperationCreator > AlignedThreadOperationCreator_registrator;
+
+
+using core::pack::task::operation::ResFilterRegistrator;
+static ResFilterRegistrator< protocols::toolbox::task_operations::ProteinCoreFilterCreator > ProteinCoreFilterCreator_registrator;
+} //namespace protocols

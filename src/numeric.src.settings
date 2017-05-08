@@ -1,0 +1,115 @@
+# -*- mode:python;indent-tabs-mode:t;show-trailing-whitespace:t; -*-
+#
+# Project settings for rosetta sources
+# (c) Copyright Rosetta Commons Member Institutions.
+# (c) This file is part of the Rosetta software suite and is made available under license.
+# (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+# (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+# (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+########### KEEP DIRECTORIES AND FILES IN ALPHABETICAL ORDER ###########
+
+sources = {
+	"numeric": [
+		"agglomerative_hierarchical_clustering",
+		"Calculator",
+		"ClusteringTreeNode",
+		"color_util",
+		"constants",
+		"cyclic_coordinate_descent",
+		"HomogeneousTransform.srlz",
+		"MathVector.srlz",
+		"MultiDimensionalHistogram",
+		"polynomial",
+		"prob_util",
+		"roc_curve",
+		"util",
+		"xyz.serialization",
+	],
+	"numeric/crick_equations":[
+		"BundleParams",
+		"HelixParams",
+	],
+	"numeric/expression_parser": [
+		"Arithmetic",
+	],
+	"numeric/fourier": [
+		"FFT",
+		"kiss_fft",
+		"kiss_fft_state",
+		"SHT",
+	],
+	"numeric/geometry": [
+		"BoundingBox.srlz",
+		"ring_plane.functions",
+	],
+	"numeric/geometry/hashing": [
+		"SixDHasher",
+		"xyzStripeHash",
+	],
+	"numeric/interpolation": [
+		"util",
+		"Histogram.srlz",
+	],
+	"numeric/interpolation/spline": [
+		"BicubicSpline",
+		"CompoundInterpolator",
+		"CubicSpline",
+		"Interpolator",
+		"SimpleInterpolator",
+		"spline_functions",
+		"SplineGenerator",
+		"TricubicSpline",
+		"PolycubicSpline",
+	],
+	"numeric/kdtree": [
+		"calc_distance",
+		"construct_kdtree",
+		"HyperRectangle",
+		"KDNode",
+		"KDPoint",
+		"KDPointList",
+		"KDTree",
+		"nearest_neighbors",
+		"util",
+	],
+	"numeric/kinematic_closure": [
+    "bridgeObjects",
+    "closure",
+    "dixon",
+    "kinematic_closure_helpers",
+    "sturm",
+    "vector",
+    "bridgeObjects_nonredundant",
+	],
+    "numeric/linear_algebra": [
+        "rgg",
+	"singular_value_decomposition",
+    ],
+	"numeric/model_quality": [
+		"maxsub",
+		"rms",
+		"RmsData",
+	],
+	"numeric/nls": [
+		"lmmin",
+	],
+	"numeric/random": [
+		"random",
+		"random_xyz",
+		"WeightedSampler",
+	],
+	"numeric/statistics": [
+		"functions",
+	],
+}
+include_path = [
+]
+library_path = [
+]
+libraries = [
+]
+subprojects = [
+	"utility",
+	"ObjexxFCL",
+]

@@ -1,0 +1,111 @@
+// -*- mode:c++;tab-width:2;indent-tabs-mode:t;show-trailing-whitespace:t;rm-trailing-spaces:t -*-
+// vi: set ts=2 noet:
+//
+// (c) Copyright Rosetta Commons Member Institutions.
+// (c) This file is part of the Rosetta software suite and is made available under license.
+// (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+// (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+// (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+/// @file src/protocols/features/FeaturesReporterFactory.hh
+/// @brief Factory for creating FeaturesReporter objects
+/// @author Matthew O'Meara (mattjomeara@gmail.com)
+
+
+#ifndef INCLUDED_protocols_features_FeaturesReporterFactory_hh
+#define INCLUDED_protocols_features_FeaturesReporterFactory_hh
+
+// Unit Headers
+#include <protocols/features/FeaturesReporterFactory.fwd.hh>
+
+// Project Headers
+#include <protocols/features/FeaturesReporter.fwd.hh>
+#include <protocols/features/FeaturesReporterCreator.fwd.hh>
+
+// Platform Headers
+#include <core/pose/Pose.fwd.hh>
+#include <protocols/filters/Filter.fwd.hh>
+#include <protocols/moves/Mover.fwd.hh>
+#include <basic/datacache/DataMap.fwd.hh>
+
+// Utility headers
+#include <utility/SingletonBase.hh>
+#include <utility/tag/Tag.fwd.hh>
+#include <utility/factory/WidgetRegistrator.hh>
+#include <utility/tag/XMLSchemaGeneration.fwd.hh>
+// C++ Headers
+#include <map>
+
+#include <utility/vector1.hh>
+
+namespace protocols {
+namespace features {
+
+/// Create Features Reporters
+class FeaturesReporterFactory : public utility::SingletonBase< FeaturesReporterFactory > {
+public:
+	friend class utility::SingletonBase< FeaturesReporterFactory >;
+private:
+	// Private constructor to make it singleton managed
+	FeaturesReporterFactory();
+	FeaturesReporterFactory(const FeaturesReporterFactory & src) = delete;
+
+	FeaturesReporterFactory const &
+	operator=( FeaturesReporterFactory const & ) = delete;
+
+public:
+
+	// Warning this is not called because of the singleton pattern
+	virtual ~FeaturesReporterFactory();
+
+	void factory_register( FeaturesReporterCreatorCOP creator );
+	FeaturesReporterOP get_features_reporter( std::string const & type_name );
+
+	/// @brief convienence header for use with RosettaScripts parse_my_tag interface
+	FeaturesReporterOP
+	get_features_reporter(
+		utility::tag::TagCOP tag,
+		basic::datacache::DataMap & data,
+		protocols::filters::Filters_map const & filters,
+		protocols::moves::Movers_map const & movers,
+		core::pose::Pose const & pose);
+
+	void define_features_reporter_xml_schema_group( utility::tag::XMLSchemaDefinition & xsd ) const;
+
+	static std::string features_reporter_xml_schema_group_name();
+
+	/// @brief Replace the load-time FeaturesReporterCreator with another creator.
+	// undefined, commenting out to fix PyRosetta build  void replace_creator( FeaturesReporterCreatorCOP creator );
+
+	// undefined, commenting out to fix PyRosetta build  FeaturesReporterCreatorCOP
+	// get_creator( std::string const & type_name );
+
+	utility::vector1<std::string> get_all_features_names();
+
+private:
+
+	typedef std::map< std::string, protocols::features::FeaturesReporterCreatorCOP > FeaturesReporterCreatorMap;
+	FeaturesReporterCreatorMap types_;
+};
+
+
+/// @brief This templated class will register an instance of an
+/// FeaturesReporterCreator (class T) with the
+/// FeaturesReporterFactory.  It will ensure that no
+/// FeaturesReporterCreator is registered twice, and, centralizes this
+/// registration logic so that thread safety issues can be handled in
+/// one place
+template < class T >
+class FeaturesReporterRegistrator : public utility::factory::WidgetRegistrator< FeaturesReporterFactory, T >
+{
+public:
+	typedef utility::factory::WidgetRegistrator< FeaturesReporterFactory, T > parent;
+public:
+	FeaturesReporterRegistrator() : parent() {}
+};
+
+
+} // namespace
+} // namespace
+
+#endif

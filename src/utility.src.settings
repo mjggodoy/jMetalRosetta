@@ -1,0 +1,130 @@
+# -*- mode:python;indent-tabs-mode:t;show-trailing-whitespace:t; -*-
+#
+# Project settings for rosetta sources
+# (c) Copyright Rosetta Commons Member Institutions.
+# (c) This file is part of the Rosetta software suite and is made available under license.
+# (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+# (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+# (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+########### KEEP DIRECTORIES AND FILES IN ALPHABETICAL ORDER ###########
+
+sources = {
+	"utility": [
+		"backtrace",
+		"Binary_Util",
+		"CSI_Sequence",
+		"curl",
+		"exit",
+		"heap",
+		"inline_file_provider",
+		"integer_mapping",
+		"LexicographicalIterator",
+		#"map_util",
+		"mpi_util",
+		"SimulateMPI",
+		"sys_util",
+		"recent_history_queue",
+		"static_database",
+		"string_util",
+		"vector0.srlz",
+		"vector1.srlz",
+	],
+	"utility/boinc": [
+		"boinc_util",
+	],
+	"utility/excn": [
+		"Exceptions",
+	],
+	"utility/file": [
+		"file_sys_util",
+		"FileName",
+		"gzip_util",
+		"PathName",
+	],
+	"utility/graph": [
+		"ArrayPool",
+		"DisjointSets",
+		"Digraph",
+		"Graph",
+		"graph_util",
+	],
+	"utility/io": [
+		"icstream",
+		"izstream",
+		"ocstream",
+		"ozstream",
+		"FileContentsMap",
+		"util",
+	],
+	"utility/keys": [
+		"Key2Tuple.srlz",
+		"Key3Tuple.srlz",
+		"Key4Tuple.srlz",
+	],
+	"utility/libsvm":[
+		"Svm_rosetta",
+		"Svm",
+	],
+	"utility/json_spirit": [
+		"json_spirit_reader",
+		"json_spirit_value",
+		"json_spirit_writer",
+		"json_spirit_tools",
+	],
+
+
+	"utility/options": [
+		"mpi_stderr",
+		"OptionCollection",
+	        "ResidueChainVectorOption",
+		"VectorOption",
+	],
+	"utility/options/keys": [
+		"OptionKeyList",
+		"OptionKeys",
+	],
+	"utility/pointer": [
+		"ReferenceCount.srlz",
+	],
+	"utility/pointer/boost": [
+		# leave this here so Xcode will include the headers in the project!
+	],
+	"utility/pointer/std": [
+		# leave this here so Xcode will include the headers in the project!
+	],
+	"utility/py": [
+		"PyExitCallback",
+	],
+	"utility/serialization": [
+		"serialization",
+	],
+	"utility/serialization/ObjexxFCL": [
+		"DynamicIndexRange.srlz",
+		"FArray1D.srlz",
+		"FArray2D.srlz",
+		"FArray3D.srlz",
+		"ubyte.srlz",
+	],
+	"utility/sql_database": [
+		"DatabaseSessionManager",
+		"types",
+	],
+	"utility/tag": [
+		"Tag",
+		"XMLSchemaGeneration",
+		"XMLSchemaValidation",
+	],
+	"utility/thread": [
+		"ReadWriteMutex",
+	],
+}
+include_path = [
+]
+library_path = [
+]
+libraries = [
+]
+subprojects = [
+	"ObjexxFCL",
+]

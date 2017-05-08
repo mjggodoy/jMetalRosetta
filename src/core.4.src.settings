@@ -1,0 +1,208 @@
+# -*- mode:python;indent-tabs-mode:t;show-trailing-whitespace:t; -*-
+#
+# Project settings for rosetta sources
+# (c) Copyright Rosetta Commons Member Institutions.
+# (c) This file is part of the Rosetta software suite and is made available under license.
+# (c) The Rosetta software is developed by the contributing members of the Rosetta Commons.
+# (c) For more information, see http://www.rosettacommons.org. Questions about this can be
+# (c) addressed to University of Washington CoMotion, email: license@uw.edu.
+
+########### KEEP DIRECTORIES AND FILES IN ALPHABETICAL ORDER ###########
+
+sources = {
+  "core/optimization": [
+		"atom_tree_minimize",
+		"AtomTreeMinimizer",
+		"AtomTreeMultifunc",
+		"cartesian_minimize",
+		"CartesianMinimizer",
+		"CartesianMinimizerMap",
+		"CartesianMultifunc",
+		"GA_Minimizer",
+		"LineMinimizer",
+		"Minimizer",
+		"MinimizerMap",
+		"MinimizerOptions",
+		"NelderMeadSimplex",
+		"NumericalDerivCheckResult",
+		"ParticleSwarmMinimizer",
+		"SingleResidueMultifunc",
+	],
+	"core/optimization/symmetry": [
+		"sym_atom_tree_minimize",
+		"SymAtomTreeMinimizer",
+		"SymAtomTreeMultifunc",
+		"SymMinimizerMap",
+	],
+	"core/pack": [
+		"make_symmetric_task",
+		"min_pack",
+		"optimizeH",
+		"pack_missing_sidechains",
+		"pack_rotamers",
+		"packer_neighbors",
+		"rotamer_trials",
+		"rtmin",
+		"util",
+	],
+	#"core/pack/fragment_rotamers": [
+#		"MutateFragment",
+#	],
+	"core/pack/annealer": [
+		"AnnealerFactory",
+		"DebuggingAnnealer",
+		"FASTERAnnealer",
+		"FixbbCoupledRotamerSimAnnealer",
+		"FixbbLinkingRotamerSimAnnealer",
+		"FixbbSimAnnealer",
+		"MultiCoolAnnealer",
+		"RotamerAssigningAnnealer",
+		"SimAnnealerBase",
+	],
+	"core/pack/dunbrack": [
+		"DunbrackConstraint",
+		"DunbrackEnergy",
+		"DunbrackRotamer",
+		"RotamerConstraint",
+		"RotamerLibrary",
+		"RotamerLibraryScratchSpace",
+		"SemiRotamericSingleResidueDunbrackLibrary",
+		"SingleResidueDunbrackLibrary",
+		"SingleResidueDunbrackLibraryCreator",
+	],
+	"core/pack/dunbrack/cenrot": [
+		"CenrotLibrary",
+		"SingleResidueCenrotLibrary",
+		"SingleResidueCenrotLibraryCreator",
+		"CenRotDunEnergy",
+	],
+	"core/pack/interaction_graph": [
+		"AnnealableGraphBase",
+		"DensePDInteractionGraph",
+		"DoubleDensePDInteractionGraph",
+		"DoubleLazyInteractionGraph",
+		"FASTERInteractionGraph",
+		"FixedBBInteractionGraph",
+		"HPatchEnergy",
+		"InteractionGraphBase",
+		"InteractionGraphFactory",
+		"LazyInteractionGraph",
+		"LinearMemoryInteractionGraph",
+		"MultiplexedAnnealableGraph",
+		"OnTheFlyInteractionGraph",
+		"PDInteractionGraph",
+		"PrecomputedPairEnergiesInteractionGraph",
+		"ResidueArrayAnnealingEvaluator",
+		"RotamerDots",
+		"SimpleInteractionGraph",
+		"SurfaceEnergy",
+		"SurfacePotential",
+		"SymmOnTheFlyInteractionGraph",
+		"SymmLinMemInteractionGraph",
+		"SymmMinimalistInteractionGraph",
+	],
+	"core/pack/rotamer_set": [
+		"AddResiduesRotamerSetOperation",
+		"bb_independent_rotamers",
+		"BumpSelector",
+		"ContinuousRotamerSet",
+		"DeleteAllRotamerSetOperation",
+		"FixbbRotamerSets",
+		"rotamer_building_functions",
+		"rna_rotamer_building_functions",
+		"RotamerCouplings",
+		"RotamerLinks",
+		"RotamerSet",
+		"RotamerSet_",
+		"RotamerSetFactory",
+		"RotamerSetOperation",
+		"RotamerSets",
+		"RotamerSetsBase",
+		"RotamerSubset",
+		"RotamerSubsets",
+		"UnboundRotamersOperation",
+		"WaterAnchorInfo",
+		"WaterPackingInfo",
+	],
+	"core/pack/rotamer_set/symmetry": [
+		"SymmetricRotamerSet_",
+		"SymmetricRotamerSetFactory",
+		"SymmetricRotamerSets",
+	],
+	"core/pack/rotamers": [
+		"SingleBasicRotamerLibrary",
+		"SingleLigandRotamerLibrary",
+		"SingleLigandRotamerLibraryCreator",
+		"SingleNCAARotamerLibraryCreator",
+                "SingleResiduePeptoidLibrary",
+		"SingleResiduePeptoidLibraryCreator",
+		"SingleResidueRotamerLibrary",
+		"SingleResidueRotamerLibraryCreator",
+		"SingleResidueRotamerLibraryFactory",
+		"StoredRotamerLibraryCreator",
+	],
+	"core/pack/scmin": [
+		"AtomTreeCollection",
+		"AtomTreeSCMinMinimizerMap",
+		"CartSCMinMinimizerMap",
+		"SCMinMultifunc",
+		"CartSCMinMultifunc",
+		"SidechainStateAssignment",
+	],
+	"core/pack/task": [
+		"IGEdgeReweightContainer",
+		"PackerTask",
+		"PackerTask_",
+		"ResidueLevelTask",
+		"ResidueLevelTask_",
+		"ResfileReader",
+		"RotamerSampleOptions",
+		"TaskFactory",
+	],
+	"core/pack/task/rna": [
+		"RNA_ResidueLevelTask",
+	],
+	"core/pack/task/operation": [
+		"NoRepackDisulfides",
+		"OperateOnCertainResidues",
+		"OperateOnResidueSubset",
+		"OptCysHG",
+		"OptH",
+		"ReplicateTask",
+		"ResFilterFactory",
+		"ResFilters",
+		"ResLvlTaskOperationFactory",
+		"ResLvlTaskOperations",
+		"TaskOperation",
+		"TaskOperationFactory",
+		"TaskOperations",
+		"task_op_schemas",
+	],
+	"core/pack/task/residue_selector" : [
+		"ClashBasedRepackShellSelector",
+	],
+	"core/util": [
+		"ChainbreakUtil",
+		"cryst_util",
+		"disulfide_util",
+		"kinematics_util",
+		"metalloproteins_util",
+		"SwitchResidueTypeSet",
+	]
+
+}
+include_path = [
+]
+library_path = [
+]
+libraries = [
+]
+subprojects = [
+	"basic",
+	"numeric",
+	"core.1",
+	"core.2",
+	"core.3",
+	"utility",
+	"ObjexxFCL",
+]
