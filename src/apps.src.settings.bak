@@ -326,5 +326,4 @@ subprojects = [
 	"numeric",
 	"utility",
 	"ObjexxFCL",
-	"jmetalcpp"
 ]

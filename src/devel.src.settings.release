@@ -53,4 +53,5 @@ subprojects = [
 	"z",
 	"cppdb",
 	"sqlite3",
+	"jmetalcpp"
 ]

@@ -198,6 +198,25 @@
 #include <utility/vector0.hh>
 #include <ObjexxFCL/format.hh>
 
+// Maria 9/5/2017 jMetalC++ libraries
+
+
+#include <jmetalcpp/core/Problem.hh>
+#include <jmetalcpp/core/Algorithm.hh>
+#include <jmetalcpp/core/Operator.hh>
+#include <jmetalcpp/problems/singleObjective/Sphere.hh>
+#include <jmetalcpp/encodings/solutionType/RealSolutionType.h>
+#include <jmetalcpp/core/SolutionType.hh>
+#include <jmetalcpp/core/Variable.hh>
+
+
+
+// Maria 9/5/2017 Variables have been initialized
+std::string strategy_input;
+std::string strategy;
+int ABINITIO_ITERATIONS = 0;
+
+
 //Auto using namespaces
 namespace ObjexxFCL { } using namespace ObjexxFCL; // AUTO USING NS
 namespace ObjexxFCL { namespace format { } } using namespace ObjexxFCL::format; // AUTO USING NS
@@ -237,6 +256,10 @@ using namespace abinitio;
 using namespace jumping;
 using namespace evaluation;
 using namespace basic::options;
+using namespace jmetalcpp::core;
+//using namespace jmetalcpp::problems;
+
+
 //using namespace basic::options::OptionKeys;
 
 // little helper classes for evaluation of generated decoys:
@@ -2189,14 +2212,38 @@ PcaEvaluator::apply( pose::Pose& pose, std::string , io::silent::SilentStruct &p
 
 void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose::Pose & fold_pose ){
 
-//This is where jMetal is called!
+
+	strategy_input = basic::options::option[ basic::options::OptionKeys::abinitio::jMetal_strategy ];
+	std::stringstream sstream( strategy_input );
+	std::getline(sstream, strategy, '*');
+	std::cout << "Maria: Entra en jMetal optimizacion" << strategy << std::endl;
+
+	
+		if( strategy == "ROSETTA" ){
+			
+			// Maria 9-5-2017: This is where Rosetta is called!
+			abinitio_protocol->apply( fold_pose );
+			std::cout << "Maria: Estrategia Rosetta" << strategy << std::endl;
 
 
-// This is where Rosetta is called!
-abinitio_protocol->apply( fold_pose );
+		}else if(strategy == "JMETAL"){
+
+			// Maria 9-5-2017: This is where jMetal is called!
+
+  			Problem   * problem   ; // The problem to solve
+  			Algorithm * algorithm ; // The algorithm to use
+			Operator  * mutation  ; // Mutation operator to use
+  			Operator  * selection ; // Selection operator to use
+			//problem = new jmetalcpp::problems::singleObjective::Sphere("Real");
+
+			std::cout << "Maria: Estrategia jMetal" << strategy << std::endl;
 
 
+		}
+		
 }
+
+
 
 
 } //abinitio
