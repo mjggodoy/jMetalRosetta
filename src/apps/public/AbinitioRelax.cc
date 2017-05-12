@@ -28,7 +28,6 @@
 
 #include <utility/vector1.hh>
 
-#include <jmetalcpp/core/Algorithm.h>
 
 
 int
@@ -36,11 +35,10 @@ main( int argc, char * argv [] )
 {
 	using namespace basic::options;
 	using namespace basic::options::OptionKeys;
-	using namespace jmetalcpp::core;
 	using std::string;
 	using utility::vector1;
 
-	Algorithm * alg;
+	
 
 	try {
 		//YL, move the options register functions out of the boinc section

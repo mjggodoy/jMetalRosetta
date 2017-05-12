@@ -19,7 +19,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <NonDominatedSolutionList.hh>
+#include "NonDominatedSolutionList.hh"
 
 
 /**
@@ -74,7 +74,7 @@ bool NonDominatedSolutionList::add(Solution *solution) {
   int i = 0;
   Solution * aux; //Store an solution temporally
 
-  while (i < solutionsList_.size()) {
+  while (i < (int)solutionsList_.size()) {
     aux = solutionsList_[i];
     int flag = dominance->compare(solution,aux);
 

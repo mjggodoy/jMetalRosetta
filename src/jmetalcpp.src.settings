@@ -134,7 +134,7 @@ libraries	 = [ ]
 subprojects  = [
 	# "protocols.1",
 	# "core.5",
-	"core.4pua",
+	"core.4",
 	"core.3",
 	"core.2",
 	"core.1",

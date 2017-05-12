@@ -21,15 +21,15 @@
 #ifndef __GGA_H__
 #define __GGA_H__
 
-#include <Algorithm.hh>
-#include <Problem.hh>
-#include <SolutionSet.hh>
-#include <ObjectiveComparator.h>
+#include <jmetalcpp/core/Algorithm.hh>
+#include <jmetalcpp/core/Problem.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
+#include <jmetalcpp/util/comparators/ObjectiveComparator.hh>
 
 class gGA : public Algorithm {
-private:
-  int populationSize_;
-  int maxEvaluations_;
+//private:
+  //int populationSize_; Maria 12/5/2017 These variables are never used
+  //int maxEvaluations_;
 public:
   gGA(Problem * problem);
   SolutionSet * execute();

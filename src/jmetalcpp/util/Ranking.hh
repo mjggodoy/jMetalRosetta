@@ -23,10 +23,10 @@
 #ifndef __RANKING__
 #define __RANKING__
 
-#include <SolutionSet.hh>
-#include <Solution.hh>
-#include <DominanceComparator.hh>
-#include <OverallConstraintViolationComparator.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
+#include <jmetalcpp/core/Solution.hh>
+#include <jmetalcpp/util/comparators/DominanceComparator.hh>
+#include <jmetalcpp/util/comparators/OverallConstraintViolationComparator.hh>
 #include <vector>
 
 /**

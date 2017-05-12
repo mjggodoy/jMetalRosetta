@@ -21,11 +21,11 @@
 #ifndef __SSGA_H__
 #define __SSGA_H__
 
-#include <Algorithm.hh>
-#include <Problem.hh>
-#include <SolutionSet.hh>
-#include <ObjectiveComparator.hh>
-#include <WorstSolutionSelection.hh>
+#include <jmetalcpp/core/Algorithm.hh>
+#include <jmetalcpp/core/Problem.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
+#include <jmetalcpp/util/comparators/ObjectiveComparator.hh>
+#include <jmetalcpp/operators/selection/WorstSolutionSelection.hh>
 
 /**
  * Class implementing a steady-state genetic algorithm

@@ -205,9 +205,14 @@
 #include <jmetalcpp/core/Algorithm.hh>
 #include <jmetalcpp/core/Operator.hh>
 #include <jmetalcpp/problems/singleObjective/Sphere.hh>
-#include <jmetalcpp/encodings/solutionType/RealSolutionType.h>
+#include <jmetalcpp/encodings/solutionType/RealSolutionType.hh>
 #include <jmetalcpp/core/SolutionType.hh>
 #include <jmetalcpp/core/Variable.hh>
+#include <jmetalcpp/metaheuristics/singleObjective/geneticAlgorithm/gGA.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
+#include <jmetalcpp/operators/crossover/SBXCrossover.hh>
+#include <jmetalcpp/operators/mutation/PolynomialMutation.hh>
+#include <jmetalcpp/operators/selection/BinaryTournament2.hh>
 
 
 
@@ -256,8 +261,6 @@ using namespace abinitio;
 using namespace jumping;
 using namespace evaluation;
 using namespace basic::options;
-using namespace jmetalcpp::core;
-//using namespace jmetalcpp::problems;
 
 
 //using namespace basic::options::OptionKeys;
@@ -2232,11 +2235,58 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 
   			Problem   * problem   ; // The problem to solve
   			Algorithm * algorithm ; // The algorithm to use
+			Operator  * crossover ; // Crossover operator
 			Operator  * mutation  ; // Mutation operator to use
   			Operator  * selection ; // Selection operator to use
-			//problem = new jmetalcpp::problems::singleObjective::Sphere("Real");
+			problem = new Sphere("Real");
+			algorithm = new gGA(problem);
+			std::cout << "TODO BIEN POR AHORA" << std::endl;
 
+				// Algorithm parameters
+			int populationSizeValue = 100;
+			int maxEvaluationsValue = 250000;
+			algorithm->setInputParameter("populationSize",&populationSizeValue);
+			algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
+
+				// Mutation and Crossover for Real codification
+			map<string, void *> parameters;
+			double crossoverProbability = 0.9;
+			double distributionIndexValue1 = 20.0;
+			parameters["probability"] =  &crossoverProbability ;
+			parameters["distributionIndex"] = &distributionIndexValue1 ;
+			crossover = new SBXCrossover(parameters);
+
+				parameters.clear();
+			double mutationProbability = 1.0/problem->getNumberOfVariables();
+			double distributionIndexValue2 = 20.0;
+			parameters["probability"] = &mutationProbability;
+			parameters["distributionIndex"] = &distributionIndexValue2 ;
+			mutation = new PolynomialMutation(parameters);
+
+			// Selection Operator
+			parameters.clear();
+			selection = new BinaryTournament2(parameters) ;
+
+			// Add the operators to the algorithm
+			algorithm->addOperator("crossover",crossover);
+			algorithm->addOperator("mutation",mutation);
+			algorithm->addOperator("selection",selection);
+
+			SolutionSet * solutions = algorithm->execute();
+			
+			delete crossover;
+  			delete mutation;
+  			delete selection;
+  			delete population;
+  			delete algorithm;
+
+			std::cout << "TERMINO BIEN" << std::endl;
+			
+			std::cout<< "SOL = " << solutions->get(0)->toString() << std::endl;
+			std::cout << "OBJ = " << solutions->get(0)->getObjective(0) << std::endl;
 			std::cout << "Maria: Estrategia jMetal" << strategy << std::endl;
+  			
+			delete solutions;
 
 
 		}

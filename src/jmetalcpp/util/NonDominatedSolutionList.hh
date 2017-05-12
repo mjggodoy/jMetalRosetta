@@ -21,10 +21,10 @@
 #ifndef __NONDOMINATEDSOLUTIONLIST__
 #define __NONDOMINATEDSOLUTIONLIST__
 
-#include <Comparator.hh>
-#include <DominanceComparator.hh>
-#include <SolutionComparator.hh>
-#include <SolutionSet.hh>
+#include <jmetalcpp/util/comparators/Comparator.hh>
+#include <jmetalcpp/util/comparators/DominanceComparator.hh>
+#include <jmetalcpp/util/comparators/SolutionComparator.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
 
 /**
  * This class implements an unbound list of non-dominated solutions
