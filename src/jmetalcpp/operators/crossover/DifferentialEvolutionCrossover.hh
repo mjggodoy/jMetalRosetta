@@ -22,10 +22,10 @@
 #define __DIFFERENTIAL_EVOLUTION_CROSSOVER__
 
 #include <string>
-#include <Crossover.hh>
-#include <Solution.hh>
-#include <PseudoRandom.hh>
-#include <XReal.hh>
+#include "Crossover.hh"
+#include <jmetalcpp/core/Solution.hh>
+#include <jmetalcpp/util/PseudoRandom.hh>
+#include <jmetalcpp/util/wrapper/XReal.hh>
 
 /**
  * Differential evolution crossover operators

@@ -23,7 +23,7 @@
 #ifndef __MUTATION__
 #define __MUTATION__
 
-#include <Operator.hh>
+#include <jmetalcpp/core/Operator.hh>
 
 /**
  * @class Mutation

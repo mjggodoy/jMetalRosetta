@@ -21,9 +21,9 @@
 #ifndef __SPX_CROSSOVER__
 #define __SPX_CROSSOVER__
 
-#include <Crossover.hh>
-#include <Binary.hh>
-#include <Solution.hh>
+#include "Crossover.hh"
+#include <jmetalcpp/encodings/variable/Binary.hh>
+#include <jmetalcpp/core/Solution.hh>
 #include <math.h>
 
 /**

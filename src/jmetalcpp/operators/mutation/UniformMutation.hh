@@ -21,10 +21,10 @@
 #ifndef __UNIFORM_MUTATION__
 #define __UNIFORM_MUTATION__
 
-#include <Mutation.hh>
-#include <Solution.hh>
-#include <PseudoRandom.hh>
-#include <XReal.hh>
+#include "Mutation.hh"
+#include <jmetalcpp/core/Solution.hh>
+#include <jmetalcpp/util/PseudoRandom.hh>
+#include <jmetalcpp/util/wrapper/XReal.hh>
 
 /**
  * This class implements a uniform mutation operator.

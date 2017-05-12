@@ -27,7 +27,7 @@
 #include <jmetalcpp/util/comparators/ObjectiveComparator.hh>
 #include <math.h>
 #include <limits.h>
-#include <PseudoRandom.hh>
+#include "PseudoRandom.hh"
 
 /**
  * This class implements some utilities for calculating distances

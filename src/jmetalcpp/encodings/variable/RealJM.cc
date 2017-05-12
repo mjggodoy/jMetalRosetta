@@ -20,7 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <RealJM.hh>
+#include "RealJM.hh"
 
 
 /** 
@@ -58,7 +58,7 @@ RealJM::RealJM(Variable * variable) {
 /**
  * Destructor
  */
-ReRealJMal::~RealJM() { /* do nothing */ }
+RealJM::~RealJM() { /* do nothing */ }
 
 
 /**

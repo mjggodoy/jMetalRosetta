@@ -23,7 +23,7 @@
 #ifndef __SELECTION__
 #define __SELECTION__
 
-#include <Operator.hh>
+#include <jmetalcpp/core/Operator.hh>
 
 /**
   * @class Selection

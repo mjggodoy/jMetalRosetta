@@ -21,9 +21,9 @@
 #ifndef __SOLUTIONCOMPARATOR__
 #define __SOLUTIONCOMPARATOR__
 
-#include <Comparator.hh>
-#include <Distance.hh>
-#include <Solution.hh>
+#include <jmetalcpp/util/comparators/Comparator.hh>
+#include <jmetalcpp/util/Distance.hh>
+#include <jmetalcpp/core/Solution.hh>
 
 /**
  * This class implements a <code>Comparator</code> (a method for comparing

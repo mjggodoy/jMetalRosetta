@@ -23,11 +23,11 @@
 #ifndef XREAL_H_
 #define XREAL_H_
 
-#include <Solution.h>
-#include <BinaryRealSolutionType.h>
-#include <RealSolutionType.h>
-#include <ArrayRealSolutionType.h>
-#include <ArrayReal.h>
+#include <jmetalcpp/core/Solution.hh>
+#include <jmetalcpp/encodings/solutionType/BinaryRealSolutionType.hh>
+#include <jmetalcpp/encodings/solutionType/RealSolutionType.hh>
+#include <jmetalcpp/encodings/solutionType/ArrayRealSolutionType.hh>
+#include <jmetalcpp/encodings/variable/ArrayReal.hh>
 
 /**
  * This class allows to apply a SBX crossover operator using two parent

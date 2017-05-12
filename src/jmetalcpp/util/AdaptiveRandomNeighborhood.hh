@@ -22,9 +22,9 @@
 #ifndef __ADAPTIVE_RANDOM_NEIGHBORHOOD__
 #define __ADAPTIVE_RANDOM_NEIGHBORHOOD__
 
-#include <Solution.hh>
-#include <SolutionSet.hh>
-#include <PseudoRandom.hh>
+#include <jmetalcpp/core/Solution.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
+#include "PseudoRandom.hh"
 
 #include <vector>
 #include <algorithm>

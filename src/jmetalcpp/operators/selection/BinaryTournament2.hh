@@ -23,11 +23,11 @@
 #ifndef __BINARY_TOURNAMENT_2__
 #define __BINARY_TOURNAMENT_2__
 
-#include <SolutionSet.hh>
-#include <Selection.hh>
-#include <Comparator.hh>
-#include <PermutationUtility.hh>
-#include <DominanceComparator.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
+#include "Selection.hh"
+#include <jmetalcpp/util/comparators/Comparator.hh>
+#include <jmetalcpp/util/PermutationUtility.hh>
+#include <jmetalcpp/util/comparators/DominanceComparator.hh>
 
 /**
  * This class implements an operator for binary selections using the same code

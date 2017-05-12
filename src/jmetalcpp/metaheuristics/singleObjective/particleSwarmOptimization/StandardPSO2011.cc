@@ -20,7 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <StandardPSO2011.hh>
+#include "StandardPSO2011.hh"
 
 
 /**
@@ -240,7 +240,7 @@ SolutionSet * StandardPSO2011::execute() {
 
   //cout << "neighborhood_i " << neighborhood_->getNeighbors(0) << endl;
   cout << "[";
-  for (int i = 0; i < neighborhood_->getNeighbors(0).size()-1; i++) {
+  for (int i = 0; i < (int)neighborhood_->getNeighbors(0).size()-1; i++) {
     cout << neighborhood_->getNeighbors(0).at(i) << ",";
   }
   cout << neighborhood_->getNeighbors(0).back() << "]" << endl;

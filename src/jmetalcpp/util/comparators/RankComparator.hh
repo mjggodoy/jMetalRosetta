@@ -21,8 +21,8 @@
 #ifndef __RANK_COMPARATOR__
 #define __RANK_COMPARATOR__
 
-#include <Comparator.hh>
-#include <Solution.hh>
+#include <jmetalcpp/util/comparators/Comparator.hh>
+#include <jmetalcpp/core/Solution.hh>
 
 /**
  * This class implements a <code>Comparator</code> (a method for comparing

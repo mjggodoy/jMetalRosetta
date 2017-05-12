@@ -21,9 +21,9 @@
 #ifndef Binary_Real_h
 #define Binary_Real_h
 
-#include <Variable.hh>
-#include <Binary.hh>
-#include <PseudoRandom.hh>
+#include <jmetalcpp/core/Variable.hh>
+#include <jmetalcpp/encodings/variable/Binary.hh>
+#include <jmetalcpp/util/PseudoRandom.hh>
 #include <math.h>
 #include <sstream>
 

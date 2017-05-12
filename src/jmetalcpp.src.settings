@@ -19,7 +19,7 @@
 #  When ready for primetime, move your apps into this .settings file.
 
 sources = {
-	"jmetalcppa/core" : [
+	"jmetalcpp/core" : [
 		"Algorithm",
 		"Operator", 
 		"Problem", 
@@ -82,7 +82,7 @@ sources = {
 		"BestSolutionSelection",
 		"BinaryTournament",
 		"BinaryTournament2",
-		"DifferentialEvoluationSelection",		
+		"DifferentialEvolutionSelection",		
 		"RandomSelection",
 		"Selection",
 		"WorstSolutionSelection",

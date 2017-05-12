@@ -65,11 +65,11 @@ AdaptiveRandomNeighborhood::AdaptiveRandomNeighborhood(SolutionSet * solutionSet
   }
   //cout <<  "L: " << list_ << endl;
   cout << "L:" << endl;
-  for (int i = 0; i < list_.size(); i++) {
+  for (int i = 0; i < (int)list_.size(); i++) {
     cout << "\t[";
-    for (int j = 0; j < list_.at(i).size(); j++) {
+    for (int j = 0; j < (int)list_.at(i).size(); j++) {
       cout << list_.at(i).at(j);
-      if (j < list_.at(i).size()-1) {
+      if (j < (int)list_.at(i).size()-1) {
         cout << ",";
       } else {
         cout << "]" << endl;
@@ -80,7 +80,7 @@ AdaptiveRandomNeighborhood::AdaptiveRandomNeighborhood(SolutionSet * solutionSet
 
 
 vector<int> AdaptiveRandomNeighborhood::getNeighbors(int i) {
-  if (i > list_.size()) {
+  if (i > (int)list_.size()) {
     cerr << "Error in AdaptiveRandomNeighborhood.getNeighbors"
         << "the parameter " << i << " is less than " << list_.size()
         << endl;
@@ -97,9 +97,9 @@ int AdaptiveRandomNeighborhood::getNumberOfRandomNeighbours() {
 
 SolutionSet * AdaptiveRandomNeighborhood::getBestFitnessSolutionInNeighborhood(Comparator * comparator) {
   SolutionSet * result = new SolutionSet();
-  for (int i = 0; i < list_.size(); i++) {
+  for (int i = 0; i < (int)list_.size(); i++) {
     Solution * bestSolution = solutionSet_->get(list_.at(i).at(0));
-    for (int j = 1; j < list_.at(i).size(); j++) {
+    for (int j = 1; j < (int)list_.at(i).size(); j++) {
       if (comparator->compare(bestSolution, solutionSet_->get(list_.at(i).at(j))) > 0) {
         bestSolution = solutionSet_->get(list_.at(i).at(j));
       }

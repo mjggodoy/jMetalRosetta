@@ -23,9 +23,9 @@
 #ifndef __SBX_CROSSOVER__
 #define __SBX_CROSSOVER__
 
-#include <Crossover.hh>
-#include <XReal.hh>
-#include <Solution.hh>
+#include "Crossover.hh"
+#include <jmetalcpp/util/wrapper/XReal.hh>
+#include <jmetalcpp/core/Solution.hh>
 #include <math.h>
 
 /**

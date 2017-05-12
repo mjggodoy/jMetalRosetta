@@ -23,12 +23,12 @@
 #ifndef __POLYNOMIAL_MUTATION__
 #define __POLYNOMIAL_MUTATION__
 
-#include <Mutation.hh>
-#include <Solution.hh>
+#include <jmetalcpp/operators/mutation/Mutation.hh>
+#include <jmetalcpp/core/Solution.hh>
 #include <math.h>
 #include <float.h>
-#include <PseudoRandom.hh>
-#include <XReal.hh>
+#include <jmetalcpp/util/PseudoRandom.hh>
+#include <jmetalcpp/util/wrapper/XReal.hh>
 
 /**
   * @class Mutation
@@ -50,7 +50,7 @@ private:
   double mutationProbability_;
   double distributionIndex_;
 
-  void * doMutation(double probability, Solution * solution);
+  void doMutation(double probability, Solution * solution);
   // TODO: VALID_TYPES;
 
 }; // PolynomialMutation

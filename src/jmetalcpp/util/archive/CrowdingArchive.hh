@@ -21,13 +21,13 @@
 #ifndef __CROWDING_ARCHIVE__
 #define __CROWDING_ARCHIVE__
 
-#include <Archive.hh>
-#include <Comparator.hh>
-#include <CrowdingDistanceComparator.hh>
-#include <Distance.hh>
-#include <DominanceComparator.hh>
-#include <EqualSolutions.hh>
-#include <Solution.hh>
+#include "Archive.hh"
+#include <jmetalcpp/util/comparators/Comparator.hh>
+#include <jmetalcpp/util/comparators/CrowdingDistanceComparator.hh>
+#include <jmetalcpp/util/Distance.hh>
+#include <jmetalcpp/util/comparators/DominanceComparator.hh>
+#include <jmetalcpp/util/comparators/EqualSolutions.hh>
+#include <jmetalcpp/core/Solution.hh>
 
 /**
  * This class implements a bounded archive based on crowding distances (as

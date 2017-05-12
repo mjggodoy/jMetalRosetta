@@ -52,7 +52,7 @@ bool AdaptiveGridArchive::add(Solution * solution, int eval) {
 	int i=0;
 	Solution * aux; //Store an solution temporally
 
-	while (i < solutionsList_.size()){
+	while (i < (int) solutionsList_.size()){
 	    aux = solutionsList_[i];
 	    int flag = dominance_->compare(solution,aux);
 	 	if (flag == -1) { // The Individual to insert dominates other
@@ -99,7 +99,7 @@ bool AdaptiveGridArchive::add(Solution * solution, int eval) {
 		i=0;
 		bool removed = false;
 
-		while (i < solutionsList_.size()){
+		while (i < (int)solutionsList_.size()){
 			if (!removed) {
 				aux = solutionsList_[i];
 				int location2 = grid_->location(aux);

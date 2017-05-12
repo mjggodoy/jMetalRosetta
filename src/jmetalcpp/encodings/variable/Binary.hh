@@ -22,10 +22,10 @@
 #ifndef Binary_h
 #define Binary_h
 
-#include <Variable.hh>
+#include <jmetalcpp/core/Variable.hh>
 #include <bitset>
 #include <vector>
-#include <PseudoRandom.hh>
+#include <jmetalcpp/util/PseudoRandom.hh>
 #include <stdlib.h>
 
 /**

@@ -21,19 +21,19 @@
 #ifndef __RANDOM_SELECTION__
 #define __RANDOM_SELECTION__
 
-#include <SolutionSet.hh>
-#include <Selection.hh>
-#include <Comparator.hh>
-#include <DominanceComparator.hh>
-#include <PseudoRandom.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
+#include <jmetalcpp/operators/selection/Selection.hh>
+#include <jmetalcpp/util/comparators/Comparator.hh>
+#include <jmetalcpp/util/comparators/DominanceComparator.hh>
+#include <jmetalcpp/util/PseudoRandom.hh>
 
 /**
  * This class implements an binary tournament selection operator
  */
 class RandomSelection : public Selection {
 
-private:
-  Comparator * comparator_;
+//private:
+ // Comparator * comparator_; //Maria 12/5/2017: This private variable is never used.
 
 public:
   RandomSelection(map<string, void *> parameters);

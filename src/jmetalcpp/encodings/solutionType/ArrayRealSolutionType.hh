@@ -21,8 +21,8 @@
 #ifndef __ARRAY_REAL_SOLUTION_TYPE__
 #define __ARRAY_REAL_SOLUTION_TYPE__
 
-#include <SolutionType.hh>
-#include <ArrayReal.h>
+#include <jmetalcpp/core/SolutionType.hh>
+#include <jmetalcpp/encodings/variable/ArrayReal.hh>
 
 /**
   * Class representing the solution type of solutions composed of an ArrayReal

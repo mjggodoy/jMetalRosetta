@@ -21,10 +21,10 @@
 #ifndef __DIFFERENTIAL_EVOLUTION_SELECTION__
 #define __DIFFERENTIAL_EVOLUTION_SELECTION__
 
-#include <Selection.hh>
-#include <Solution.hh>
-#include <SolutionSet.hh>
-#include <PseudoRandom.hh>
+#include <jmetalcpp/operators/selection/Selection.hh>
+#include <jmetalcpp/core/Solution.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
+#include <jmetalcpp/util/PseudoRandom.hh>
 
 /**
  * Class implementing the selection operator used in DE: three different solutions

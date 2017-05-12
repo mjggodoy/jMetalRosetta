@@ -21,8 +21,8 @@
 #ifndef __EPSILON_OBJECTIVE_COMPARATOR__
 #define __EPSILON_OBJECTIVE_COMPARATOR__
 
-#include <Solution.hh>
-#include <Comparator.hh>
+#include <jmetalcpp/core/Solution.hh>
+#include <jmetalcpp/util/comparators/Comparator.hh>
 
 /**
  * This class implements a <code>Comparator</code> (a method for comparing

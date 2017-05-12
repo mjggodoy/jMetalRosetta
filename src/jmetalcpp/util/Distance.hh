@@ -23,10 +23,10 @@
 #ifndef __DISTANCE__
 #define __DISTANCE__
 
-#include <SolutionSet.hh>
-#include <Solution.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
+#include <jmetalcpp/core/Solution.hh>
 #include <float.h>
-#include <ObjectiveComparator.hh>
+#include <jmetalcpp/util/comparators/ObjectiveComparator.hh>
 #include <math.h>
 
 using namespace std;

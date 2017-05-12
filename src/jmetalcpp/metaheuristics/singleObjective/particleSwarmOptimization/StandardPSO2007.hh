@@ -22,14 +22,14 @@
 #ifndef __STANDARD_PSO_2007__
 #define __STANDARD_PSO_2007__
 
-#include <Algorithm.hh>
-#include <Problem.hh>
-#include <SolutionSet.hh>
-#include <XReal.hh>
-#include <Comparator.hh>
-#include <ObjectiveComparator.hh>
-#include <BestSolutionSelection.hh>
-#include <AdaptiveRandomNeighborhood.hh>
+#include <jmetalcpp/core/Algorithm.hh>
+#include <jmetalcpp/core/Problem.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
+#include <jmetalcpp/util/wrapper/XReal.hh>
+#include <jmetalcpp/util/comparators/Comparator.hh>
+#include <jmetalcpp/util/comparators/ObjectiveComparator.hh>
+#include <jmetalcpp/operators/selection/BestSolutionSelection.hh>
+#include <jmetalcpp/util/AdaptiveRandomNeighborhood.hh>
 
 #include <math.h>
 

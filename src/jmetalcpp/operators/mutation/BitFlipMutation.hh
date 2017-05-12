@@ -21,12 +21,12 @@
 #ifndef __BITFLIP_MUTATION__
 #define __BITFLIP_MUTATION__
 
-#include <Mutation.hh>
-#include <Solution.hh>
+#include "Mutation.hh"
+#include <jmetalcpp/core/Solution.hh>
 #include <math.h>
 #include <float.h>
-#include <PseudoRandom.hh>
-#include <Binary.hh>
+#include <jmetalcpp/util/PseudoRandom.hh>
+#include <jmetalcpp/encodings/variable/Binary.hh>
 
 /**
   * @class Mutation
@@ -42,7 +42,7 @@ public:
 private:
   double mutationProbability_;
   // TODO: VALID_TYPES;
-  void * doMutation(double probability, Solution * solution);
+  void doMutation(double probability, Solution * solution);
 
 }; // BitFlipMutation
 

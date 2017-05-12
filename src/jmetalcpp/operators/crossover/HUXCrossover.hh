@@ -20,9 +20,9 @@
 
 #pragma once
 
-#include <Crossover.hh>
-#include <Binary.hh>
-#include <Solution.hh>
+#include <jmetalcpp/operators/crossover/Crossover.hh>
+#include <jmetalcpp/encodings/variable/Binary.hh>
+#include <jmetalcpp/core/Solution.hh>
 #include <math.h>
 
 /**

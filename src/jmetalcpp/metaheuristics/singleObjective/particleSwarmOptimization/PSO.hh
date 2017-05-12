@@ -21,14 +21,14 @@
 #ifndef __PSO__
 #define __PSO__
 
-#include <Algorithm.hh>
-#include <BestSolutionSelection.hh>
-#include <ObjectiveComparator.hh>
-#include <Problem.hh>
+#include <jmetalcpp/core/Algorithm.hh>
+#include <jmetalcpp/operators/selection/BestSolutionSelection.hh>
+#include <jmetalcpp/util/comparators/ObjectiveComparator.hh>
+#include <jmetalcpp/core/Problem.hh>
 //#include <QualityIndicator.h>
-#include <SolutionSet.hh>
-#include <XReal.hh>
-#include <PseudoRandom.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
+#include <jmetalcpp/util/wrapper/XReal.hh>
+#include <jmetalcpp/util/PseudoRandom.hh>
 #include <math.h>
 #include <string>
 
@@ -95,7 +95,7 @@ private:
   double ChVel1_;
   double ChVel2_;
 
-  SolutionSet * trueFront_;
+  //SolutionSet * trueFront_;
   double * deltaMax_;
   double * deltaMin_;
   bool success_;

@@ -19,7 +19,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <Binary.hh>
+#include "Binary.hh"
 
 
 /**
@@ -136,7 +136,7 @@ void Binary::setIth(int bit, bool value){
 int Binary::hammingDistance(Binary * other) {
   int distance = 0;
   int i = 0;
-  while (i < bits_->size()) {
+  while (i < (int)bits_->size()) {
     if ((*bits_)[i] != (*other->bits_)[i]) {
       distance++;
     }

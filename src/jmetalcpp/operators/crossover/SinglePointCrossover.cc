@@ -19,7 +19,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <SinglePointCrossover.hh>
+#include "SinglePointCrossover.hh"
 
 
 /**

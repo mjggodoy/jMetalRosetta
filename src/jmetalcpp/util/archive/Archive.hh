@@ -21,7 +21,7 @@
 #ifndef __ARCHIVE__
 #define __ARCHIVE__
 
-#include <SolutionSet.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
 
 /**
  * This class represents the super class for archive objects.

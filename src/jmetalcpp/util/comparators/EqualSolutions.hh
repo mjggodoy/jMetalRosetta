@@ -21,9 +21,9 @@
 #ifndef __EQUAL_SOLUTIONS__
 #define __EQUAL_SOLUTIONS__
 
-#include <Solution.hh>
-#include <Comparator.hh>
-#include <ObjectiveComparator.hh>
+#include <jmetalcpp/core/Solution.hh>
+#include <jmetalcpp/util/comparators/Comparator.hh>
+#include <jmetalcpp/util/comparators/ObjectiveComparator.hh>
 
 /**
  * This class implements a <code>Comparator</code> (a method for comparing

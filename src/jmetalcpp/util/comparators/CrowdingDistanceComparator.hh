@@ -21,8 +21,8 @@
 #ifndef __CROWDING_DISTANCE_COMPARATOR__
 #define __CROWDING_DISTANCE_COMPARATOR__
 
-#include <Comparator.hh>
-#include <Solution.hh>
+#include "Comparator.hh"
+#include <jmetalcpp/core/Solution.hh>
 
 /**
  * This class implements a <code>Comparator</code> (a method for comparing

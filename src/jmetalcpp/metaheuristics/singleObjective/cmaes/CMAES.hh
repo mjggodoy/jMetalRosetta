@@ -21,13 +21,13 @@
 #ifndef __CMAES__
 #define __CMAES__
 
-#include <Algorithm.hh>
-#include <Problem.hh>
-#include <SolutionSet.hh>
-#include <Comparator.hh>
-#include <ObjectiveComparator.hh>
+#include <jmetalcpp/core/Algorithm.hh>
+#include <jmetalcpp/core/Problem.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
+#include <jmetalcpp/util/comparators/Comparator.hh>
+#include <jmetalcpp/util/comparators/ObjectiveComparator.hh>
 
-#include <UtilsCMAES.hh>
+#include <jmetalcpp/metaheuristics/singleObjective/cmaes/utils/UtilsCMAES.hh>
 
 #include <math.h>
 #include <random>

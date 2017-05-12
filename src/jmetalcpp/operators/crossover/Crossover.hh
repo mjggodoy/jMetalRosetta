@@ -23,7 +23,7 @@
 #ifndef __CROSSOVER__
 #define __CROSSOVER__
 
-#include <Operator.hh>
+#include <jmetalcpp/core/Operator.hh>
 
 /**
   * @class Crossover

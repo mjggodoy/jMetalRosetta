@@ -21,7 +21,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <PolynomialMutation.hh>
+#include "PolynomialMutation.hh"
 
 
 const double PolynomialMutation::ETA_M_DEFAULT_ = 20.0;
@@ -54,7 +54,7 @@ PolynomialMutation::~PolynomialMutation() { } // ~PolynomialMutation
  * @param probability Mutation probability
  * @param solution The solution to mutate
  */
-void * PolynomialMutation::doMutation(double probability, Solution *solution) {        
+void PolynomialMutation::doMutation(double probability, Solution *solution) {        
   double rnd, delta1, delta2, mut_pow, deltaq;
   double y, yl, yu, val, xy;
   XReal * x = new XReal(solution);

@@ -21,9 +21,9 @@
 #ifndef Array_Real_h
 #define Array_Real_h
 
-#include <Variable.hh>
-#include <Problem.hh>
-#include <PseudoRandom.hh>
+#include <jmetalcpp/core/Variable.hh>
+#include <jmetalcpp/core/Problem.hh>
+#include <jmetalcpp/util/PseudoRandom.hh>
 #include <sstream>
 
 /**

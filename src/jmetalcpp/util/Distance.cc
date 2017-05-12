@@ -21,7 +21,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <Distance.hh>
+#include "Distance.hh"
 
 
 /**
@@ -49,7 +49,8 @@ double ** Distance::distanceMatrix(SolutionSet * solutionSet) {
 
   //The matrix of distances
   int size = solutionSet->size();
-  double ** distance;// = new double [size][size];
+  //double ** distance ;// = new double [size][size];
+  double ** distance = new double * [size];
   for (int i = 0; i < solutionSet->size(); i++){
     distance[i] = new double[size];
   }

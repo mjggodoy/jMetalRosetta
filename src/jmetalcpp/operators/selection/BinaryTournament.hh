@@ -21,11 +21,11 @@
 #ifndef __BINARY_TOURNAMENT__
 #define __BINARY_TOURNAMENT__
 
-#include <SolutionSet.hh>
-#include <Selection.hh>
-#include <Comparator.hh>
-#include <DominanceComparator.hh>
-#include <PseudoRandom.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
+#include <jmetalcpp/operators/selection/Selection.hh>
+#include <jmetalcpp/util/comparators/Comparator.hh>
+#include <jmetalcpp/util/comparators/DominanceComparator.hh>
+#include <jmetalcpp/util/PseudoRandom.hh>
 
 /**
  * This class implements an binary tournament selection operator

@@ -21,9 +21,9 @@
 #ifndef __EPSILON_DOMINANCE_COMPARATOR__
 #define __EPSILON_DOMINANCE_COMPARATOR__
 
-#include <Solution.hh>
-#include <Comparator.hh>
-#include <OverallConstraintViolationComparator.hh>
+#include <jmetalcpp/core/Solution.hh>
+#include <jmetalcpp/util/comparators/Comparator.hh>
+#include "OverallConstraintViolationComparator.hh"
 
 /**
  * This class implements a <code>Comparator</code> (a method for comparing

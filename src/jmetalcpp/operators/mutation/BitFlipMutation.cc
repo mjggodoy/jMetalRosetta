@@ -19,7 +19,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <BitFlipMutation.hh>
+#include "BitFlipMutation.hh"
 
 
 /**
@@ -45,7 +45,7 @@ BitFlipMutation::~BitFlipMutation() { } // ~BitFlipMutation
  * @param probability Mutation probability
  * @param solution The solution to mutate
  */
-void * BitFlipMutation::doMutation(double probability, Solution *solution) {
+void BitFlipMutation::doMutation(double probability, Solution *solution) {
   int numberOfVariables = solution->getNumberOfVariables() ;
 
   for (int i = 0 ; i < numberOfVariables ; i++) {

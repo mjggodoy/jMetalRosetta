@@ -21,9 +21,9 @@
 #ifndef __BEST_SOLUTION_SELECTION__
 #define __BEST_SOLUTION_SELECTION__
 
-#include <SolutionSet.hh>
-#include <Selection.hh>
-#include <Comparator.hh>
+#include <jmetalcpp/core/SolutionSet.hh>
+#include <jmetalcpp/operators/selection/Selection.hh>
+#include <jmetalcpp/util/comparators/Comparator.hh>
 
 /**
  * This class implements a selection operator used for selecting the best

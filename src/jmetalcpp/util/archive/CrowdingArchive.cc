@@ -18,7 +18,7 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <CrowdingArchive.hh>
+#include "CrowdingArchive.hh"
 
 /**
  * This class implements a bounded archive based on crowding distances (as
@@ -69,7 +69,7 @@ bool CrowdingArchive::add(Solution *solution){
   int flag = 0;
   int i = 0;
   Solution * aux; //Store an solution temporally
-  while (i < solutionsList_.size()){
+  while (i < (int)solutionsList_.size()){
     aux = solutionsList_[i];
 
     flag = dominance->compare(solution,aux);

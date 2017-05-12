@@ -27,9 +27,6 @@
 #include <jmetalcpp/encodings/solutionType/RealSolutionType.hh>
 #include <jmetalcpp/core/Solution.hh>
 
-namespace jmetalcpp {
-namespace problems {
-namespace singleObjective {
 
 /**
   * @class Sphere
@@ -43,8 +40,6 @@ public:
 	void evaluate(Solution *solution);
 };
 
-}
-}
-}
+
 
 #endif

@@ -19,7 +19,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <ArrayRealSolutionType.hh>
+#include "ArrayRealSolutionType.hh"
 #include <cstddef>
 
 

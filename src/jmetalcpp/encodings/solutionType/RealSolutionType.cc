@@ -20,7 +20,8 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <RealSolutionType.hh>
+#include <jmetalcpp/core/SolutionType.hh>
+#include "RealSolutionType.hh"
 #include <cstddef>
 
 

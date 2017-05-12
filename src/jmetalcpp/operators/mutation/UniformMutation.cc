@@ -18,7 +18,7 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <UniformMutation.hh>
+#include "UniformMutation.hh"
 
 /**
  * This class implements a uniform mutation operator.

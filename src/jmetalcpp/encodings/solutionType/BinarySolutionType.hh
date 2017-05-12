@@ -21,8 +21,8 @@
 #ifndef __BINARY_SOLUTION_TYPE__
 #define __BINARY_SOLUTION_TYPE__
 
-#include <SolutionType.hh>
-#include <BinaryReal.hh>
+#include <jmetalcpp/core/SolutionType.hh>
+#include <jmetalcpp/encodings/variable/BinaryReal.hh>
 
 /**
  * This class is aimed at defining a Type encoding a Real solution
