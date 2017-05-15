@@ -2229,7 +2229,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			std::cout << "Maria: Estrategia Rosetta" << strategy << std::endl;
 
 
-		}else if(strategy == "JMETAL"){
+		}else if(strategy == "JMETAL" || strategy=="JMETAL_SHORT"){
 
 			// Maria 9-5-2017: This is where jMetal is called!
 
@@ -2240,7 +2240,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
   			Operator  * selection ; // Selection operator to use
 			problem = new Sphere("Real");
 			algorithm = new gGA(problem);
-			std::cout << "TODO BIEN POR AHORA" << std::endl;
+			std::cout << "Maria 9-5-2017: Everything is ok" << std::endl;
 
 				// Algorithm parameters
 			int populationSizeValue = 100;
@@ -2256,7 +2256,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			parameters["distributionIndex"] = &distributionIndexValue1 ;
 			crossover = new SBXCrossover(parameters);
 
-				parameters.clear();
+			parameters.clear();
 			double mutationProbability = 1.0/problem->getNumberOfVariables();
 			double distributionIndexValue2 = 20.0;
 			parameters["probability"] = &mutationProbability;
@@ -2280,7 +2280,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
   			delete population;
   			delete algorithm;
 
-			std::cout << "TERMINO BIEN" << std::endl;
+			std::cout << "All things have finished ok!" << std::endl;
 			
 			std::cout<< "SOL = " << solutions->get(0)->toString() << std::endl;
 			std::cout << "OBJ = " << solutions->get(0)->getObjective(0) << std::endl;
@@ -2289,6 +2289,10 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			delete solutions;
 
 
+		}else{
+			
+			std::cout << "\n\tERROR: Strategy is not JMETAL or ROSETTA. Please, provide an strategy: " << std::endl << std::endl;
+			exit(1);
 		}
 		
 }
