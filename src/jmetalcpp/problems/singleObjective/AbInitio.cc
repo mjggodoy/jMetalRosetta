@@ -32,7 +32,7 @@
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = 1;
 	numberOfConstraints_ = 0;
-	problemName_ 				 = "AbInitio";
+	problemName_= "AbInitio";
 
 	lowerLimit_ = new double[numberOfVariables_];
 	if (lowerLimit_ == NULL) {
@@ -74,7 +74,7 @@
 /**
  * Destructor
  */
-AbInitio::AbInitio() {
+AbInitio::~AbInitio() {
   delete [] lowerLimit_ ;
   delete [] upperLimit_ ;
   delete solutionType_ ;
@@ -114,7 +114,7 @@ void AbInitio::configureEvaluation(){
 
         rma_stage_sample=1;
 
-    }else if(evals <= MAX_EVALUATIONS_STAGE2){
+    }else if(evals <= MAX_EVALUATIONS_STAGE2 ){
 
         rma_stage_sample=2;
 

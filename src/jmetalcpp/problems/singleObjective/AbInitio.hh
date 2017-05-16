@@ -32,11 +32,10 @@ class AbInitio : public Problem {
 public:
 	/// @brief Constructor 1 of the Abinito problem
 	AbInitio(string solutionType, int numberOfVariables = 10);
-    
     /// @brief Destructor
 	~AbInitio();
 	void evaluate(Solution *solution);
-};
+
 
 private: 
 
@@ -57,7 +56,10 @@ private:
 	int MAX_EVALUATIONS_STAGE4;		// Max allowed evaluations in stage4
 
 
+};
+
 #endif
+
 
 /**
   * @class AbInitio

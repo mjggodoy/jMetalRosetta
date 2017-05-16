@@ -90,6 +90,7 @@ sources = {
 
 	"jmetalcpp/problems/singleObjective" : [ # Maria 10/5/2017: Sphere problem to test
 		"Sphere",
+		"AbInitio",
 		],
 	
 	"jmetalcpp/util/archive" : [

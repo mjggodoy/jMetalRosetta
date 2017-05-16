@@ -2221,6 +2221,23 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 	std::getline(sstream, strategy, '*');
 	std::cout << "Maria: Entra en jMetal optimizacion" << strategy << std::endl;
 
+		//create pose
+		using namespace basic::options::OptionKeys;
+
+		if ( option[ in::file::fasta ].user() ) {
+			sequence_ = core::sequence::read_fasta_file( option[ in::file::fasta ]()[1] )[1]->sequence();
+			tr.Info << "read fasta sequence: " << sequence_.size() << " residues\n"  << sequence_ << std::endl;
+		} else if ( native_pose_ ) {
+			sequence_ = native_pose_->sequence();
+			tr.Info << "take sequence from native : " << sequence_ << std::endl;
+		} else if ( !option[ OptionKeys::abinitio::rerun ]() && !option[ OptionKeys::abinitio::jdist_rerun ]() ) { // if we rerun we don't need sequence or native or anything...
+			utility_exit_with_message("Error: can't read sequence! Use -in::file::fasta sequence.fasta or -in::file::native native.pdb!");
+		}
+		
+		pose = core::pose::PoseOP( new pose::Pose );
+		core::pose::make_pose_from_sequence(*pose, sequence_, *( chemical::ChemicalManager::get_instance()->residue_type_set( chemical::CENTROID )));
+
+
 	
 		if( strategy == "ROSETTA" ){
 			
@@ -2277,7 +2294,6 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			delete crossover;
   			delete mutation;
   			delete selection;
-  			delete population;
   			delete algorithm;
 
 			std::cout << "All things have finished ok!" << std::endl;

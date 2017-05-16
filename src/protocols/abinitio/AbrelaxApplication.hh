@@ -200,6 +200,9 @@ private:
 	core::io::silent::SilentFileOptionsOP silent_options_;
 	core::io::silent::SilentFileDataOP silent_score_file_;
 
+	// Maria: a new pose to test
+	core::pose::PoseOP pose;	
+
 	// native_pose: steal fragments, compute rmsd, start-structure, sequence
 	core::pose::PoseOP native_pose_;
 
