@@ -201,7 +201,10 @@ private:
 	core::io::silent::SilentFileDataOP silent_score_file_;
 
 	// Maria: a new pose to test
-	core::pose::PoseOP pose;	
+	core::pose::PoseOP pose;
+
+	// Maria: a new pose(2) to test
+	core::pose::PoseOP pose2;	
 
 	// native_pose: steal fragments, compute rmsd, start-structure, sequence
 	core::pose::PoseOP native_pose_;

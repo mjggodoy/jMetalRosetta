@@ -1342,6 +1342,9 @@ void AbrelaxApplication::setup_fold( pose::Pose& extended_pose, ProtocolOP& prot
 
 	// ---------------------------------------------------------------------------------------------------------------
 	// initialize pose
+		
+	//tr.Info << "Maria: Setting of angles from protein" << std::endl;
+	//extractAngles(extended_pose);
 	generate_extended_pose( extended_pose, sequence_ );
 	//extractAngles(extended_pose);
 
@@ -2160,12 +2163,14 @@ void AbrelaxApplication::run() {
 void AbrelaxApplication::extractAngles(core::pose::Pose &pose) {
 
 	int phi, psi, omega = 0;
+	int count = 0;
 
 	for (Size pos = 1; pos <= pose.total_residue(); pos++ ){
 		phi = pose.phi(pos);
 		psi= pose.psi(pos);
 		omega = pose.omega(pos);
-		std::cout << "XUXA: ANGLES TO MODIFY" << " phi: "<< phi << " psi: " << psi << " omega: " << omega << std::endl;
+		count++;
+		std::cout << count << " " << "XUXA: ANGLES TO MODIFY" << " phi: "<< phi << " psi: " << psi << " omega: " << omega << std::endl;
 
 	}
 }
@@ -2236,9 +2241,34 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 		
 		pose = core::pose::PoseOP( new pose::Pose );
 		core::pose::make_pose_from_sequence(*pose, sequence_, *( chemical::ChemicalManager::get_instance()->residue_type_set( chemical::CENTROID )));
+		
+		std::cout << "Maria: Getting all angles from pose in jMetalOptimization method: " << strategy << std::endl;
+
+		extractAngles(*pose);
+
+		std::cout << "Maria: Ending of getting  all angles from pose in jMetalOptimization method: " << strategy << std::endl;
+		
+		std::cout << "Maria: Generating extended pose: " << strategy << std::endl;
+
+		generate_extended_pose(*pose,sequence_);
+
+		std::cout << "Finishing extended pose " << strategy << std::endl;
+
+		std::cout << "Maria: Getting all angles from pose in jMetalOptimization method after calling the extended pose method: " << strategy << std::endl;
+
+		extractAngles(*pose);
+
+		std::cout << "Maria:  Ending of getting  all angles from pose in jMetalOptimization method after calling the pose method" << strategy << std::endl;
 
 
-	
+		//pose2 = core::pose::PoseOP( new pose::Pose );
+		//core::pose::make_pose_from_sequence(*pose2, sequence_, *( chemical::ChemicalManager::get_instance()->residue_type_set( chemical::CENTROID )));
+		
+		//std::cout << "Maria: Getting all angles from pose in jMetalOptimization method: (2)  " << strategy << std::endl;
+
+		//extractAngles(*pose2);
+
+
 		if( strategy == "ROSETTA" ){
 			
 			// Maria 9-5-2017: This is where Rosetta is called!

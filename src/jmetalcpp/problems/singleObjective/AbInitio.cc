@@ -78,7 +78,7 @@ AbInitio::~AbInitio() {
   delete [] lowerLimit_ ;
   delete [] upperLimit_ ;
   delete solutionType_ ;
-} // ~Sphere
+} // ~AbInitio
 
 
 void AbInitio::evaluate(Solution *solution) {
