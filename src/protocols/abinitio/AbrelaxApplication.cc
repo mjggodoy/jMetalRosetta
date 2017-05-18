@@ -1347,6 +1347,7 @@ void AbrelaxApplication::setup_fold( pose::Pose& extended_pose, ProtocolOP& prot
 	//extractAngles(extended_pose);
 	generate_extended_pose( extended_pose, sequence_ );
 	//extractAngles(extended_pose);
+	extended_pose.fraglength = 9;
 
 
 	// apply cyclic peptide constraints if the option is selected
@@ -2220,6 +2221,9 @@ PcaEvaluator::apply( pose::Pose& pose, std::string , io::silent::SilentStruct &p
 
 void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose::Pose & fold_pose ){
 
+	int STAGE1_ITERATIONS = 2000;	
+	int RMA_ITERATIONS = 10;
+	int iterations =  STAGE1_ITERATIONS*RMA_ITERATIONS;
 
 	strategy_input = basic::options::option[ basic::options::OptionKeys::abinitio::jMetal_strategy ];
 	std::stringstream sstream( strategy_input );
@@ -2259,6 +2263,9 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 		extractAngles(*pose);
 
 		std::cout << "Maria:  Ending of getting  all angles from pose in jMetalOptimization method after calling the pose method" << strategy << std::endl;
+
+
+		//abinitio_protocol->mgf_apply_STAGE1( *pose, iterations, true, true );
 
 
 		//pose2 = core::pose::PoseOP( new pose::Pose );
@@ -2342,7 +2349,6 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 		}
 		
 }
-
 
 
 

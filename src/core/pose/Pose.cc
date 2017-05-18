@@ -270,6 +270,11 @@ Pose::operator=( Pose const & src )
 		old_conf.reset(); // force clear
 	}
 
+	//SMK starts
+
+	fraglength = src.fraglength;
+
+
 	unbuffer_observers();
 	//std::cout << "Done ref pose and observers" << std::endl;
 

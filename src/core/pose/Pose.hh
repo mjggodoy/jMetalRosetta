@@ -1855,6 +1855,12 @@ private:
 	/// @remarks fires when Conformation experiences a coordinate change (conformation::signals::XYZEvent)
 	mutable utility::signals::BufferedSignalHub< void, ConformationEvent > conformation_obs_hub_;
 
+//Where SDK's code starts:
+public:
+
+	Size fraglength;
+
+
 
 #ifdef    SERIALIZATION
 public:

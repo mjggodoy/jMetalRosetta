@@ -456,10 +456,20 @@ public:
 
 	utility::vector1< StageID > recover_low_stages_;
 
+
+
 private:
 	/// @brief Private, unimplemented assignment operator to prevent assignment of this class.
 	/// Copy-constructor copying only.
 	ClassicAbinitio const & operator = ( ClassicAbinitio const & src );
+
+
+public:
+
+	int mgf_apply_STAGE1( core::pose::Pose &pose, int iterations, bool do_recover, bool variable_temp ) override;
+	int mgf_apply_STAGE2( core::pose::Pose &pose, int iterations, bool do_recover, bool variable_temp ) override;
+	int mgf_apply_STAGE3( core::pose::Pose &pose, int iterations, bool do_recover, bool variable_temp ) override;
+	int mgf_apply_STAGE4( core::pose::Pose &pose, int iterations, bool do_recover, bool variable_temp ) override;
 
 
 };

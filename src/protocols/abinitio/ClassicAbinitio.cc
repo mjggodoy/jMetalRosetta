@@ -1329,5 +1329,184 @@ void ClassicAbinitio::output_debug_structure( core::pose::Pose & pose, std::stri
 
 } // ClassicAbinitio::output_debug_structure( core::pose::Pose & pose, std::string prefix )
 
+
+
+//18/5/17 Maria: Evaluations methods implemented by Mario.
+
+int ClassicAbinitio::mgf_apply_STAGE1( core::pose::Pose &pose, int iterations, bool do_recover, bool variable_temp ) {
+	
+	pose.fraglength = 9; //SMK
+
+	// Set iterations
+	stage1_cycles_ = iterations;
+
+	if( !prepare_stage1( pose ) ){
+		std::cout << "\n\tERROR: Unable to prepare STAGE1 " << std::endl << std::endl;
+		exit(1);
+	}
+	
+	//Apply
+	bool success( true );
+	int total_trials_ = 0;
+
+	success = do_stage1_cycles( pose );
+	if( do_recover ) recover_low( pose, STAGE_1 );
+	total_trials_+=mc().total_trials();
+	mc().reset_counters();
+
+	if ( !success ) {
+		std::cout << "\n\tERROR: STAGE1 failed!!! " << std::endl << std::endl;
+		exit(1);
+	}
+
+	return total_trials_;
+
+}
+
+int ClassicAbinitio::mgf_apply_STAGE2( core::pose::Pose &pose, int iterations, bool do_recover, bool variable_temp ) {
+	
+	pose.fraglength = 9; //SMK
+	
+	// Set iterations
+
+	stage2_cycles_ = iterations;
+
+
+	// Prepare stage 
+	if( !prepare_stage2( pose ) ){
+		std::cout << "\n\tERROR: Unable to prepare STAGE2 " << std::endl << std::endl;
+		exit(1);
+	}
+
+	// Temperature control settings
+	if( variable_temp ){
+		mc_->set_variable_temp( true, temperature_/(iterations-1.0) );
+		mc_->set_heat_after_cycles( 50 );
+	}
+
+	// Apply
+	bool success( true );
+	int total_trials_ = 0;
+
+	success = do_stage2_cycles( pose );
+
+	if( do_recover ){
+
+		recover_low( pose, STAGE_2 );                   
+
+	}else{
+
+		if( mc_->mgf_start_point_replaced() ) recover_low( pose, STAGE_2 ); 
+
+	}
+
+	total_trials_+=mc().total_trials();
+	mc().reset_counters();
+	// pose.constraint_set( orig_constraints ); // restore constraints - this is critical for checkpointing to work
+
+	if ( !success ) {
+		std::cout << "\n\tERROR: STAGE2 failed!!! " << std::endl << std::endl;
+		exit(1);
+	}
+
+	return total_trials_;
+
+
+}
+
+
+int ClassicAbinitio::mgf_apply_STAGE3( core::pose::Pose &pose, int iterations, bool do_recover, bool variable_temp ) {
+
+	pose.fraglength = 9; //SMK
+
+	// Setting iterations
+
+	stage3_cycles_ = iterations;
+
+	if( !prepare_stage3( pose ) ){
+		std::cout << "\n\tERROR: Unable to prepare STAGE3 " << std::endl << std::endl;
+		exit(1);
+	}
+	
+	// Temperature control settings
+	if( variable_temp ){
+		mc_->set_variable_temp( true, temperature_/(iterations-1.0) );
+		mc_->set_heat_after_cycles( 50 );
+	}
+
+	// Apply
+	bool success( true );
+	int total_trials_ = 0;
+	success = do_stage3_cycles( pose );
+
+	// Recover low step
+	if( do_recover ){
+
+		recover_low( pose, STAGE_3a );                   
+
+	}else{
+
+		if( mc_->mgf_start_point_replaced() ) recover_low( pose, STAGE_3a ); 
+
+	}
+	
+	total_trials_+=mc().total_trials();
+	mc().reset_counters();
+
+	if ( !success ) {
+		std::cout << "\n\tERROR: STAGE3 failed!!! " << std::endl << std::endl;
+		exit(1);
+	}
+
+	return total_trials_;
+
+}
+
+
+int ClassicAbinitio::mgf_apply_STAGE4( core::pose::Pose &pose, int iterations, bool do_recover, bool variable_temp ) {
+	pose.fraglength = 3; //SMK
+
+	// Set iterations
+	stage4_cycles_ = iterations;
+
+	// Prepare stage 
+	if( !prepare_stage4( pose ) ){
+		std::cout << "\n\tERROR: Unable to prepare STAGE4 " << std::endl << std::endl;
+		exit(1);
+	}
+
+	// Temperature control settings
+	if( variable_temp ){
+		mc_->set_variable_temp( true, temperature_/(iterations-1.0) );
+		mc_->set_heat_after_cycles( 50 );
+	}
+
+	// Apply
+	bool success( true );
+	int total_trials_ = 0;
+	success = do_stage4_cycles( pose );
+
+	// Recover low step
+	if( do_recover ){
+
+		recover_low( pose, STAGE_4 );                   
+
+	}else{
+
+		if( mc_->mgf_start_point_replaced() ) recover_low( pose, STAGE_4 ); 		
+
+	}
+
+	total_trials_+=mc().total_trials();
+	mc().reset_counters();
+
+	if ( !success ) {
+		std::cout << "\n\tERROR: STAGE4 failed!!! " << std::endl << std::endl;
+		exit(1);
+	}
+
+	return total_trials_;
+}
+
 } //abinitio
 } //protocols

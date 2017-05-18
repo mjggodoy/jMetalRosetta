@@ -150,6 +150,15 @@ private:
 	//fast fix until the new JobDist/Mover is introduced:
 	std::string silentout_file_name_;
 
+
+public:
+
+	virtual int mgf_apply_STAGE1( core::pose::Pose &pose, int iterations, bool do_recover, bool variable_temp ) { return 0;}
+	virtual int mgf_apply_STAGE2( core::pose::Pose &pose, int iterations, bool do_recover, bool variable_temp ){ return 0; }
+	virtual int mgf_apply_STAGE3( core::pose::Pose &pose, int iterations, bool do_recover, bool variable_temp ){ return 0; }
+	virtual int mgf_apply_STAGE4( core::pose::Pose &pose, int iterations, bool do_recover, bool variable_temp ){ return 0; }
+
+
 };
 
 }

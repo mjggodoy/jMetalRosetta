@@ -656,6 +656,30 @@ private:
 	utility::vector1< moves::MonteCarloExceptionConvergeOP > convergence_checks_;
 	Size last_check_;
 	Size check_frequency_;
+
+	//Mario's code:
+	//Mario's code starts here:
+
+public:
+	
+	void set_variable_temp( bool setting, double decrease ){
+		mgf_variable_temp = setting;
+		mgf_temp_decrease = decrease;
+		mgf_mc_iteration = 0;
+		mgf_normal_temp = true;
+	}
+	
+	bool mgf_variable_temp;
+	bool mgf_normal_temp;
+	double mgf_temp_decrease;
+	unsigned long mgf_mc_iteration;
+
+	bool mgf_start_point_replaced( ){ return mgf_starting_point_replaced; }
+	bool mgf_starting_point_replaced;
+
+	//Mario's code ends here:
+
+
 };
 
 // for Python bindings
