@@ -2263,9 +2263,31 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 		extractAngles(*pose);
 
 		std::cout << "Maria:  Ending of getting  all angles from pose in jMetalOptimization method after calling the pose method" << strategy << std::endl;
+		
+		std::cout << "Maria:  Starting to evaluate the solutions in mgf_apply_stage1" << strategy << std::endl;
 
+		//pose->get_pose()->fraglength = 9;
+		abinitio_protocol->mgf_apply_STAGE1( *pose, iterations, true, true );
+		double energy = pose->energies().total_energy();
 
-		//abinitio_protocol->mgf_apply_STAGE1( *pose, iterations, true, true );
+		std::cout << "Energy from pose when has been evaluated in Stage 1: " << energy << std::endl;
+
+		abinitio_protocol->mgf_apply_STAGE2( *pose, iterations, true, true );
+		double energy2 = pose->energies().total_energy();
+
+		std::cout << "Energy from pose when has been evaluated in Stage 2: " << energy2 << std::endl;
+
+		abinitio_protocol->mgf_apply_STAGE3( *pose, iterations, true, true );
+		double energy3 = pose->energies().total_energy();
+		std::cout << "Energy from pose when has been evaluated in Stage 3: " << energy3 << std::endl;
+
+		abinitio_protocol->mgf_apply_STAGE4( *pose, iterations, true, true );
+		double energy4 = pose->energies().total_energy();
+		std::cout << "Energy from pose when has been evaluated in Stage 4: " << energy4 << std::endl;
+
+		abinitio_protocol->mgf_apply_STAGE1( *pose, iterations, true, true );
+		double energy5 = pose->energies().total_energy();
+		std::cout << "Energy from pose when has been evaluated in Stage 1: " << energy5 << std::endl;
 
 
 		//pose2 = core::pose::PoseOP( new pose::Pose );

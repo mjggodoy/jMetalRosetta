@@ -67,6 +67,13 @@
 
 #include <utility/vector1.hh>
 
+//Maria: Trying to include poses.
+#include <core/pose/Pose.hh>
+#include <core/pose/Pose.fwd.hh>
+#include <core/scoring/Energies.hh>
+
+
+
 
 namespace protocols {
 namespace abinitio {
@@ -152,6 +159,11 @@ public:
 
 	/// @brief extract the value of the angles in an specific pose.
 	void extractAngles( core::pose::Pose & pose );
+
+	/// @brief extract the value of energy from a given pose (Maria: 19/5/17)
+
+	//double get_energy(){ return pose->energies().total_energy(); }
+
 
 private:
 	/// @brief create score-functions for centroid and fullatom level

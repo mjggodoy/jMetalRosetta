@@ -1859,7 +1859,8 @@ private:
 public:
 
 	Size fraglength;
-
+	//double get_energy(){ return pose.energies().total_energy(); }
+	//PoseOP get_pose(){ return pose; }
 
 
 #ifdef    SERIALIZATION
