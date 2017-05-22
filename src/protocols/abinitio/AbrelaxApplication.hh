@@ -160,6 +160,8 @@ public:
 	/// @brief extract the value of the angles in an specific pose.
 	void extractAngles( core::pose::Pose & pose );
 
+	void setAngles( core::pose::Pose & pose);
+
 	/// @brief extract the value of energy from a given pose (Maria: 19/5/17)
 
 	//double get_energy(){ return pose->energies().total_energy(); }

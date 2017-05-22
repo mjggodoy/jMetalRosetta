@@ -2176,6 +2176,44 @@ void AbrelaxApplication::extractAngles(core::pose::Pose &pose) {
 	}
 }
 
+
+void AbrelaxApplication::setAngles(core::pose::Pose &pose){
+	
+	int foo[6] = {-150, 152, -179, -150, 130, -120} ;
+	int foo2[pose.size()*3];
+	for (int i = 0; i <= pose.size()*3; i++) {
+		foo2[i] = i % 120;
+	}
+	//std::cout << foo[0] << "XUXA: ANGLES TO MODIFY" << std::endl;
+	
+	int i =0;
+	for ( Size pos = 1; pos <= pose.size(); pos++ ) {
+
+		if ( !pose.residue(pos).is_protein() ) continue;
+			
+			if(i==0){
+				
+				pose.set_phi( pos, foo[i] );
+				pose.set_psi( pos, foo[i+1]);
+				pose.set_omega( pos, foo[i+2]);
+				
+				i+=i+2;
+
+			
+			}else{
+				
+				pose.set_phi( pos, foo[i+1] );
+				pose.set_phi( pos, foo[i+2] );
+				pose.set_phi( pos, foo[i+3] );
+
+				i+=i+3;
+
+			}
+
+			std::cout << i << std::endl;
+	}
+}
+
 //============= Implementation of PoseEvaluators ======================================
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /// @detail
@@ -2224,6 +2262,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 	int STAGE1_ITERATIONS = 2000;	
 	int RMA_ITERATIONS = 10;
 	int iterations =  STAGE1_ITERATIONS*RMA_ITERATIONS;
+	//iterations=0;
 
 	strategy_input = basic::options::option[ basic::options::OptionKeys::abinitio::jMetal_strategy ];
 	std::stringstream sstream( strategy_input );
@@ -2269,25 +2308,39 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 		//pose->get_pose()->fraglength = 9;
 		abinitio_protocol->mgf_apply_STAGE1( *pose, iterations, true, true );
 		double energy = pose->energies().total_energy();
+		std::cout << "Maria: Energy from pose when has been evaluated in Stage 1: " << energy << std::endl;
+		std::cout << "Maria: Applying the modification in the pose'angles: " << energy << std::endl;
+		setAngles(*pose);
+		std::cout << "Maria: Printing all the angles from pose: " << energy << std::endl;
+		extractAngles(*pose);
 
-		std::cout << "Energy from pose when has been evaluated in Stage 1: " << energy << std::endl;
+		//abinitio_protocol->mgf_apply_STAGE1( *pose, iterations, true, true );
+		//energy = pose->energies().total_energy();
+		//std::cout << "Maria: Energy from pose when has been evaluated in Stage 1_: " << energy << std::endl;
+		//extractAngles(*pose);
+		//std::cout << "Maria: Applying the modification in the pose'angles: " << energy << std::endl;
+		//setAngles(*pose);
+		//std::cout << "Maria: Printing all the angles from pose: " << energy << std::endl;
+		//extractAngles(*pose);
 
-		abinitio_protocol->mgf_apply_STAGE2( *pose, iterations, true, true );
-		double energy2 = pose->energies().total_energy();
 
-		std::cout << "Energy from pose when has been evaluated in Stage 2: " << energy2 << std::endl;
 
-		abinitio_protocol->mgf_apply_STAGE3( *pose, iterations, true, true );
-		double energy3 = pose->energies().total_energy();
-		std::cout << "Energy from pose when has been evaluated in Stage 3: " << energy3 << std::endl;
+		//abinitio_protocol->mgf_apply_STAGE2( *pose, iterations, true, true );
+		//double energy2 = pose->energies().total_energy();
 
-		abinitio_protocol->mgf_apply_STAGE4( *pose, iterations, true, true );
-		double energy4 = pose->energies().total_energy();
-		std::cout << "Energy from pose when has been evaluated in Stage 4: " << energy4 << std::endl;
+		//std::cout << "Energy from pose when has been evaluated in Stage 2: " << energy2 << std::endl;
 
-		abinitio_protocol->mgf_apply_STAGE1( *pose, iterations, true, true );
-		double energy5 = pose->energies().total_energy();
-		std::cout << "Energy from pose when has been evaluated in Stage 1: " << energy5 << std::endl;
+		//abinitio_protocol->mgf_apply_STAGE3( *pose, iterations, true, true );
+		//double energy3 = pose->energies().total_energy();
+		//std::cout << "Energy from pose when has been evaluated in Stage 3: " << energy3 << std::endl;
+
+		//abinitio_protocol->mgf_apply_STAGE4( *pose, iterations, true, true );
+		//double energy4 = pose->energies().total_energy();
+		//std::cout << "Energy from pose when has been evaluated in Stage 4: " << energy4 << std::endl;
+
+		//abinitio_protocol->mgf_apply_STAGE1( *pose, iterations, true, true );
+		//double energy6 = pose->energies().total_energy();
+		//std::cout << "Energy from pose when has been evaluated in Stage 1: " << energy6 << std::endl;
 
 
 		//pose2 = core::pose::PoseOP( new pose::Pose );
@@ -2309,59 +2362,59 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 
 			// Maria 9-5-2017: This is where jMetal is called!
 
-  			Problem   * problem   ; // The problem to solve
-  			Algorithm * algorithm ; // The algorithm to use
-			Operator  * crossover ; // Crossover operator
-			Operator  * mutation  ; // Mutation operator to use
-  			Operator  * selection ; // Selection operator to use
-			problem = new Sphere("Real");
-			algorithm = new gGA(problem);
-			std::cout << "Maria 9-5-2017: Everything is ok" << std::endl;
+  			//Problem   * problem   ; // The problem to solve
+  			//Algorithm * algorithm ; // The algorithm to use
+			//Operator  * crossover ; // Crossover operator
+			//Operator  * mutation  ; // Mutation operator to use
+  			//Operator  * selection ; // Selection operator to use
+			//problem = new Sphere("Real");
+			//algorithm = new gGA(problem);
+			//std::cout << "Maria 9-5-2017: Everything is ok" << std::endl;
 
 				// Algorithm parameters
-			int populationSizeValue = 100;
-			int maxEvaluationsValue = 250000;
-			algorithm->setInputParameter("populationSize",&populationSizeValue);
-			algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
+			//int populationSizeValue = 100;
+			//int maxEvaluationsValue = 250000;
+			//algorithm->setInputParameter("populationSize",&populationSizeValue);
+			//algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
 
 				// Mutation and Crossover for Real codification
-			map<string, void *> parameters;
-			double crossoverProbability = 0.9;
-			double distributionIndexValue1 = 20.0;
-			parameters["probability"] =  &crossoverProbability ;
-			parameters["distributionIndex"] = &distributionIndexValue1 ;
-			crossover = new SBXCrossover(parameters);
+			//map<string, void *> parameters;
+			//double crossoverProbability = 0.9;
+			//double distributionIndexValue1 = 20.0;
+			//parameters["probability"] =  &crossoverProbability ;
+			//parameters["distributionIndex"] = &distributionIndexValue1 ;
+			//crossover = new SBXCrossover(parameters);
 
-			parameters.clear();
-			double mutationProbability = 1.0/problem->getNumberOfVariables();
-			double distributionIndexValue2 = 20.0;
-			parameters["probability"] = &mutationProbability;
-			parameters["distributionIndex"] = &distributionIndexValue2 ;
-			mutation = new PolynomialMutation(parameters);
+			//parameters.clear();
+			//double mutationProbability = 1.0/problem->getNumberOfVariables();
+			//double distributionIndexValue2 = 20.0;
+			//parameters["probability"] = &mutationProbability;
+			//parameters["distributionIndex"] = &distributionIndexValue2 ;
+			//mutation = new PolynomialMutation(parameters);
 
 			// Selection Operator
-			parameters.clear();
-			selection = new BinaryTournament2(parameters) ;
+			//parameters.clear();
+			//selection = new BinaryTournament2(parameters) ;
 
 			// Add the operators to the algorithm
-			algorithm->addOperator("crossover",crossover);
-			algorithm->addOperator("mutation",mutation);
-			algorithm->addOperator("selection",selection);
+			//algorithm->addOperator("crossover",crossover);
+			//algorithm->addOperator("mutation",mutation);
+			//algorithm->addOperator("selection",selection);
 
-			SolutionSet * solutions = algorithm->execute();
+			//SolutionSet * solutions = algorithm->execute();
 			
-			delete crossover;
-  			delete mutation;
-  			delete selection;
-  			delete algorithm;
+			//delete crossover;
+  			//delete mutation;
+  			//delete selection;
+  			//delete algorithm;
 
-			std::cout << "All things have finished ok!" << std::endl;
+			//std::cout << "All things have finished ok!" << std::endl;
 			
-			std::cout<< "SOL = " << solutions->get(0)->toString() << std::endl;
-			std::cout << "OBJ = " << solutions->get(0)->getObjective(0) << std::endl;
-			std::cout << "Maria: Estrategia jMetal" << strategy << std::endl;
+			//std::cout<< "SOL = " << solutions->get(0)->toString() << std::endl;
+			//std::cout << "OBJ = " << solutions->get(0)->getObjective(0) << std::endl;
+			//std::cout << "Maria: Estrategia jMetal" << strategy << std::endl;
   			
-			delete solutions;
+			//delete solutions;
 
 
 		}else{

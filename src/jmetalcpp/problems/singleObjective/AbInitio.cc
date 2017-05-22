@@ -83,9 +83,16 @@ AbInitio::~AbInitio() {
 
 void AbInitio::evaluate(Solution *solution) {
 
+    double energy;
+
+    // Construir pose a partir de solution
+
     if(rma_stage_sample==1){
 
-    
+        // EValuar pose
+        // recuperas energia
+
+
 
     }else if(rma_stage_sample==2){
 
@@ -100,7 +107,12 @@ void AbInitio::evaluate(Solution *solution) {
     }else if(rma_stage_sample==4){
 
         
+    } else {
+        // ERROR
+        exit(-1);
     }
+
+    //solution->setObjective(0,energy);
 
     evals++;
     configureEvaluation();

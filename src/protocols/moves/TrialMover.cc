@@ -175,7 +175,7 @@ void TrialMover::apply( pose::Pose & pose )
 	}
 
 	/// make the move
-	std::cout << "XUXA: MUY IMPORTANTE. MAKE THE MOVE!!!!" << std::endl;
+	//std::cout << "XUXA: MUY IMPORTANTE. MAKE THE MOVE!!!!" << std::endl;
 	mover_->apply( pose );
 
 	// if ( keep_stats_type() == all_stats ) { //// score and get residue energies
