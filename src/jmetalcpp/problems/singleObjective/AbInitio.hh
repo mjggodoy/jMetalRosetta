@@ -25,14 +25,23 @@
 #include <math.h>
 #include <jmetalcpp/encodings/solutionType/RealSolutionType.hh>
 #include <jmetalcpp/core/Solution.hh>
+#include <protocols/abinitio/Protocol.hh>
+#include <core/pose/Pose.hh>
+#include <core/pose/Pose.hh>
+
+
+
+using protocols::abinitio::ProtocolOP;
+using core::pose::Pose;
 
 
 class AbInitio : public Problem {
    
 public:
 	/// @brief Constructor 1 of the Abinito problem
-	AbInitio(string solutionType, int numberOfVariables = 10);
-    /// @brief Destructor
+	AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables = 10);
+    
+	/// @brief Destructor
 	~AbInitio();
 	void evaluate(Solution *solution);
 
@@ -40,6 +49,7 @@ public:
 private: 
 
     void configureEvaluation();
+	core::pose::PoseOP createPose();
 
 private:
 
@@ -54,6 +64,7 @@ private:
 	int MAX_EVALUATIONS_STAGE2;		// Max allowed evaluations in stage2		
 	int MAX_EVALUATIONS_STAGE3;		// Max allowed evaluations in stage3		
 	int MAX_EVALUATIONS_STAGE4;		// Max allowed evaluations in stage4
+	ProtocolOP rosetta_abinitio;	// Protocol Rosetta Abinitio
 
 
 };

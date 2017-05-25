@@ -19,6 +19,13 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "AbInitio.hh"
+#include <protocols/abinitio/Protocol.hh>
+#include <core/chemical/ChemicalManager.hh>
+#include <core/pose/Pose.hh>
+#include <core/pose/Pose.fwd.hh>
+#include <core/pose/annotated_sequence.hh>
+
+
 
 /**
  * Constructor.
@@ -28,13 +35,14 @@
  */
 
 
- AbInitio::AbInitio(string solutionType, int numberOfVariables) {
+ AbInitio::AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables) {
+    rosetta_abinitio = ab;
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = 1;
 	numberOfConstraints_ = 0;
 	problemName_= "AbInitio";
-
-	lowerLimit_ = new double[numberOfVariables_];
+	
+    lowerLimit_ = new double[numberOfVariables_];
 	if (lowerLimit_ == NULL) {
 		cout << "Sphere::Sphere. Error reserving memory for storing the array of lower limits" << endl;
 		exit(-1) ;
@@ -86,13 +94,25 @@ void AbInitio::evaluate(Solution *solution) {
     double energy;
 
     // Construir pose a partir de solution
+    
+   
+    //EN VEZ DE FOO2, cogemos los variables de solution
+
+    //IF POSE.SIZE*3 != solution.size exit(-1);
+   // for ( Size pos = 1; pos <= pose.size(); pos++ ) {	
+			//pose.set_phi( pos, foo2[(pos-1)*3] );
+			//pose.set_psi( pos, foo2[(pos-1)*3+1]);
+			//pose.set_omega( pos, foo2[(pos-1)*3+2]);
+	//}	
+
+
 
     if(rma_stage_sample==1){
 
         // EValuar pose
+        //rosetta_abinitio->mgf_apply_STAGE1(*pose, iterations, do_recover, variable_temp );
+
         // recuperas energia
-
-
 
     }else if(rma_stage_sample==2){
 
@@ -139,4 +159,16 @@ void AbInitio::configureEvaluation(){
         rma_stage_sample=4;
 
     }
+
+
 }
+
+core::pose::PoseOP createPose(std::string const& sequence){
+
+    core::pose::PoseOP pose = core::pose::PoseOP( new core::pose::Pose );
+    core::pose::make_pose_from_sequence(*pose, sequence, *( core::chemical::ChemicalManager::get_instance()->residue_type_set( core::chemical::CENTROID )));
+
+    return pose;
+}
+
+

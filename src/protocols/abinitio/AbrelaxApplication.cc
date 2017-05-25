@@ -204,6 +204,8 @@
 #include <jmetalcpp/core/Problem.hh>
 #include <jmetalcpp/core/Algorithm.hh>
 #include <jmetalcpp/core/Operator.hh>
+#include <jmetalcpp/core/Operator.hh>
+#include <jmetalcpp/problems/singleObjective/AbInitio.hh>
 #include <jmetalcpp/problems/singleObjective/Sphere.hh>
 #include <jmetalcpp/encodings/solutionType/RealSolutionType.hh>
 #include <jmetalcpp/core/SolutionType.hh>
@@ -2179,39 +2181,53 @@ void AbrelaxApplication::extractAngles(core::pose::Pose &pose) {
 
 void AbrelaxApplication::setAngles(core::pose::Pose &pose){
 	
-	int foo[6] = {-150, 152, -179, -150, 130, -120} ;
-	int foo2[pose.size()*3];
-	for (int i = 0; i <= pose.size()*3; i++) {
+	//int foo[6] = {-150, 152, -179, -150, 130, -120} ;
+	//Maria: We're goint to fill up the array:
+	int * foo2 = new int[pose.size()*3];
+	for (int i = 0; i <= (int)pose.size()*3; i++) {
+		
 		foo2[i] = i % 120;
+		std::cout <<  "XUXA: Filling the array " << foo2[i] << std::endl;
+		
 	}
+	//Maria: We're goint set the angles of the pose:
+
+	for ( Size pos = 1; pos <= pose.size(); pos++ ) {
+			
+			pose.set_phi( pos, foo2[(pos-1)*3] );
+			pose.set_psi( pos, foo2[(pos-1)*3+1]);
+			pose.set_omega( pos, foo2[(pos-1)*3+2]);
+	}
+
+
 	//std::cout << foo[0] << "XUXA: ANGLES TO MODIFY" << std::endl;
 	
-	int i =0;
-	for ( Size pos = 1; pos <= pose.size(); pos++ ) {
+	//int i =0;
+	//for ( Size pos = 1; pos <= pose.size(); pos++ ) {
 
-		if ( !pose.residue(pos).is_protein() ) continue;
+		//if ( !pose.residue(pos).is_protein() ) continue;
 			
-			if(i==0){
+			//if(i==0){
 				
-				pose.set_phi( pos, foo[i] );
-				pose.set_psi( pos, foo[i+1]);
-				pose.set_omega( pos, foo[i+2]);
+				//pose.set_phi( pos, foo2[pos-1] );
+				//pose.set_psi( pos, foo2[pos]);
+				//pose.set_omega( pos, foo2[pos+1]);
 				
-				i+=i+2;
+				//i=pos+2; //i==3;
 
 			
-			}else{
+			//}else{
 				
-				pose.set_phi( pos, foo[i+1] );
-				pose.set_phi( pos, foo[i+2] );
-				pose.set_phi( pos, foo[i+3] );
+				//pose.set_phi( pos, foo2[i] ); //3
+				//pose.set_psi( pos, foo2[i+1] ); //4
+				//pose.set_omega( pos, foo2[i+2] ); //5
 
-				i+=i+3;
+				//i=i+3; //i==6
 
-			}
+			//}
 
-			std::cout << i << std::endl;
-	}
+			//std::cout << i << std::endl;
+	//}
 }
 
 //============= Implementation of PoseEvaluators ======================================
@@ -2362,12 +2378,12 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 
 			// Maria 9-5-2017: This is where jMetal is called!
 
-  			//Problem   * problem   ; // The problem to solve
-  			//Algorithm * algorithm ; // The algorithm to use
+  			Problem   * problem   ; // The problem to solve
+  			Algorithm * algorithm ; // The algorithm to use
 			//Operator  * crossover ; // Crossover operator
 			//Operator  * mutation  ; // Mutation operator to use
   			//Operator  * selection ; // Selection operator to use
-			//problem = new Sphere("Real");
+			problem = new AbInitio("Real", abinitio_protocol, sequence_);
 			//algorithm = new gGA(problem);
 			//std::cout << "Maria 9-5-2017: Everything is ok" << std::endl;
 
