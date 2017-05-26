@@ -22,13 +22,16 @@
 #define __ABINITIO__
 
 #include <jmetalcpp/core/Problem.hh>
+#include <jmetalcpp/core/Solution.hh>
 #include <math.h>
 #include <jmetalcpp/encodings/solutionType/RealSolutionType.hh>
 #include <jmetalcpp/core/Solution.hh>
 #include <protocols/abinitio/Protocol.hh>
 #include <core/pose/Pose.hh>
-#include <core/pose/Pose.hh>
+#include <core/sequence/Sequence.hh>
 
+
+#include <string>
 
 
 using protocols::abinitio::ProtocolOP;
@@ -39,17 +42,20 @@ class AbInitio : public Problem {
    
 public:
 	/// @brief Constructor 1 of the Abinito problem
-	AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables = 10);
+	AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables);
     
 	/// @brief Destructor
 	~AbInitio();
 	void evaluate(Solution *solution);
 
+public:
+	
+	core::pose::PoseOP createPose(std::string const& sequence);
 
 private: 
 
     void configureEvaluation();
-	core::pose::PoseOP createPose();
+	void getRosettaSolution(Solution *solution);
 
 private:
 
@@ -64,8 +70,19 @@ private:
 	int MAX_EVALUATIONS_STAGE2;		// Max allowed evaluations in stage2		
 	int MAX_EVALUATIONS_STAGE3;		// Max allowed evaluations in stage3		
 	int MAX_EVALUATIONS_STAGE4;		// Max allowed evaluations in stage4
-	ProtocolOP rosetta_abinitio;	// Protocol Rosetta Abinitio
+	std::string sequence; 	// Maria: Input protein sequence
+	bool do_recover = true; // Maria: do_recover
+	int iterations; // Maria: do_recover: total number of iterations
+	double fitness; // Maria: Energy associated with each pose
+	bool variable_temp;
+	string temp_strategy = "";
 
+
+
+public:
+
+
+	ProtocolOP rosetta_abinitio;	// Maria: Protocol Rosetta Abinitio
 
 };
 

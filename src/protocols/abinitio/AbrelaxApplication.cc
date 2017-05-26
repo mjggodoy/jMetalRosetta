@@ -2377,13 +2377,14 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 		}else if(strategy == "JMETAL" || strategy=="JMETAL_SHORT"){
 
 			// Maria 9-5-2017: This is where jMetal is called!
-
+			Size total_residues = fold_pose.total_residue();
+			int numberOfVariables = total_residues;
   			Problem   * problem   ; // The problem to solve
   			Algorithm * algorithm ; // The algorithm to use
 			//Operator  * crossover ; // Crossover operator
 			//Operator  * mutation  ; // Mutation operator to use
   			//Operator  * selection ; // Selection operator to use
-			problem = new AbInitio("Real", abinitio_protocol, sequence_);
+			problem = new AbInitio("Real", abinitio_protocol, sequence_, numberOfVariables);
 			//algorithm = new gGA(problem);
 			//std::cout << "Maria 9-5-2017: Everything is ok" << std::endl;
 

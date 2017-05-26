@@ -19,11 +19,23 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "AbInitio.hh"
+#include <jmetalcpp/core/Solution.hh>
 #include <protocols/abinitio/Protocol.hh>
 #include <core/chemical/ChemicalManager.hh>
 #include <core/pose/Pose.hh>
 #include <core/pose/Pose.fwd.hh>
 #include <core/pose/annotated_sequence.hh>
+#include <core/sequence/Sequence.hh>
+#include <core/types.hh>
+#include <core/conformation/Residue.hh>
+
+
+
+#include <string>
+#include <utility/io/util.hh>
+
+using core::Size;
+using namespace core;
 
 
 
@@ -53,13 +65,6 @@
 		cout << "Sphere::Sphere. Error reserving memory for storing the array of upper limits" << endl;
 		exit(-1) ;
 	}
-
-    // 15-5-17 Maria: To set up the constraints of the problem
-    int i ;
-    for (i = 0; i < numberOfVariables_; i++) {
-    	lowerLimit_[i] = -5.12;
-    	upperLimit_[i] =  5.12;
-    }
 	
     // TODO: Solution type initialization
     solutionType_ = new RealSolutionType(this);	
@@ -91,26 +96,35 @@ AbInitio::~AbInitio() {
 
 void AbInitio::evaluate(Solution *solution) {
 
-    double energy;
+    iterations = STAGE1_ITERATIONS * RMA_ITERATIONS;
+    variable_temp = ( temp_strategy == "VT" ) ? true : false;
 
-    // Construir pose a partir de solution
+
+    core::pose::PoseOP pose = createPose(sequence);
     
-   
-    //EN VEZ DE FOO2, cogemos los variables de solution
+    Variable **variables = solution->getDecisionVariables();
+    
+    if((int)pose->size()*3 != (int)solution->getNumberOfVariables()){
+ 
+        cout << "The number of variables do not equal to the size of the problem: " << "\n" << "Number of angles per aminoacids in protein" << pose->size()*3 
+        << " Number of variables in jMetal solution: " << solution->getNumberOfVariables() <<endl;
+        exit(-1);
+    }
 
-    //IF POSE.SIZE*3 != solution.size exit(-1);
-   // for ( Size pos = 1; pos <= pose.size(); pos++ ) {	
-			//pose.set_phi( pos, foo2[(pos-1)*3] );
-			//pose.set_psi( pos, foo2[(pos-1)*3+1]);
-			//pose.set_omega( pos, foo2[(pos-1)*3+2]);
-	//}	
 
+    for ( int pos = 0; pos <= numberOfVariables_; pos++ ) {
+
+        pose->set_phi(pos, variables[pos*3]->getValue());
+        pose->set_psi(pos, variables[pos*3+1]->getValue());
+        pose->set_omega(pos, variables[pos*3+2]->getValue());
+
+    }
 
 
     if(rma_stage_sample==1){
 
-        // EValuar pose
-        //rosetta_abinitio->mgf_apply_STAGE1(*pose, iterations, do_recover, variable_temp );
+        // Maria: Evaluation of pose
+        rosetta_abinitio->mgf_apply_STAGE1(*pose, iterations, do_recover, variable_temp );
 
         // recuperas energia
 
@@ -159,16 +173,24 @@ void AbInitio::configureEvaluation(){
         rma_stage_sample=4;
 
     }
-
-
 }
 
-core::pose::PoseOP createPose(std::string const& sequence){
+core::pose::PoseOP AbInitio::createPose(std::string const& sequence){
 
     core::pose::PoseOP pose = core::pose::PoseOP( new core::pose::Pose );
     core::pose::make_pose_from_sequence(*pose, sequence, *( core::chemical::ChemicalManager::get_instance()->residue_type_set( core::chemical::CENTROID )));
 
+    for ( Size pos = 1; pos <= pose->size(); pos++ ) {
+		
+		if ( ! pose->residue(pos).is_protein() ) continue;
+		pose->set_phi( pos, -150 );
+		pose->set_psi( pos, 150);
+		pose->set_omega( pos, 180 );
+	}
+
     return pose;
 }
+
+
 
 
