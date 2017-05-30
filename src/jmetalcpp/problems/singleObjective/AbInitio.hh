@@ -28,6 +28,8 @@
 #include <jmetalcpp/core/Solution.hh>
 #include <protocols/abinitio/Protocol.hh>
 #include <core/pose/Pose.hh>
+#include <core/pose/Pose.fwd.hh>
+
 #include <core/sequence/Sequence.hh>
 
 
@@ -91,5 +93,5 @@ public:
 
 /**
   * @class AbInitio
-  * @brief Class representing problem Sphere
+  * @brief Class representing problem AbInitio
  **/

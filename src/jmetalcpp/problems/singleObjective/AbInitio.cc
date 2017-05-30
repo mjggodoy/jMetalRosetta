@@ -1,4 +1,4 @@
-//  Sphere.cpp
+//  AbInitio.cc
 //
 //  Authors:
 //       Maria Jesus Garcia Godoy <mjgarciag@lcc.uma.es>
@@ -18,6 +18,9 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+// Maria: Dependences from Rosetta's code
+
 #include "AbInitio.hh"
 #include <jmetalcpp/core/Solution.hh>
 #include <protocols/abinitio/Protocol.hh>
@@ -28,8 +31,10 @@
 #include <core/sequence/Sequence.hh>
 #include <core/types.hh>
 #include <core/conformation/Residue.hh>
+#include <core/scoring/Energies.hh>
 
 
+// Maria: Dependences from C++ code
 
 #include <string>
 #include <utility/io/util.hh>
@@ -46,25 +51,32 @@ using namespace core;
  * @param numberOfVariables Number of variables of the problem
  */
 
-
  AbInitio::AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables) {
     rosetta_abinitio = ab;
 	numberOfVariables_   = numberOfVariables;
-	numberOfObjectives_  = 1;
+	numberOfObjectives_  = 1; // monoobjective problem so the number of objectives is just one.
 	numberOfConstraints_ = 0;
 	problemName_= "AbInitio";
 	
     lowerLimit_ = new double[numberOfVariables_];
 	if (lowerLimit_ == NULL) {
-		cout << "Sphere::Sphere. Error reserving memory for storing the array of lower limits" << endl;
+		cout << "Abinitio::Abinitio. Error reserving memory for storing the array of lower limits" << endl;
 		exit(-1) ;
 	}	
 	
 	upperLimit_ = new double[numberOfVariables_];
 	if (upperLimit_ == NULL) {
-		cout << "Sphere::Sphere. Error reserving memory for storing the array of upper limits" << endl;
+		cout << "Abinitio::Abinitio. Error reserving memory for storing the array of upper limits" << endl;
 		exit(-1) ;
 	}
+
+    //Maria: Range of values for the problem
+    
+    for (int i=0; i<numberOfVariables_; i++) {
+        
+        lowerLimit_[i] = -180;
+        upperLimit_[i] = 180;    
+    }
 	
     // TODO: Solution type initialization
     solutionType_ = new RealSolutionType(this);	
@@ -100,6 +112,7 @@ void AbInitio::evaluate(Solution *solution) {
     variable_temp = ( temp_strategy == "VT" ) ? true : false;
 
 
+    //Maria 30-5-17: Create pose from sequence and initialize the angles in -150, 150 and 180.
     core::pose::PoseOP pose = createPose(sequence);
     
     Variable **variables = solution->getDecisionVariables();
@@ -112,6 +125,8 @@ void AbInitio::evaluate(Solution *solution) {
     }
 
 
+    //Maria 31-5-17: Getting the Rosetta's solution.
+
     for ( int pos = 0; pos <= numberOfVariables_; pos++ ) {
 
         pose->set_phi(pos, variables[pos*3]->getValue());
@@ -123,30 +138,58 @@ void AbInitio::evaluate(Solution *solution) {
 
     if(rma_stage_sample==1){
 
-        // Maria: Evaluation of pose
-        rosetta_abinitio->mgf_apply_STAGE1(*pose, iterations, do_recover, variable_temp );
+        std::cout << "Maria:  Evaluation in Stage 1" << evals << std::endl;
 
-        // recuperas energia
+        // Maria: Evaluation of pose (Stage1)
+        rosetta_abinitio->mgf_apply_STAGE1(*pose, iterations, do_recover, variable_temp );
+        
 
     }else if(rma_stage_sample==2){
 
+        std::cout << "Maria:  Evaluation in Stage 2" << evals << std::endl;
 
+         // Maria: Evaluation of pose (Stage2)
+        rosetta_abinitio->mgf_apply_STAGE2(*pose, iterations, do_recover, variable_temp );
 
 
     }else if(rma_stage_sample==3){
- 
-
-
-    
-    }else if(rma_stage_sample==4){
 
         
+         std::cout << "Maria:  Evaluation in Stage 3" << evals << std::endl;
+
+        // Maria: Evaluation of pose (Stage3)
+        rosetta_abinitio->mgf_apply_STAGE3(*pose, iterations, do_recover, variable_temp );
+
+
+    }else if(rma_stage_sample==4){
+
+        std::cout << "Maria:  Evaluation in Stage 4" << evals << std::endl;
+
+        // Maria: Evaluation of pose (Stage4)
+        rosetta_abinitio->mgf_apply_STAGE4(*pose, iterations, do_recover, variable_temp );
+
     } else {
         // ERROR
         exit(-1);
     }
 
-    //solution->setObjective(0,energy);
+
+     // Maria: Retrieving the energy from pose
+
+    for (int i = 0; i < numberOfObjectives_; i++) {
+           
+            solution->setObjective(i,pose->energies().total_energy());
+    }
+
+    //Maria: get all angles after evaluation and write them in jMetal array of real values.
+
+    for ( int pos = 0; pos <= numberOfVariables_; pos++ ) {
+
+        variables[pos*3]->setValue(pose->phi(pos*3));
+        variables[pos*3+1]->setValue(pose->psi(pos*3+1));
+        variables[pos*3+2]->setValue(pose->omega(pos*3+2));
+
+    }
 
     evals++;
     configureEvaluation();
@@ -190,6 +233,9 @@ core::pose::PoseOP AbInitio::createPose(std::string const& sequence){
 
     return pose;
 }
+
+
+
 
 
 

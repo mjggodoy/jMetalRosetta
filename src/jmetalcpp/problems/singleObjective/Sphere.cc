@@ -96,9 +96,8 @@ void Sphere::evaluate(Solution *solution) {
   }        
 
   
-	fx[0] = sum ;
 		
-	solution->setObjective(0,fx[0]);
+	solution->setObjective(0,sum);
   delete[]fx ;
   delete[]x;
 } // evaluate

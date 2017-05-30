@@ -2298,37 +2298,37 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			utility_exit_with_message("Error: can't read sequence! Use -in::file::fasta sequence.fasta or -in::file::native native.pdb!");
 		}
 		
-		pose = core::pose::PoseOP( new pose::Pose );
-		core::pose::make_pose_from_sequence(*pose, sequence_, *( chemical::ChemicalManager::get_instance()->residue_type_set( chemical::CENTROID )));
+		//pose = core::pose::PoseOP( new pose::Pose );
+		//core::pose::make_pose_from_sequence(*pose, sequence_, *( chemical::ChemicalManager::get_instance()->residue_type_set( chemical::CENTROID )));
 		
-		std::cout << "Maria: Getting all angles from pose in jMetalOptimization method: " << strategy << std::endl;
+		//std::cout << "Maria: Getting all angles from pose in jMetalOptimization method: " << strategy << std::endl;
 
-		extractAngles(*pose);
+		//extractAngles(*pose);
 
-		std::cout << "Maria: Ending of getting  all angles from pose in jMetalOptimization method: " << strategy << std::endl;
+		//std::cout << "Maria: Ending of getting  all angles from pose in jMetalOptimization method: " << strategy << std::endl;
 		
-		std::cout << "Maria: Generating extended pose: " << strategy << std::endl;
+		//std::cout << "Maria: Generating extended pose: " << strategy << std::endl;
 
-		generate_extended_pose(*pose,sequence_);
+		//generate_extended_pose(*pose,sequence_);
 
-		std::cout << "Finishing extended pose " << strategy << std::endl;
+		//std::cout << "Finishing extended pose " << strategy << std::endl;
 
-		std::cout << "Maria: Getting all angles from pose in jMetalOptimization method after calling the extended pose method: " << strategy << std::endl;
+		//std::cout << "Maria: Getting all angles from pose in jMetalOptimization method after calling the extended pose method: " << strategy << std::endl;
 
-		extractAngles(*pose);
+		//extractAngles(*pose);
 
-		std::cout << "Maria:  Ending of getting  all angles from pose in jMetalOptimization method after calling the pose method" << strategy << std::endl;
+		//std::cout << "Maria:  Ending of getting  all angles from pose in jMetalOptimization method after calling the pose method" << strategy << std::endl;
 		
-		std::cout << "Maria:  Starting to evaluate the solutions in mgf_apply_stage1" << strategy << std::endl;
+		//std::cout << "Maria:  Starting to evaluate the solutions in mgf_apply_stage1" << strategy << std::endl;
 
 		//pose->get_pose()->fraglength = 9;
-		abinitio_protocol->mgf_apply_STAGE1( *pose, iterations, true, true );
-		double energy = pose->energies().total_energy();
-		std::cout << "Maria: Energy from pose when has been evaluated in Stage 1: " << energy << std::endl;
-		std::cout << "Maria: Applying the modification in the pose'angles: " << energy << std::endl;
-		setAngles(*pose);
-		std::cout << "Maria: Printing all the angles from pose: " << energy << std::endl;
-		extractAngles(*pose);
+		//abinitio_protocol->mgf_apply_STAGE1( *pose, iterations, true, true );
+		//double energy = pose->energies().total_energy();
+		//std::cout << "Maria: Energy from pose when has been evaluated in Stage 1: " << energy << std::endl;
+		//std::cout << "Maria: Applying the modification in the pose'angles: " << energy << std::endl;
+		//setAngles(*pose);
+		//std::cout << "Maria: Printing all the angles from pose: " << energy << std::endl;
+		//extractAngles(*pose);
 
 		//abinitio_protocol->mgf_apply_STAGE1( *pose, iterations, true, true );
 		//energy = pose->energies().total_energy();
