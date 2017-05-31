@@ -1834,7 +1834,7 @@ void AbrelaxApplication::fold( core::pose::Pose &init_pose, ProtocolOP prot_ptr 
 		std::string output_tag = abinitio_protocol.get_current_tag();
 
 		tr.Info << "Extracting angles from Pose before structure abinitio_protocol: " << std::endl;
-		extractAngles(fold_pose);
+		//extractAngles(fold_pose);
 
 		//Maria 8-5-2017 This method calls to jMetal and will replace the original Rosetta method that is  abinitio_protocol.apply( fold_pose );
 
@@ -1842,7 +1842,7 @@ void AbrelaxApplication::fold( core::pose::Pose &init_pose, ProtocolOP prot_ptr 
 
 
 		tr.Info << "Extracting angles from Pose  after structure abinitio_protocol: " << std::endl;
-		extractAngles(fold_pose);
+		//extractAngles(fold_pose);
 
 
 		//tr.Info << "Extraction of angles in the method fold() after the retrieve starting pose: " << std::endl;
@@ -2036,7 +2036,7 @@ void AbrelaxApplication::fold( core::pose::Pose &init_pose, ProtocolOP prot_ptr 
 		foldJobCounter++;
 
 		tr.Info << "At the end of the process: " << std::endl;
-		extractAngles(fold_pose);
+		//extractAngles(fold_pose);
 
 	} // end of production loop
 	jobdist.shutdown();
@@ -2283,7 +2283,6 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 	strategy_input = basic::options::option[ basic::options::OptionKeys::abinitio::jMetal_strategy ];
 	std::stringstream sstream( strategy_input );
 	std::getline(sstream, strategy, '*');
-	std::cout << "Maria: Entra en jMetal optimizacion" << strategy << std::endl;
 
 		//create pose
 		using namespace basic::options::OptionKeys;
@@ -2370,6 +2369,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 		if( strategy == "ROSETTA" ){
 			
 			// Maria 9-5-2017: This is where Rosetta is called!
+			
 			abinitio_protocol->apply( fold_pose );
 			std::cout << "Maria: Estrategia Rosetta" << strategy << std::endl;
 
@@ -2377,6 +2377,8 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 		}else if(strategy == "JMETAL" || strategy=="JMETAL_SHORT"){
 
 			// Maria 9-5-2017: This is where jMetal is called!
+			 std::cout << "Maria:  Stategy jMetal: " << strategy << std::endl;
+
 			Size total_residues = fold_pose.total_residue();
 			int numberOfVariables = total_residues;
   			Problem   * problem   ; // The problem to solve
@@ -2384,8 +2386,10 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			//Operator  * crossover ; // Crossover operator
 			//Operator  * mutation  ; // Mutation operator to use
   			//Operator  * selection ; // Selection operator to use
-			problem = new AbInitio("Real", abinitio_protocol, sequence_, numberOfVariables);
-			//algorithm = new gGA(problem);
+			 std::cout << "Maria:  Problem AbInitio: " << strategy << std::endl;
+
+			problem = new AbInitio("Real", abinitio_protocol, sequence_, numberOfVariables, strategy);
+			algorithm = new gGA(problem);
 			//std::cout << "Maria 9-5-2017: Everything is ok" << std::endl;
 
 				// Algorithm parameters

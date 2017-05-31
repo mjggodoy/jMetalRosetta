@@ -44,7 +44,7 @@ class AbInitio : public Problem {
    
 public:
 	/// @brief Constructor 1 of the Abinito problem
-	AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables);
+	AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables, string const strategy);
     
 	/// @brief Destructor
 	~AbInitio();
@@ -77,7 +77,8 @@ private:
 	int iterations; // Maria: do_recover: total number of iterations
 	double fitness; // Maria: Energy associated with each pose
 	bool variable_temp;
-	string temp_strategy = "";
+	string temp_strategy = "VT";
+	int population_size;
 
 
 

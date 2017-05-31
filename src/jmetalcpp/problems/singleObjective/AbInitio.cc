@@ -51,7 +51,7 @@ using namespace core;
  * @param numberOfVariables Number of variables of the problem
  */
 
- AbInitio::AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables) {
+ AbInitio::AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables, string const strategy) {
     rosetta_abinitio = ab;
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = 1; // monoobjective problem so the number of objectives is just one.
@@ -82,16 +82,37 @@ using namespace core;
     solutionType_ = new RealSolutionType(this);	
     
     //Inizialite number of evaluations:
+
     rma_stage_sample = 1;
-    RMA_ITERATIONS = 100;
-    STAGE1_ITERATIONS = 200;
-    STAGE2_ITERATIONS = 200;
-    STAGE3_ITERATIONS = 200;
-    STAGE4_ITERATIONS = 400;
-    MAX_EVALUATIONS_STAGE1 = STAGE1_ITERATIONS * 500 * RMA_ITERATIONS;
-    MAX_EVALUATIONS_STAGE2 = MAX_EVALUATIONS_STAGE1 + STAGE2_ITERATIONS * 500 * RMA_ITERATIONS;
-    MAX_EVALUATIONS_STAGE3 = MAX_EVALUATIONS_STAGE2 + STAGE3_ITERATIONS * 500 * RMA_ITERATIONS;
-    MAX_EVALUATIONS_STAGE4 = MAX_EVALUATIONS_STAGE3 + STAGE4_ITERATIONS * 500 * RMA_ITERATIONS;
+    population_size = 500;
+    
+    if( strategy == "JMETAL" ){
+
+        RMA_ITERATIONS = 10;
+		STAGE1_ITERATIONS = 2000;
+		STAGE2_ITERATIONS = 2000;	
+		STAGE3_ITERATIONS = 2000;	
+		STAGE4_ITERATIONS = 4000;
+
+    }else if(strategy == "JMETAL_SHORT"){
+
+        RMA_ITERATIONS = 100;
+		STAGE1_ITERATIONS = 200;
+		STAGE2_ITERATIONS = 200;
+		STAGE3_ITERATIONS = 200;
+		STAGE4_ITERATIONS = 400;
+
+    }else{
+
+        std::cout << "\n\tERROR: Unrecognised JMETAL strategy: " << strategy << std::endl << std::endl;
+		exit(1);
+
+    }
+    
+    MAX_EVALUATIONS_STAGE1 = STAGE1_ITERATIONS * population_size * RMA_ITERATIONS;
+    MAX_EVALUATIONS_STAGE2 = MAX_EVALUATIONS_STAGE1 + STAGE2_ITERATIONS * population_size * RMA_ITERATIONS;
+    MAX_EVALUATIONS_STAGE3 = MAX_EVALUATIONS_STAGE2 + STAGE3_ITERATIONS * population_size * RMA_ITERATIONS;
+    MAX_EVALUATIONS_STAGE4 = MAX_EVALUATIONS_STAGE3 + STAGE4_ITERATIONS * population_size * RMA_ITERATIONS;
 
 } // AbInitio
 
@@ -109,8 +130,16 @@ AbInitio::~AbInitio() {
 void AbInitio::evaluate(Solution *solution) {
 
     iterations = STAGE1_ITERATIONS * RMA_ITERATIONS;
-    variable_temp = ( temp_strategy == "VT" ) ? true : false;
 
+    if( temp_strategy != "FT" && temp_strategy != "VT"){
+    
+        std::cout << "\n\tERROR: Unrecognised format for temp_strategy " << temp_strategy << std::endl << std::endl;
+		exit(1);
+    
+    }else{
+        
+        variable_temp = ( temp_strategy == "VT" ) ? true : false;
+    }
 
     //Maria 30-5-17: Create pose from sequence and initialize the angles in -150, 150 and 180.
     core::pose::PoseOP pose = createPose(sequence);
@@ -191,6 +220,7 @@ void AbInitio::evaluate(Solution *solution) {
 
     }
 
+    //Maria: evals
     evals++;
     configureEvaluation();
 
