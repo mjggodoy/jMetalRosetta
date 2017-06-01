@@ -2376,27 +2376,68 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 
 		}else if(strategy == "JMETAL" || strategy=="JMETAL_SHORT"){
 
+			iterations = 0;
+
+
+			if( strategy == "JMETAL" ){
+
+        		//RMA_ITERATIONS = 10;
+				STAGE1_ITERATIONS = 2000;
+				STAGE2_ITERATIONS = 2000;	
+				STAGE3_ITERATIONS = 2000;	
+				STAGE4_ITERATIONS = 4000;
+				JMETAL_ITERATIONS_STAGE1= 1000;
+				JMETAL_ITERATIONS_STAGE2 = 1000;
+				JMETAL_ITERATIONS_STAGE3 = 1000;
+				JMETAL_ITERATIONS_STAGE4 = 1000;
+
+   			 }else if(strategy == "JMETAL_SHORT"){
+
+       			//RMA_ITERATIONS = 100;
+				STAGE1_ITERATIONS = 200;
+				STAGE2_ITERATIONS = 200;
+				STAGE3_ITERATIONS = 200;
+				STAGE4_ITERATIONS = 400;
+				JMETAL_ITERATIONS_STAGE1 = 100;
+				JMETAL_ITERATIONS_STAGE2 = 100;
+				JMETAL_ITERATIONS_STAGE3 = 100;
+				JMETAL_ITERATIONS_STAGE4 = 100;
+			
+
+			}
+
 			// Maria 9-5-2017: This is where jMetal is called!
-			 std::cout << "Maria:  Stategy jMetal: " << strategy << std::endl;
+			std::cout << "Maria:  Stategy jMetal: " << strategy << std::endl;
 
 			Size total_residues = fold_pose.total_residue();
 			int numberOfVariables = total_residues;
+
+			
+			// Maria 1-6-2017: Setting all the jMetal algorithms' parameters  
+
+			int populationSizeValue = 500;
+
+			iterations = JMETAL_ITERATIONS_STAGE1 + JMETAL_ITERATIONS_STAGE2 + JMETAL_ITERATIONS_STAGE3 + JMETAL_ITERATIONS_STAGE4 ;
+			int maxEvaluationsValue = populationSizeValue*iterations; //200.000 evaluations
+
+			// Maria 1-6-2017: Create all instances from jMetal
   			Problem   * problem   ; // The problem to solve
   			Algorithm * algorithm ; // The algorithm to use
 			//Operator  * crossover ; // Crossover operator
 			//Operator  * mutation  ; // Mutation operator to use
   			//Operator  * selection ; // Selection operator to use
-			 std::cout << "Maria:  Problem AbInitio: " << strategy << std::endl;
-
-			problem = new AbInitio("Real", abinitio_protocol, sequence_, numberOfVariables, strategy);
+			
+			std::cout << "Maria:  Problem AbInitio: " << strategy << std::endl;
+			
+			problem = new AbInitio("Real", abinitio_protocol, sequence_, numberOfVariables, strategy, populationSizeValue, iterations, 
+			STAGE1_ITERATIONS, STAGE2_ITERATIONS, STAGE3_ITERATIONS, STAGE4_ITERATIONS, JMETAL_ITERATIONS_STAGE1, JMETAL_ITERATIONS_STAGE2,
+			JMETAL_ITERATIONS_STAGE3, JMETAL_ITERATIONS_STAGE4);
 			algorithm = new gGA(problem);
+			
 			//std::cout << "Maria 9-5-2017: Everything is ok" << std::endl;
-
-				// Algorithm parameters
-			//int populationSizeValue = 100;
-			//int maxEvaluationsValue = 250000;
-			//algorithm->setInputParameter("populationSize",&populationSizeValue);
-			//algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
+			
+			algorithm->setInputParameter("populationSize",&populationSizeValue);
+			algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
 
 				// Mutation and Crossover for Real codification
 			//map<string, void *> parameters;
@@ -2422,12 +2463,12 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			//algorithm->addOperator("mutation",mutation);
 			//algorithm->addOperator("selection",selection);
 
-			//SolutionSet * solutions = algorithm->execute();
+			SolutionSet * solutions = algorithm->execute();
 			
 			//delete crossover;
   			//delete mutation;
   			//delete selection;
-  			//delete algorithm;
+  			delete algorithm;
 
 			//std::cout << "All things have finished ok!" << std::endl;
 			
@@ -2440,7 +2481,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 
 		}else{
 			
-			std::cout << "\n\tERROR: Strategy is not JMETAL or ROSETTA. Please, provide an strategy: " << std::endl << std::endl;
+			std::cout << "\n\tERROR: Strategy is not JMETAL or ROSETTA. Please, provide a correct strategy: " << strategy << std::endl << std::endl;
 			exit(1);
 		}
 		

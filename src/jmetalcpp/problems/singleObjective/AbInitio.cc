@@ -51,7 +51,9 @@ using namespace core;
  * @param numberOfVariables Number of variables of the problem
  */
 
- AbInitio::AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables, string const strategy) {
+ AbInitio::AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables, 
+ string const strategy, int population_size, int iterations, int STAGE1_ITERATIONS, int STAGE2_ITERATIONS, int STAGE3_ITERATIONS, int STAGE4_ITERATIONS,
+ int STAGE3_ITERATIONS, int STAGE4_ITERATIONS, int JMETAL_ITERATIONS_STAGE1, int JMETAL_ITERATIONS_STAGE2, int JMETAL_ITERATIONS_STAGE3, int JMETAL_ITERATIONS_STAGE4) {
     rosetta_abinitio = ab;
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = 1; // monoobjective problem so the number of objectives is just one.
@@ -84,35 +86,11 @@ using namespace core;
     //Inizialite number of evaluations:
 
     rma_stage_sample = 1;
-    population_size = 500;
     
-    if( strategy == "JMETAL" ){
-
-        RMA_ITERATIONS = 10;
-		STAGE1_ITERATIONS = 2000;
-		STAGE2_ITERATIONS = 2000;	
-		STAGE3_ITERATIONS = 2000;	
-		STAGE4_ITERATIONS = 4000;
-
-    }else if(strategy == "JMETAL_SHORT"){
-
-        RMA_ITERATIONS = 100;
-		STAGE1_ITERATIONS = 200;
-		STAGE2_ITERATIONS = 200;
-		STAGE3_ITERATIONS = 200;
-		STAGE4_ITERATIONS = 400;
-
-    }else{
-
-        std::cout << "\n\tERROR: Unrecognised JMETAL strategy: " << strategy << std::endl << std::endl;
-		exit(1);
-
-    }
-    
-    MAX_EVALUATIONS_STAGE1 = STAGE1_ITERATIONS * population_size * RMA_ITERATIONS;
-    MAX_EVALUATIONS_STAGE2 = MAX_EVALUATIONS_STAGE1 + STAGE2_ITERATIONS * population_size * RMA_ITERATIONS;
-    MAX_EVALUATIONS_STAGE3 = MAX_EVALUATIONS_STAGE2 + STAGE3_ITERATIONS * population_size * RMA_ITERATIONS;
-    MAX_EVALUATIONS_STAGE4 = MAX_EVALUATIONS_STAGE3 + STAGE4_ITERATIONS * population_size * RMA_ITERATIONS;
+    MAX_EVALUATIONS_STAGE1 = JMETAL_ITERATIONS_STAGE1 * population_size; //500*100=50000
+    MAX_EVALUATIONS_STAGE2 = MAX_EVALUATIONS_STAGE1 + JMETAL_ITERATIONS_STAGE2 * population_size; // 100000
+    MAX_EVALUATIONS_STAGE3 = MAX_EVALUATIONS_STAGE2 + JMETAL_ITERATIONS_STAGE3 * population_size; // 150000
+    MAX_EVALUATIONS_STAGE4 = MAX_EVALUATIONS_STAGE3 + JMETAL_ITERATIONS_STAGE4 * population_size; // 200000
 
 } // AbInitio
 
@@ -128,8 +106,6 @@ AbInitio::~AbInitio() {
 
 
 void AbInitio::evaluate(Solution *solution) {
-
-    iterations = STAGE1_ITERATIONS * RMA_ITERATIONS;
 
     if( temp_strategy != "FT" && temp_strategy != "VT"){
     
@@ -170,7 +146,7 @@ void AbInitio::evaluate(Solution *solution) {
         std::cout << "Maria:  Evaluation in Stage 1" << evals << std::endl;
 
         // Maria: Evaluation of pose (Stage1)
-        rosetta_abinitio->mgf_apply_STAGE1(*pose, iterations, do_recover, variable_temp );
+        rosetta_abinitio->mgf_apply_STAGE1(*pose, STAGE1_ITERATIONS, do_recover, variable_temp ); 
         
 
     }else if(rma_stage_sample==2){
@@ -178,7 +154,7 @@ void AbInitio::evaluate(Solution *solution) {
         std::cout << "Maria:  Evaluation in Stage 2" << evals << std::endl;
 
          // Maria: Evaluation of pose (Stage2)
-        rosetta_abinitio->mgf_apply_STAGE2(*pose, iterations, do_recover, variable_temp );
+        rosetta_abinitio->mgf_apply_STAGE2(*pose, STAGE2_ITERATIONS, do_recover, variable_temp ); 
 
 
     }else if(rma_stage_sample==3){
@@ -187,7 +163,7 @@ void AbInitio::evaluate(Solution *solution) {
          std::cout << "Maria:  Evaluation in Stage 3" << evals << std::endl;
 
         // Maria: Evaluation of pose (Stage3)
-        rosetta_abinitio->mgf_apply_STAGE3(*pose, iterations, do_recover, variable_temp );
+        rosetta_abinitio->mgf_apply_STAGE3(*pose, STAGE3_ITERATIONS, do_recover, variable_temp ); 
 
 
     }else if(rma_stage_sample==4){
@@ -195,7 +171,7 @@ void AbInitio::evaluate(Solution *solution) {
         std::cout << "Maria:  Evaluation in Stage 4" << evals << std::endl;
 
         // Maria: Evaluation of pose (Stage4)
-        rosetta_abinitio->mgf_apply_STAGE4(*pose, iterations, do_recover, variable_temp );
+        rosetta_abinitio->mgf_apply_STAGE4(*pose, STAGE4_ITERATIONS, do_recover, variable_temp );
 
     } else {
         // ERROR

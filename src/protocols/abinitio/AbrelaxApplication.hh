@@ -165,7 +165,17 @@ public:
 	/// @brief extract the value of energy from a given pose (Maria: 19/5/17)
 
 	//double get_energy(){ return pose->energies().total_energy(); }
+public:
 
+	int STAGE1_ITERATIONS;			// Iterations for Rosetta stage1 
+	int STAGE2_ITERATIONS;			// Iterations for Rosetta stage2
+	int STAGE3_ITERATIONS;			// Iterations for Rosetta stage3 
+	int STAGE4_ITERATIONS;
+	int JMETAL_ITERATIONS_STAGE1; 	//Iterations for jMetal in stage1
+	int JMETAL_ITERATIONS_STAGE2; 	//Iterations for jMetal in stage2
+	int JMETAL_ITERATIONS_STAGE3; 	//Iterations for jMetal in stage3
+	int JMETAL_ITERATIONS_STAGE4; 	//Iterations for jMetal in stage4
+	int iterations;		// Iterations for Rosetta stage4
 
 private:
 	/// @brief create score-functions for centroid and fullatom level

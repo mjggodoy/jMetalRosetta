@@ -44,7 +44,10 @@ class AbInitio : public Problem {
    
 public:
 	/// @brief Constructor 1 of the Abinito problem
-	AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables, string const strategy);
+	AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables, 
+	string const strategy, int population_size, int iterations, int STAGE1_ITERATIONS, int STAGE2_ITERATIONS, 
+	int STAGE3_ITERATIONS, int STAGE4_ITERATIONS, int JMETAL_ITERATIONS_STAGE1, int JMETAL_ITERATIONS_STAGE2,
+	int JMETAL_ITERATIONS_STAGE3, int JMETAL_ITERATIONS_STAGE4);
     
 	/// @brief Destructor
 	~AbInitio();
@@ -64,10 +67,6 @@ private:
 	int evals; 						//Number of Evaluations
 	int rma_stage_sample;           // Number of Rosetta's stage
 	int RMA_ITERATIONS;				// Iterations at each stage of RMA
-    int STAGE1_ITERATIONS;			// Iterations for Rosetta stage1 
-	int STAGE2_ITERATIONS;			// Iterations for Rosetta stage2
-	int STAGE3_ITERATIONS;			// Iterations for Rosetta stage3 
-	int STAGE4_ITERATIONS;			// Iterations for Rosetta stage4
     int MAX_EVALUATIONS_STAGE1;		// Max allowed evaluations in stage1		
 	int MAX_EVALUATIONS_STAGE2;		// Max allowed evaluations in stage2		
 	int MAX_EVALUATIONS_STAGE3;		// Max allowed evaluations in stage3		
