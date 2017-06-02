@@ -66,7 +66,6 @@ private:
 
 	int evals; 						//Number of Evaluations
 	int rma_stage_sample;           // Number of Rosetta's stage
-	int RMA_ITERATIONS;				// Iterations at each stage of RMA
     int MAX_EVALUATIONS_STAGE1;		// Max allowed evaluations in stage1		
 	int MAX_EVALUATIONS_STAGE2;		// Max allowed evaluations in stage2		
 	int MAX_EVALUATIONS_STAGE3;		// Max allowed evaluations in stage3		
@@ -83,9 +82,11 @@ private:
 
 public:
 
-
 	ProtocolOP rosetta_abinitio;	// Maria: Protocol Rosetta Abinitio
-
+	int STAGE1_ITERATIONS;
+	int STAGE2_ITERATIONS;
+	int STAGE3_ITERATIONS;
+	int STAGE4_ITERATIONS;
 };
 
 #endif

@@ -2376,13 +2376,15 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 
 		}else if(strategy == "JMETAL" || strategy=="JMETAL_SHORT"){
 
-			iterations = 0;
+			// Maria 9-5-2017: This is where jMetal is called!
+			std::cout << "Maria: Strategy jMetal: " << strategy << std::endl;
 
-
+			Size total_residues = fold_pose.total_residue();
+			int numberOfVariables = total_residues;
+			
 			if( strategy == "JMETAL" ){
 
-        		//RMA_ITERATIONS = 10;
-				STAGE1_ITERATIONS = 2000;
+	    		STAGE1_ITERATIONS = 2000;
 				STAGE2_ITERATIONS = 2000;	
 				STAGE3_ITERATIONS = 2000;	
 				STAGE4_ITERATIONS = 4000;
@@ -2391,9 +2393,8 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 				JMETAL_ITERATIONS_STAGE3 = 1000;
 				JMETAL_ITERATIONS_STAGE4 = 1000;
 
-   			 }else if(strategy == "JMETAL_SHORT"){
+   			}else if(strategy == "JMETAL_SHORT"){
 
-       			//RMA_ITERATIONS = 100;
 				STAGE1_ITERATIONS = 200;
 				STAGE2_ITERATIONS = 200;
 				STAGE3_ITERATIONS = 200;
@@ -2402,16 +2403,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 				JMETAL_ITERATIONS_STAGE2 = 100;
 				JMETAL_ITERATIONS_STAGE3 = 100;
 				JMETAL_ITERATIONS_STAGE4 = 100;
-			
-
 			}
-
-			// Maria 9-5-2017: This is where jMetal is called!
-			std::cout << "Maria:  Stategy jMetal: " << strategy << std::endl;
-
-			Size total_residues = fold_pose.total_residue();
-			int numberOfVariables = total_residues;
-
 			
 			// Maria 1-6-2017: Setting all the jMetal algorithms' parameters  
 

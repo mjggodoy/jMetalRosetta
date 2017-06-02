@@ -53,7 +53,7 @@ using namespace core;
 
  AbInitio::AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables, 
  string const strategy, int population_size, int iterations, int STAGE1_ITERATIONS, int STAGE2_ITERATIONS, int STAGE3_ITERATIONS, int STAGE4_ITERATIONS,
- int STAGE3_ITERATIONS, int STAGE4_ITERATIONS, int JMETAL_ITERATIONS_STAGE1, int JMETAL_ITERATIONS_STAGE2, int JMETAL_ITERATIONS_STAGE3, int JMETAL_ITERATIONS_STAGE4) {
+ int JMETAL_ITERATIONS_STAGE1, int JMETAL_ITERATIONS_STAGE2, int JMETAL_ITERATIONS_STAGE3, int JMETAL_ITERATIONS_STAGE4) {
     rosetta_abinitio = ab;
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = 1; // monoobjective problem so the number of objectives is just one.
