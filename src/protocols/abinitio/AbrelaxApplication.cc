@@ -2285,17 +2285,17 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 	std::getline(sstream, strategy, '*');
 
 		//create pose
-		using namespace basic::options::OptionKeys;
+		//using namespace basic::options::OptionKeys;
 
-		if ( option[ in::file::fasta ].user() ) {
-			sequence_ = core::sequence::read_fasta_file( option[ in::file::fasta ]()[1] )[1]->sequence();
-			tr.Info << "read fasta sequence: " << sequence_.size() << " residues\n"  << sequence_ << std::endl;
-		} else if ( native_pose_ ) {
-			sequence_ = native_pose_->sequence();
-			tr.Info << "take sequence from native : " << sequence_ << std::endl;
-		} else if ( !option[ OptionKeys::abinitio::rerun ]() && !option[ OptionKeys::abinitio::jdist_rerun ]() ) { // if we rerun we don't need sequence or native or anything...
-			utility_exit_with_message("Error: can't read sequence! Use -in::file::fasta sequence.fasta or -in::file::native native.pdb!");
-		}
+		//if ( option[ in::file::fasta ].user() ) {
+			//sequence_ = core::sequence::read_fasta_file( option[ in::file::fasta ]()[1] )[1]->sequence();
+			//tr.Info << "read fasta sequence: " << sequence_.size() << " residues\n"  << sequence_ << std::endl;
+		//} else if ( native_pose_ ) {
+			//sequence_ = native_pose_->sequence();
+			//tr.Info << "take sequence from native : " << sequence_ << std::endl;
+		//} else if ( !option[ OptionKeys::abinitio::rerun ]() && !option[ OptionKeys::abinitio::jdist_rerun ]() ) { // if we rerun we don't need sequence or native or anything...
+			//utility_exit_with_message("Error: can't read sequence! Use -in::file::fasta sequence.fasta or -in::file::native native.pdb!");
+		//}
 		
 		//pose = core::pose::PoseOP( new pose::Pose );
 		//core::pose::make_pose_from_sequence(*pose, sequence_, *( chemical::ChemicalManager::get_instance()->residue_type_set( chemical::CENTROID )));
@@ -2380,7 +2380,9 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			std::cout << "Maria: Strategy jMetal: " << strategy << std::endl;
 
 			Size total_residues = fold_pose.total_residue();
-			int numberOfVariables = total_residues;
+			int numberOfVariables = total_residues*3;
+			//std::cout << "fold_pose's size: " << fold_pose.size() << std::endl;
+			
 			
 			if( strategy == "JMETAL" ){
 
@@ -2421,7 +2423,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			
 			std::cout << "Maria:  Problem AbInitio: " << strategy << std::endl;
 			
-			problem = new AbInitio("Real", abinitio_protocol, sequence_, numberOfVariables, strategy, populationSizeValue, iterations, 
+			problem = new AbInitio("Real", abinitio_protocol, fold_pose, sequence_, numberOfVariables, strategy, populationSizeValue, iterations, 
 			STAGE1_ITERATIONS, STAGE2_ITERATIONS, STAGE3_ITERATIONS, STAGE4_ITERATIONS, JMETAL_ITERATIONS_STAGE1, JMETAL_ITERATIONS_STAGE2,
 			JMETAL_ITERATIONS_STAGE3, JMETAL_ITERATIONS_STAGE4);
 			algorithm = new gGA(problem);
@@ -2431,7 +2433,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			algorithm->setInputParameter("populationSize",&populationSizeValue);
 			algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
 
-				// Mutation and Crossover for Real codification
+			// Mutation and Crossover for Real codification
 			//map<string, void *> parameters;
 			//double crossoverProbability = 0.9;
 			//double distributionIndexValue1 = 20.0;

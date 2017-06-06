@@ -44,7 +44,7 @@ class AbInitio : public Problem {
    
 public:
 	/// @brief Constructor 1 of the Abinito problem
-	AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables, 
+	AbInitio(string solutionType, ProtocolOP ab,  Pose & fold_pose, std::string const& sequence, int numberOfVariables, 
 	string const strategy, int population_size, int iterations, int STAGE1_ITERATIONS, int STAGE2_ITERATIONS, 
 	int STAGE3_ITERATIONS, int STAGE4_ITERATIONS, int JMETAL_ITERATIONS_STAGE1, int JMETAL_ITERATIONS_STAGE2,
 	int JMETAL_ITERATIONS_STAGE3, int JMETAL_ITERATIONS_STAGE4);
@@ -60,7 +60,7 @@ public:
 private: 
 
     void configureEvaluation();
-	void getRosettaSolution(Solution *solution);
+	//void getRosettaSolution(Solution *solution);
 
 private:
 
@@ -81,7 +81,8 @@ private:
 
 
 public:
-
+	
+	Pose pose;	// Maria: fold_pose
 	ProtocolOP rosetta_abinitio;	// Maria: Protocol Rosetta Abinitio
 	int STAGE1_ITERATIONS;
 	int STAGE2_ITERATIONS;

@@ -51,9 +51,10 @@ using namespace core;
  * @param numberOfVariables Number of variables of the problem
  */
 
- AbInitio::AbInitio(string solutionType, ProtocolOP ab, std::string const& sequence, int numberOfVariables, 
+ AbInitio::AbInitio(string solutionType, ProtocolOP ab, Pose & fold_pose, std::string const& sequence, int numberOfVariables, 
  string const strategy, int population_size, int iterations, int STAGE1_ITERATIONS, int STAGE2_ITERATIONS, int STAGE3_ITERATIONS, int STAGE4_ITERATIONS,
  int JMETAL_ITERATIONS_STAGE1, int JMETAL_ITERATIONS_STAGE2, int JMETAL_ITERATIONS_STAGE3, int JMETAL_ITERATIONS_STAGE4) {
+    pose = fold_pose;
     rosetta_abinitio = ab;
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = 1; // monoobjective problem so the number of objectives is just one.
@@ -117,14 +118,14 @@ void AbInitio::evaluate(Solution *solution) {
         variable_temp = ( temp_strategy == "VT" ) ? true : false;
     }
 
-    //Maria 30-5-17: Create pose from sequence and initialize the angles in -150, 150 and 180.
-    core::pose::PoseOP pose = createPose(sequence);
     
     Variable **variables = solution->getDecisionVariables();
+    std::cout << "fold_pose's size: " << pose.size() << std::endl;
+
     
-    if((int)pose->size()*3 != (int)solution->getNumberOfVariables()){
+    if((int)pose.size()*3 != (int)solution->getNumberOfVariables()){
  
-        cout << "The number of variables do not equal to the size of the problem: " << "\n" << "Number of angles per aminoacids in protein" << pose->size()*3 
+        cout << "The number of variables does not equal to the size of the problem: " << "\n" << "Number of angles per aminoacids in protein: " << pose.size()*3 
         << " Number of variables in jMetal solution: " << solution->getNumberOfVariables() <<endl;
         exit(-1);
     }
@@ -134,9 +135,9 @@ void AbInitio::evaluate(Solution *solution) {
 
     for ( int pos = 0; pos <= numberOfVariables_; pos++ ) {
 
-        pose->set_phi(pos, variables[pos*3]->getValue());
-        pose->set_psi(pos, variables[pos*3+1]->getValue());
-        pose->set_omega(pos, variables[pos*3+2]->getValue());
+        pose.set_phi(pos, variables[pos*3]->getValue());
+        pose.set_psi(pos, variables[pos*3+1]->getValue());
+        pose.set_omega(pos, variables[pos*3+2]->getValue());
 
     }
 
@@ -146,7 +147,7 @@ void AbInitio::evaluate(Solution *solution) {
         std::cout << "Maria:  Evaluation in Stage 1" << evals << std::endl;
 
         // Maria: Evaluation of pose (Stage1)
-        rosetta_abinitio->mgf_apply_STAGE1(*pose, STAGE1_ITERATIONS, do_recover, variable_temp ); 
+        rosetta_abinitio->mgf_apply_STAGE1(pose, STAGE1_ITERATIONS, do_recover, variable_temp ); 
         
 
     }else if(rma_stage_sample==2){
@@ -154,7 +155,7 @@ void AbInitio::evaluate(Solution *solution) {
         std::cout << "Maria:  Evaluation in Stage 2" << evals << std::endl;
 
          // Maria: Evaluation of pose (Stage2)
-        rosetta_abinitio->mgf_apply_STAGE2(*pose, STAGE2_ITERATIONS, do_recover, variable_temp ); 
+        rosetta_abinitio->mgf_apply_STAGE2(pose, STAGE2_ITERATIONS, do_recover, variable_temp ); 
 
 
     }else if(rma_stage_sample==3){
@@ -163,7 +164,7 @@ void AbInitio::evaluate(Solution *solution) {
          std::cout << "Maria:  Evaluation in Stage 3" << evals << std::endl;
 
         // Maria: Evaluation of pose (Stage3)
-        rosetta_abinitio->mgf_apply_STAGE3(*pose, STAGE3_ITERATIONS, do_recover, variable_temp ); 
+        rosetta_abinitio->mgf_apply_STAGE3(pose, STAGE3_ITERATIONS, do_recover, variable_temp ); 
 
 
     }else if(rma_stage_sample==4){
@@ -171,7 +172,7 @@ void AbInitio::evaluate(Solution *solution) {
         std::cout << "Maria:  Evaluation in Stage 4" << evals << std::endl;
 
         // Maria: Evaluation of pose (Stage4)
-        rosetta_abinitio->mgf_apply_STAGE4(*pose, STAGE4_ITERATIONS, do_recover, variable_temp );
+        rosetta_abinitio->mgf_apply_STAGE4(pose, STAGE4_ITERATIONS, do_recover, variable_temp );
 
     } else {
         // ERROR
@@ -183,16 +184,16 @@ void AbInitio::evaluate(Solution *solution) {
 
     for (int i = 0; i < numberOfObjectives_; i++) {
            
-            solution->setObjective(i,pose->energies().total_energy());
+            solution->setObjective(i,pose.energies().total_energy());
     }
 
     //Maria: get all angles after evaluation and write them in jMetal array of real values.
 
     for ( int pos = 0; pos <= numberOfVariables_; pos++ ) {
 
-        variables[pos*3]->setValue(pose->phi(pos*3));
-        variables[pos*3+1]->setValue(pose->psi(pos*3+1));
-        variables[pos*3+2]->setValue(pose->omega(pos*3+2));
+        variables[pos*3]->setValue(pose.phi(pos*3));
+        variables[pos*3+1]->setValue(pose.psi(pos*3+1));
+        variables[pos*3+2]->setValue(pose.omega(pos*3+2));
 
     }
 
@@ -224,21 +225,21 @@ void AbInitio::configureEvaluation(){
     }
 }
 
-core::pose::PoseOP AbInitio::createPose(std::string const& sequence){
+//core::pose::PoseOP AbInitio::createPose(std::string const& sequence){
 
-    core::pose::PoseOP pose = core::pose::PoseOP( new core::pose::Pose );
-    core::pose::make_pose_from_sequence(*pose, sequence, *( core::chemical::ChemicalManager::get_instance()->residue_type_set( core::chemical::CENTROID )));
+    //core::pose::PoseOP pose = core::pose::PoseOP( new core::pose::Pose );
+    //core::pose::make_pose_from_sequence(*pose, sequence, *( core::chemical::ChemicalManager::get_instance()->residue_type_set( core::chemical::CENTROID )));
 
-    for ( Size pos = 1; pos <= pose->size(); pos++ ) {
+    //for ( Size pos = 1; pos <= pose->size(); pos++ ) {
 		
-		if ( ! pose->residue(pos).is_protein() ) continue;
-		pose->set_phi( pos, -150 );
-		pose->set_psi( pos, 150);
-		pose->set_omega( pos, 180 );
-	}
+		//if ( ! pose->residue(pos).is_protein() ) continue;
+		//pose->set_phi( pos, -150 );
+		//pose->set_psi( pos, 150);
+		//pose->set_omega( pos, 180 );
+	//}
 
-    return pose;
-}
+    //return pose;
+//}
 
 
 
