@@ -2417,9 +2417,9 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			// Maria 1-6-2017: Create all instances from jMetal
   			Problem   * problem   ; // The problem to solve
   			Algorithm * algorithm ; // The algorithm to use
-			//Operator  * crossover ; // Crossover operator
-			//Operator  * mutation  ; // Mutation operator to use
-  			//Operator  * selection ; // Selection operator to use
+			Operator  * crossover ; // Crossover operator
+			Operator  * mutation  ; // Mutation operator to use
+  			Operator  * selection ; // Selection operator to use
 			
 			std::cout << "Maria:  Problem AbInitio: " << strategy << std::endl;
 			
@@ -2434,34 +2434,34 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
 
 			// Mutation and Crossover for Real codification
-			//map<string, void *> parameters;
-			//double crossoverProbability = 0.9;
-			//double distributionIndexValue1 = 20.0;
-			//parameters["probability"] =  &crossoverProbability ;
-			//parameters["distributionIndex"] = &distributionIndexValue1 ;
-			//crossover = new SBXCrossover(parameters);
+			map<string, void *> parameters;
+			double crossoverProbability = 0.9;
+			double distributionIndexValue1 = 20.0;
+			parameters["probability"] =  &crossoverProbability ;
+			parameters["distributionIndex"] = &distributionIndexValue1 ;
+			crossover = new SBXCrossover(parameters);
 
-			//parameters.clear();
-			//double mutationProbability = 1.0/problem->getNumberOfVariables();
-			//double distributionIndexValue2 = 20.0;
-			//parameters["probability"] = &mutationProbability;
-			//parameters["distributionIndex"] = &distributionIndexValue2 ;
-			//mutation = new PolynomialMutation(parameters);
+			parameters.clear();
+			double mutationProbability = 1.0/problem->getNumberOfVariables();
+			double distributionIndexValue2 = 20.0;
+			parameters["probability"] = &mutationProbability;
+			parameters["distributionIndex"] = &distributionIndexValue2 ;
+			mutation = new PolynomialMutation(parameters);
 
 			// Selection Operator
-			//parameters.clear();
-			//selection = new BinaryTournament2(parameters) ;
+			parameters.clear();
+			selection = new BinaryTournament2(parameters) ;
 
 			// Add the operators to the algorithm
-			//algorithm->addOperator("crossover",crossover);
-			//algorithm->addOperator("mutation",mutation);
-			//algorithm->addOperator("selection",selection);
+			algorithm->addOperator("crossover",crossover);
+			algorithm->addOperator("mutation",mutation);
+			algorithm->addOperator("selection",selection);
 
 			SolutionSet * solutions = algorithm->execute();
 			
-			//delete crossover;
-  			//delete mutation;
-  			//delete selection;
+			delete crossover;
+  			delete mutation;
+  			delete selection;
   			delete algorithm;
 
 			//std::cout << "All things have finished ok!" << std::endl;
@@ -2470,7 +2470,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			//std::cout << "OBJ = " << solutions->get(0)->getObjective(0) << std::endl;
 			//std::cout << "Maria: Estrategia jMetal" << strategy << std::endl;
   			
-			//delete solutions;
+			delete solutions;
 
 
 		}else{
