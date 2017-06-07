@@ -121,6 +121,8 @@ void AbInitio::evaluate(Solution *solution) {
     
     Variable **variables = solution->getDecisionVariables();
     std::cout << "fold_pose's size: " << pose.size() << std::endl;
+    std::cout << "number of variables: " << solution->getNumberOfVariables() << std::endl;
+    std::cout << "ESTOY AQUI 0" << std::endl;
 
     
     if((int)pose.size()*3 != (int)solution->getNumberOfVariables()){
@@ -130,16 +132,24 @@ void AbInitio::evaluate(Solution *solution) {
         exit(-1);
     }
 
+    std::cout << "ESTOY AQUI 1" << std::endl;
+
 
     //Maria 31-5-17: Getting the Rosetta's solution.
 
-    for ( int pos = 0; pos <= numberOfVariables_; pos++ ) {
+    for ( int pos = 0; pos < (int)pose.size(); pos++ ) {
 
-        pose.set_phi(pos, variables[pos*3]->getValue());
-        pose.set_psi(pos, variables[pos*3+1]->getValue());
-        pose.set_omega(pos, variables[pos*3+2]->getValue());
+        std::cout << "pos = " << pos << std::endl;
+        //Sstd::cout << 
+
+        pose.set_phi(pos+1, variables[pos*3]->getValue());
+        pose.set_psi(pos+1, variables[pos*3+1]->getValue());
+        pose.set_omega(pos+1, variables[pos*3+2]->getValue());
 
     }
+
+        std::cout << "ESTOY AQUI 2" << std::endl;
+
 
 
     if(rma_stage_sample==1){
@@ -182,20 +192,28 @@ void AbInitio::evaluate(Solution *solution) {
 
      // Maria: Retrieving the energy from pose
 
+     std::cout << "ESTOY AQUI 3" << std::endl;
+
+
     for (int i = 0; i < numberOfObjectives_; i++) {
            
             solution->setObjective(i,pose.energies().total_energy());
     }
 
     //Maria: get all angles after evaluation and write them in jMetal array of real values.
+    std::cout << "ESTOY AQUI 4" << std::endl;
 
-    for ( int pos = 0; pos <= numberOfVariables_; pos++ ) {
 
-        variables[pos*3]->setValue(pose.phi(pos*3));
-        variables[pos*3+1]->setValue(pose.psi(pos*3+1));
-        variables[pos*3+2]->setValue(pose.omega(pos*3+2));
+    for ( int pos = 0; pos < (int)pose.size(); pos++ ) {
+
+        variables[pos*3]->setValue(pose.phi(pos+1));
+        variables[pos*3+1]->setValue(pose.psi(pos+1));
+        variables[pos*3+2]->setValue(pose.omega(pos+1));
 
     }
+
+    std::cout << "ESTOY AQUI 5" << std::endl;
+
 
     //Maria: evals
     evals++;
