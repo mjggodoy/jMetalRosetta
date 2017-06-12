@@ -34,15 +34,13 @@
 #include <core/scoring/Energies.hh>
 
 
-// Maria: Dependences from C++ code
+// Maria: Dependences from C++ language
 
 #include <string>
 #include <utility/io/util.hh>
 
 using core::Size;
 using namespace core;
-
-
 
 /**
  * Constructor.
@@ -117,14 +115,12 @@ void AbInitio::evaluate(Solution *solution) {
         
         variable_temp = ( temp_strategy == "VT" ) ? true : false;
     }
-
-    
+  
     Variable **variables = solution->getDecisionVariables();
-    std::cout << "fold_pose's size: " << pose.size() << std::endl;
-    std::cout << "number of variables: " << solution->getNumberOfVariables() << std::endl;
-    std::cout << "ESTOY AQUI 0" << std::endl;
+    //std::cout << "fold_pose's size: " << pose.size() << std::endl;
+    //std::cout << "number of variables: " << solution->getNumberOfVariables() << std::endl;
+    //std::cout << "ESTOY AQUI 0" << std::endl;
 
-    
     if((int)pose.size()*3 != (int)solution->getNumberOfVariables()){
  
         cout << "The number of variables does not equal to the size of the problem: " << "\n" << "Number of angles per aminoacids in protein: " << pose.size()*3 
@@ -132,9 +128,7 @@ void AbInitio::evaluate(Solution *solution) {
         exit(-1);
     }
 
-    std::cout << "ESTOY AQUI 1" << std::endl;
-
-
+    //std::cout << "ESTOY AQUI 1" << std::endl;
     //Maria 31-5-17: Getting the Rosetta's solution.
 
     for ( int pos = 0; pos < (int)pose.size(); pos++ ) {
@@ -147,10 +141,7 @@ void AbInitio::evaluate(Solution *solution) {
         pose.set_omega(pos+1, variables[pos*3+2]->getValue());
 
     }
-
-        std::cout << "ESTOY AQUI 2" << std::endl;
-
-
+        //std::cout << "ESTOY AQUI 2" << std::endl;
 
     if(rma_stage_sample==1){
 
@@ -171,7 +162,7 @@ void AbInitio::evaluate(Solution *solution) {
     }else if(rma_stage_sample==3){
 
         
-         std::cout << "Maria:  Evaluation in Stage 3" << evals << std::endl;
+        std::cout << "Maria:  Evaluation in Stage 3" << evals << std::endl;
 
         // Maria: Evaluation of pose (Stage3)
         rosetta_abinitio->mgf_apply_STAGE3(pose, STAGE3_ITERATIONS, do_recover, variable_temp ); 
@@ -189,11 +180,8 @@ void AbInitio::evaluate(Solution *solution) {
         exit(-1);
     }
 
-
      // Maria: Retrieving the energy from pose
-
-     std::cout << "ESTOY AQUI 3" << std::endl;
-
+     //std::cout << "ESTOY AQUI 3" << std::endl;
 
     for (int i = 0; i < numberOfObjectives_; i++) {
            
@@ -201,8 +189,7 @@ void AbInitio::evaluate(Solution *solution) {
     }
 
     //Maria: get all angles after evaluation and write them in jMetal array of real values.
-    std::cout << "ESTOY AQUI 4" << std::endl;
-
+   // std::cout << "ESTOY AQUI 4" << std::endl;
 
     for ( int pos = 0; pos < (int)pose.size(); pos++ ) {
 
@@ -212,15 +199,11 @@ void AbInitio::evaluate(Solution *solution) {
 
     }
 
-    std::cout << "ESTOY AQUI 5" << std::endl;
-
-
+    //std::cout << "ESTOY AQUI 5" << std::endl;
     //Maria: evals
     evals++;
     configureEvaluation();
-
 }
-
 
 void AbInitio::configureEvaluation(){
 
@@ -239,7 +222,6 @@ void AbInitio::configureEvaluation(){
     }else if(evals<= MAX_EVALUATIONS_STAGE4){
 
         rma_stage_sample=4;
-
     }
 }
 
