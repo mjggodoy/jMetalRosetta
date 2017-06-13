@@ -101,7 +101,7 @@ MonteCarlo::MonteCarlo(
 	heat_after_cycles_( 150 )
 {
 
-	std::cout << "XUXA: CONSTRUYENDO MONTECARLO " << scorefxn << " temperature:  "<< temperature_ << "autotemp_: " << autotemp_ << std::endl;
+	//std::cout << "XUXA: CONSTRUYENDO MONTECARLO " << scorefxn << " temperature:  "<< temperature_ << "autotemp_: " << autotemp_ << std::endl;
 
 	last_accepted_pose_ = PoseOP( new Pose() );
 	lowest_score_pose_ = PoseOP( new Pose() );
@@ -129,7 +129,7 @@ MonteCarlo::MonteCarlo(
 	lowest_score_( 0.0 ),
 	heat_after_cycles_( 150 )
 {
-	std::cout << "XUXA: CONSTRUYENDO MONTECARLO " << scorefxn << " temperature:  "<< temperature_ << "heat_after_cycles: " << heat_after_cycles_ << std::endl;
+	//std::cout << "XUXA: CONSTRUYENDO MONTECARLO " << scorefxn << " temperature:  "<< temperature_ << "heat_after_cycles: " << heat_after_cycles_ << std::endl;
 	last_accepted_pose_ = PoseOP( new Pose() );
 	lowest_score_pose_ = PoseOP( new Pose() );
 	// score_function_ = new ScoreFunction(scorefxn);
@@ -175,7 +175,7 @@ MonteCarlo::recover_low( Pose & pose )
 
 	last_accepted_score_ = last_accepted_pose_->energies().total_energy();
 
-	std::cout << "XUXA:Montecarlo:Last accepted pose (recover_low function): " << last_accepted_pose_ << std::endl;
+	//std::cout << "XUXA:Montecarlo:Last accepted pose (recover_low function): " << last_accepted_pose_ << std::endl;
 
 }
 
@@ -457,7 +457,7 @@ void
 MonteCarlo::reset( Pose const & pose )
 {
 
-	std::cout << "XUXA:Montecarlo: RESET   " << pose << std::endl;
+	//std::cout << "XUXA:Montecarlo: RESET   " << pose << std::endl;
 
 	PROF_START( basic::MC_ACCEPT );
 	*last_accepted_pose_ = pose;
@@ -475,8 +475,8 @@ MonteCarlo::reset( Pose const & pose )
 	last_accepted_score_ = score;
 	lowest_score_ = score;
 
-		std::cout << "XUXA:Montecarlo:Last accepted score from reset() function " << last_accepted_score_ << std::endl;
-		std::cout << "XUXA:Montecarlo:Lowest score: from reset() function" << lowest_score_ << std::endl;
+		//std::cout << "XUXA:Montecarlo:Last accepted score from reset() function " << last_accepted_score_ << std::endl;
+		//std::cout << "XUXA:Montecarlo:Lowest score: from reset() function" << lowest_score_ << std::endl;
 
 
 }

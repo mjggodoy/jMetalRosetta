@@ -61,7 +61,7 @@ my_main( void* )
 
 	if ( option[ OptionKeys::docking::multibody ].user() ) {
 
-		std::cout << "XUXA:SET MOVABLE JUMPS" << std::endl;
+		//std::cout << "XUXA:SET MOVABLE JUMPS" << std::endl;
 
 		utility::vector1< core::Size > const movable_jumps(
 			option[ OptionKeys::docking::multibody ]()
@@ -72,7 +72,7 @@ my_main( void* )
 	}
 
 
-    std::cout << "XUXA: SE VA A DOCKING PROTOCOL" << std::endl;
+    //std::cout << "XUXA: SE VA A DOCKING PROTOCOL" << std::endl;
 
 	JobDistributor::get_instance()->go(dp);
 
@@ -87,7 +87,7 @@ my_main( void* )
 int
 main( int argc, char * argv [] )
 {
-    std::cout << "XUXA: Estoy hasta los huevos" << std::endl;
+    //std::cout << "XUXA: Estoy hasta los huevos" << std::endl;
 	try {
 
 		basic::options::option.add_relevant( basic::options::OptionKeys::docking::no_filters );

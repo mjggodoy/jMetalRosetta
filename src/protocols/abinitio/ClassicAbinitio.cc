@@ -906,7 +906,8 @@ bool ClassicAbinitio::do_stage1_cycles( pose::Pose &pose ) {
 			return true;
 		}
 	}
-	tr.Warning << "Warning: extended chain may still remain after " << stage1_cycles() << " cycles!" << std::endl;
+	//TODO: Maria: MUY IMPORTANTE!!!!!
+	//tr.Warning << "Warning: extended chain may still remain after " << stage1_cycles() << " cycles!" << std::endl;
 	done.show_unmoved( pose, tr.Warning );
 	mc().reset( pose ); // make sure that we keep the final structure
 	return true;
@@ -1253,7 +1254,7 @@ void ClassicAbinitio::extractAngles(core::pose::Pose &pose) {
 		phi = pose.phi(pos);
 		psi= pose.psi(pos);
 		omega = pose.omega(pos);
-		std::cout << "XUXA: ANGLES TO MODIFY" << " phi: "<< phi << " psi: " << psi << " omega: " << omega << std::endl;
+		//std::cout << "XUXA: ANGLES TO MODIFY" << " phi: "<< phi << " psi: " << psi << " omega: " << omega << std::endl;
 
 	}
 }

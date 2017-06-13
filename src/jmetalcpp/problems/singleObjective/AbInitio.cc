@@ -133,7 +133,7 @@ void AbInitio::evaluate(Solution *solution) {
 
     for ( int pos = 0; pos < (int)pose.size(); pos++ ) {
 
-        std::cout << "pos = " << pos << std::endl;
+        //std::cout << "pos = " << pos << std::endl;
         //Sstd::cout << 
 
         pose.set_phi(pos+1, variables[pos*3]->getValue());
@@ -145,7 +145,7 @@ void AbInitio::evaluate(Solution *solution) {
 
     if(rma_stage_sample==1){
 
-        std::cout << "Maria:  Evaluation in Stage 1" << evals << std::endl;
+        std::cout << "Maria:  Evaluation in Stage 1: " << evals << std::endl;
 
         // Maria: Evaluation of pose (Stage1)
         rosetta_abinitio->mgf_apply_STAGE1(pose, STAGE1_ITERATIONS, do_recover, variable_temp ); 
@@ -153,7 +153,7 @@ void AbInitio::evaluate(Solution *solution) {
 
     }else if(rma_stage_sample==2){
 
-        std::cout << "Maria:  Evaluation in Stage 2" << evals << std::endl;
+        std::cout << "Maria:  Evaluation in Stage 2: " << evals << std::endl;
 
          // Maria: Evaluation of pose (Stage2)
         rosetta_abinitio->mgf_apply_STAGE2(pose, STAGE2_ITERATIONS, do_recover, variable_temp ); 
@@ -162,7 +162,7 @@ void AbInitio::evaluate(Solution *solution) {
     }else if(rma_stage_sample==3){
 
         
-        std::cout << "Maria:  Evaluation in Stage 3" << evals << std::endl;
+        std::cout << "Maria:  Evaluation in Stage 3: " << evals << std::endl;
 
         // Maria: Evaluation of pose (Stage3)
         rosetta_abinitio->mgf_apply_STAGE3(pose, STAGE3_ITERATIONS, do_recover, variable_temp ); 
@@ -170,7 +170,7 @@ void AbInitio::evaluate(Solution *solution) {
 
     }else if(rma_stage_sample==4){
 
-        std::cout << "Maria:  Evaluation in Stage 4" << evals << std::endl;
+        std::cout << "Maria:  Evaluation in Stage 4: " << evals << std::endl;
 
         // Maria: Evaluation of pose (Stage4)
         rosetta_abinitio->mgf_apply_STAGE4(pose, STAGE4_ITERATIONS, do_recover, variable_temp );

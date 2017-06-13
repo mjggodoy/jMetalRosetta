@@ -176,7 +176,7 @@ void SequenceMover::apply( core::pose::Pose & pose )
 		Size i = 0;
 		while ( i < movers_.size() ) {
 
-			std::cout << "XUXA: ESTOY EN EL while " << movers_[i] << std::endl;
+			//std::cout << "XUXA: ESTOY EN EL while " << movers_[i] << std::endl;
 
 
 			core::pose::Pose storepose( pose );
@@ -186,7 +186,7 @@ void SequenceMover::apply( core::pose::Pose & pose )
 
 			if ( ms == MS_SUCCESS ) {
 				
-				std::cout << "XUXA: ESTOY EN SequenceMover::apply. Success " << movers_[i] << " movers." << std::endl;
+				//std::cout << "XUXA: ESTOY EN SequenceMover::apply. Success " << movers_[i] << " movers." << std::endl;
 
 				type( type()+movers_[i]->type() );
 				i++;
@@ -201,15 +201,15 @@ void SequenceMover::apply( core::pose::Pose & pose )
 
 	} else {
 
-		std::cout << "XUXA: ESTOY EN SequenceMover::apply en el segundo if" << std::endl;
-		std::cout << ": ESTOY EN SequenceMover::apply. Hay " << movers_.size() << " movers." << std::endl;
+		//std::cout << "XUXA: ESTOY EN SequenceMover::apply en el segundo if" << std::endl;
+		//std::cout << ": ESTOY EN SequenceMover::apply. Hay " << movers_.size() << " movers." << std::endl;
 
 		// set the mover status from the last mover applied, but do not act on the mover status
 		for ( Size i=0; i<movers_.size(); ++i ) {
 			std::cout << "PUA: NOMBRE DE MOVER: " << movers_[i]->get_name() << std::endl;
 
 
-			std::cout << "XUXA: ESTOY EN SequenceMover::apply (SEGUNDA CONDICIÓN). Hay " << movers_[i] << " movers." << std::endl;
+			//std::cout << "XUXA: ESTOY EN SequenceMover::apply (SEGUNDA CONDICIÓN). Hay " << movers_[i] << " movers." << std::endl;
 			movers_[i]->apply( pose );
 			type( type()+movers_[i]->type() );
 		}

@@ -59,7 +59,7 @@ void
 RepeatMover::apply( core::pose::Pose & pose ) {
 	for ( int i=1; i<=nmoves_; ++i ) {
 		
-		std::cout << "XUXA:nmoves:  " <<  nmoves_ << std::endl;
+		//std::cout << "XUXA:nmoves:  " <<  nmoves_ << std::endl;
 
 		//  T("protocols.moves.RepeatMover") << "Move: " << i << "/" << nmoves_ << std::endl;
 		mover_->apply( pose );

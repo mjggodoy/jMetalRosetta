@@ -84,10 +84,10 @@ public:
 	
 	Pose pose;	// Maria: fold_pose
 	ProtocolOP rosetta_abinitio;	// Maria: Protocol Rosetta Abinitio
-	int STAGE1_ITERATIONS;
-	int STAGE2_ITERATIONS;
-	int STAGE3_ITERATIONS;
-	int STAGE4_ITERATIONS;
+	int STAGE1_ITERATIONS; // Maria: Iterations in Stage1
+	int STAGE2_ITERATIONS; // Maria: Iterations in Stage2 (local search)
+	int STAGE3_ITERATIONS; // Maria: Iterations in Stage3
+	int STAGE4_ITERATIONS; // Maria: Iterations in Satge4
 };
 
 #endif

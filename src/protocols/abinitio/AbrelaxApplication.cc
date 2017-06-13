@@ -2457,7 +2457,19 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			algorithm->addOperator("mutation",mutation);
 			algorithm->addOperator("selection",selection);
 
+			//Maria: Returning the results:
 			SolutionSet * solutions = algorithm->execute();
+			Solution* final_pose = solutions->get(0);
+			Variable **variables = final_pose->getDecisionVariables();
+
+			
+			for ( int pos = 0; pos < (int)fold_pose.size(); pos++ ) {
+
+				fold_pose.set_phi(pos+1,variables[pos*3]->getValue());
+				fold_pose.set_psi(pos+1,variables[pos*3]->getValue());
+				fold_pose.set_omega(pos+1,variables[pos*3]->getValue());
+        
+    		}
 			
 			delete crossover;
   			delete mutation;

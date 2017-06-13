@@ -1073,7 +1073,7 @@ run_pep_prep()
 
 		//Real Docking!!
 		
-		std::cout << "XUXA: ENTRA O NO ENTRA EN EL REAL DOCKING??" <<  pose << std::endl;
+		//std::cout << "XUXA: ENTRA O NO ENTRA EN EL REAL DOCKING??" <<  pose << std::endl;
 
 
 		MonteCarloOP mc_dock2( new MonteCarlo( pose, *scorefxn, 0.8 ) );
