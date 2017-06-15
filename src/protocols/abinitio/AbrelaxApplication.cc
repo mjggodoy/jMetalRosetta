@@ -215,6 +215,9 @@
 #include <jmetalcpp/operators/crossover/SBXCrossover.hh>
 #include <jmetalcpp/operators/mutation/PolynomialMutation.hh>
 #include <jmetalcpp/operators/selection/BinaryTournament2.hh>
+#include <jmetalcpp/operators/crossover/DifferentialEvolutionCrossover.hh>
+#include <jmetalcpp/operators/selection/DifferentialEvolutionSelection.hh>
+#include <jmetalcpp/metaheuristics/singleObjective/differentialEvolution/DE.hh>
 
 
 
@@ -2409,10 +2412,12 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			
 			// Maria 1-6-2017: Setting all the jMetal algorithms' parameters  
 
-			int populationSizeValue = 500;
+			int populationSizeValue = 100;
 
 			iterations = JMETAL_ITERATIONS_STAGE1 + JMETAL_ITERATIONS_STAGE2 + JMETAL_ITERATIONS_STAGE3 + JMETAL_ITERATIONS_STAGE4 ;
 			int maxEvaluationsValue = populationSizeValue*iterations; //200.000 evaluations
+
+			std::cout << "Se van a hacer " << maxEvaluationsValue << " evaluaciones." << std::endl;
 
 			// Maria 1-6-2017: Create all instances from jMetal
   			Problem   * problem   ; // The problem to solve
@@ -2426,7 +2431,8 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			problem = new AbInitio("Real", abinitio_protocol, fold_pose, sequence_, numberOfVariables, strategy, populationSizeValue, iterations, 
 			STAGE1_ITERATIONS, STAGE2_ITERATIONS, STAGE3_ITERATIONS, STAGE4_ITERATIONS, JMETAL_ITERATIONS_STAGE1, JMETAL_ITERATIONS_STAGE2,
 			JMETAL_ITERATIONS_STAGE3, JMETAL_ITERATIONS_STAGE4);
-			algorithm = new gGA(problem);
+			//algorithm = new gGA(problem);
+			algorithm = new DE(problem);
 			
 			//std::cout << "Maria 9-5-2017: Everything is ok" << std::endl;
 			
@@ -2435,6 +2441,11 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 
 			// Mutation and Crossover for Real codification
 			map<string, void *> parameters;
+
+
+
+			/*
+			//gGA configuration
 			double crossoverProbability = 0.9;
 			double distributionIndexValue1 = 20.0;
 			parameters["probability"] =  &crossoverProbability ;
@@ -2456,23 +2467,41 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			algorithm->addOperator("crossover",crossover);
 			algorithm->addOperator("mutation",mutation);
 			algorithm->addOperator("selection",selection);
+			*/
+
+			// Crossover operator
+			double crParameter = 0.5;
+			double fParameter  = 0.5;
+			parameters["CR"] =  &crParameter;
+			parameters["F"] = &fParameter;
+			string deVariantParameter = "rand/1/bin";
+			parameters["DE_VARIANT"] = &deVariantParameter;
+			crossover = new DifferentialEvolutionCrossover(parameters);
+
+			// Selection operator
+			parameters.clear();
+			selection = new DifferentialEvolutionSelection(parameters) ;
+
+			// Add the operators to the algorithm
+			algorithm->addOperator("crossover",crossover);
+			algorithm->addOperator("selection",selection);
 
 			//Maria: Returning the results:
 			SolutionSet * solutions = algorithm->execute();
 			Solution* final_pose = solutions->get(0);
 			Variable **variables = final_pose->getDecisionVariables();
 
+			std::cout << "Retrieving the pose: " << std::endl;
 			
 			for ( int pos = 0; pos < (int)fold_pose.size(); pos++ ) {
 
 				fold_pose.set_phi(pos+1,variables[pos*3]->getValue());
-				fold_pose.set_psi(pos+1,variables[pos*3]->getValue());
-				fold_pose.set_omega(pos+1,variables[pos*3]->getValue());
-        
+				fold_pose.set_psi(pos+1,variables[pos*3+1]->getValue());
+				fold_pose.set_omega(pos+1,variables[pos*3+2]->getValue());
     		}
 			
 			delete crossover;
-  			delete mutation;
+  			//delete mutation;
   			delete selection;
   			delete algorithm;
 

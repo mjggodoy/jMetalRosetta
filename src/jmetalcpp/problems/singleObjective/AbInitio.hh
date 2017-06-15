@@ -51,15 +51,18 @@ public:
     
 	/// @brief Destructor
 	~AbInitio();
+
 	void evaluate(Solution *solution);
+	void evaluateByRosetta(Solution *solution);
 
 public:
 	
 	core::pose::PoseOP createPose(std::string const& sequence);
-
+	
 private: 
 
     void configureEvaluation();
+	//void revaluate(int evals, Solution *solution);
 	//void getRosettaSolution(Solution *solution);
 
 private:
@@ -71,9 +74,9 @@ private:
 	int MAX_EVALUATIONS_STAGE3;		// Max allowed evaluations in stage3		
 	int MAX_EVALUATIONS_STAGE4;		// Max allowed evaluations in stage4
 	std::string sequence; 	// Maria: Input protein sequence
-	bool do_recover = true; // Maria: do_recover
 	int iterations; // Maria: do_recover: total number of iterations
 	double fitness; // Maria: Energy associated with each pose
+	bool do_recover = true; // Maria: do_recover
 	bool variable_temp;
 	string temp_strategy = "VT";
 	int population_size;
@@ -88,6 +91,7 @@ public:
 	int STAGE2_ITERATIONS; // Maria: Iterations in Stage2 (local search)
 	int STAGE3_ITERATIONS; // Maria: Iterations in Stage3
 	int STAGE4_ITERATIONS; // Maria: Iterations in Satge4
+	
 };
 
 #endif

@@ -50,6 +50,7 @@ sources = {
 		],
 	"jmetalcpp/metaheuristics/singleObjective/differentialEvolution" : [
 		"DE",
+		"DESeq"
 		],
 	
 	"jmetalcpp/metaheuristics/singleObjective/geneticAlgorithm" : [

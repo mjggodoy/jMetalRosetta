@@ -19,7 +19,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include "DE.hh"
+#include "DESeq.hh"
 
 
 /*
@@ -31,7 +31,7 @@
  * Constructor
  * @param problem Problem to solve
  */
-DE::DE(Problem *problem) : Algorithm(problem) {
+DESeq::DESeq(Problem *problem) : Algorithm(problem) {
 } // DE
 
 
@@ -40,7 +40,7 @@ DE::DE(Problem *problem) : Algorithm(problem) {
  * @return a <code>SolutionSet</code> that is a set of non dominated solutions
  * as a result of the algorithm execution
  */
-SolutionSet * DE::execute() {
+SolutionSet * DESeq::execute() {
 
   int populationSize;
   int maxEvaluations;

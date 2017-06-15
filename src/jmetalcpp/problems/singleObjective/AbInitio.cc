@@ -58,6 +58,7 @@ using namespace core;
 	numberOfObjectives_  = 1; // monoobjective problem so the number of objectives is just one.
 	numberOfConstraints_ = 0;
 	problemName_= "AbInitio";
+    evals = 0;
 	
     lowerLimit_ = new double[numberOfVariables_];
 	if (lowerLimit_ == NULL) {
@@ -106,7 +107,8 @@ AbInitio::~AbInitio() {
 
 void AbInitio::evaluate(Solution *solution) {
 
-    if( temp_strategy != "FT" && temp_strategy != "VT"){
+
+if( temp_strategy != "FT" && temp_strategy != "VT"){
     
         std::cout << "\n\tERROR: Unrecognised format for temp_strategy " << temp_strategy << std::endl << std::endl;
 		exit(1);
@@ -199,11 +201,18 @@ void AbInitio::evaluate(Solution *solution) {
 
     }
 
-    //std::cout << "ESTOY AQUI 5" << std::endl;
+    std::cout << "Reevaluating for each stage:" << std::endl;
+
     //Maria: evals
     evals++;
+    
+    //Maria: Recaluating 
+    //revaluate(evals, solution);
+     //Maria: Configuring evaluations 
     configureEvaluation();
 }
+
+ 
 
 void AbInitio::configureEvaluation(){
 
@@ -224,6 +233,8 @@ void AbInitio::configureEvaluation(){
         rma_stage_sample=4;
     }
 }
+
+
 
 //core::pose::PoseOP AbInitio::createPose(std::string const& sequence){
 

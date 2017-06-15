@@ -170,8 +170,8 @@ void SequenceMover::apply( core::pose::Pose & pose )
 	type("");
 	if ( use_mover_status_ ) {
 
-		std::cout << "PUA: ESTOY EN SequenceMover::apply en el primer if" << std::endl;
-		std::cout << "PUA: ESTOY EN SequenceMover::apply. Hay " << movers_.size() << " movers." << std::endl;
+		//std::cout << "PUA: ESTOY EN SequenceMover::apply en el primer if" << std::endl;
+		//std::cout << "PUA: ESTOY EN SequenceMover::apply. Hay " << movers_.size() << " movers." << std::endl;
 
 		Size i = 0;
 		while ( i < movers_.size() ) {

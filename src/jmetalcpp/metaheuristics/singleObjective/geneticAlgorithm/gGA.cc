@@ -133,6 +133,7 @@ SolutionSet * gGA::execute() {
       population->add(offspringPopulation->get(i)) ;
     offspringPopulation->clear() ;
     delete offspringPopulation;
+
   }
 
   delete comparator;
