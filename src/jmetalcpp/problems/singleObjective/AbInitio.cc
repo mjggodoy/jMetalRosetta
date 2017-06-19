@@ -49,16 +49,15 @@ using namespace core;
  * @param numberOfVariables Number of variables of the problem
  */
 
- AbInitio::AbInitio(string solutionType, ProtocolOP ab, Pose & fold_pose, std::string const& sequence, int numberOfVariables, 
- string const strategy, int population_size, int iterations, int STAGE1_ITERATIONS, int STAGE2_ITERATIONS, int STAGE3_ITERATIONS, int STAGE4_ITERATIONS,
- int JMETAL_ITERATIONS_STAGE1, int JMETAL_ITERATIONS_STAGE2, int JMETAL_ITERATIONS_STAGE3, int JMETAL_ITERATIONS_STAGE4) {
+ AbInitio::AbInitio(string solutionType, ProtocolOP ab,  Pose & fold_pose, int numberOfVariables, 
+	string const strategy, int stage_iterations, int rma_stage_sample) {
+    stage = rma_stage_sample;
     pose = fold_pose;
     rosetta_abinitio = ab;
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = 1; // monoobjective problem so the number of objectives is just one.
 	numberOfConstraints_ = 0;
 	problemName_= "AbInitio";
-    evals = 0;
 	
     lowerLimit_ = new double[numberOfVariables_];
 	if (lowerLimit_ == NULL) {
@@ -85,12 +84,11 @@ using namespace core;
     
     //Inizialite number of evaluations:
 
-    rma_stage_sample = 1;
+     
     
-    MAX_EVALUATIONS_STAGE1 = JMETAL_ITERATIONS_STAGE1 * population_size; //500*100=50000
-    MAX_EVALUATIONS_STAGE2 = MAX_EVALUATIONS_STAGE1 + JMETAL_ITERATIONS_STAGE2 * population_size; // 100000
-    MAX_EVALUATIONS_STAGE3 = MAX_EVALUATIONS_STAGE2 + JMETAL_ITERATIONS_STAGE3 * population_size; // 150000
-    MAX_EVALUATIONS_STAGE4 = MAX_EVALUATIONS_STAGE3 + JMETAL_ITERATIONS_STAGE4 * population_size; // 200000
+    //MAX_EVALUATIONS_STAGE1 = JMETAL_ITERATIONS_STAGE1 * population_size; //500*100=50000
+    //MAX_EVALUATIONS_STAGE3 = JMETAL_ITERATIONS_STAGE3 * population_size; // 150000
+    //MAX_EVALUATIONS_STAGE4 = JMETAL_ITERATIONS_STAGE4 * population_size; // 200000
 
 } // AbInitio
 
@@ -143,41 +141,46 @@ if( temp_strategy != "FT" && temp_strategy != "VT"){
         pose.set_omega(pos+1, variables[pos*3+2]->getValue());
 
     }
+
+    pose.fraglength = 9;
         //std::cout << "ESTOY AQUI 2" << std::endl;
 
-    if(rma_stage_sample==1){
+    if(stage==1){
 
-        std::cout << "Maria:  Evaluation in Stage 1: " << evals << std::endl;
+        std::cout << "Maria:  Evaluation in Stage 1: " << stage << std::endl;
 
         // Maria: Evaluation of pose (Stage1)
-        rosetta_abinitio->mgf_apply_STAGE1(pose, STAGE1_ITERATIONS, do_recover, variable_temp ); 
+        rosetta_abinitio->mgf_apply_STAGE1(pose, stage_iterations, do_recover, variable_temp ); 
         
 
-    }else if(rma_stage_sample==2){
+    }else if(stage==2){
 
-        std::cout << "Maria:  Evaluation in Stage 2: " << evals << std::endl;
+        std::cout << "Maria:  Evaluation in Stage 2: " << stage << std::endl;
 
          // Maria: Evaluation of pose (Stage2)
-        rosetta_abinitio->mgf_apply_STAGE2(pose, STAGE2_ITERATIONS, do_recover, variable_temp ); 
+        rosetta_abinitio->mgf_apply_STAGE2(pose, stage_iterations, do_recover, variable_temp ); 
 
 
-    }else if(rma_stage_sample==3){
+    }else if(stage==3){
 
         
-        std::cout << "Maria:  Evaluation in Stage 3: " << evals << std::endl;
+        std::cout << "Maria:  Evaluation in Stage 3: "  << stage << std::endl;
 
         // Maria: Evaluation of pose (Stage3)
-        rosetta_abinitio->mgf_apply_STAGE3(pose, STAGE3_ITERATIONS, do_recover, variable_temp ); 
+        rosetta_abinitio->mgf_apply_STAGE3(pose, stage_iterations, do_recover, variable_temp ); 
 
 
-    }else if(rma_stage_sample==4){
+    }else if(stage==4){
 
-        std::cout << "Maria:  Evaluation in Stage 4: " << evals << std::endl;
+        std::cout << "Maria:  Evaluation in Stage 4: " << std::endl;
 
         // Maria: Evaluation of pose (Stage4)
-        rosetta_abinitio->mgf_apply_STAGE4(pose, STAGE4_ITERATIONS, do_recover, variable_temp );
+        rosetta_abinitio->mgf_apply_STAGE4(pose, stage_iterations, do_recover, variable_temp );
 
     } else {
+
+        std::cout << " Strategy not found. Please provide an strategy: " << stage << std::endl;
+
         // ERROR
         exit(-1);
     }
@@ -201,38 +204,16 @@ if( temp_strategy != "FT" && temp_strategy != "VT"){
 
     }
 
-    std::cout << "Reevaluating for each stage:" << std::endl;
-
     //Maria: evals
-    evals++;
+   // evals++;
     
     //Maria: Recaluating 
     //revaluate(evals, solution);
      //Maria: Configuring evaluations 
-    configureEvaluation();
+    //configureEvaluation();
 }
 
  
-
-void AbInitio::configureEvaluation(){
-
-    if(evals<=MAX_EVALUATIONS_STAGE1) {
-
-        rma_stage_sample=1;
-
-    }else if(evals <= MAX_EVALUATIONS_STAGE2 ){
-
-        rma_stage_sample=2;
-
-    }else if(evals<= MAX_EVALUATIONS_STAGE3){
-
-        rma_stage_sample=3;
-
-    }else if(evals<= MAX_EVALUATIONS_STAGE4){
-
-        rma_stage_sample=4;
-    }
-}
 
 
 

@@ -52,6 +52,7 @@ SolutionSet * DESeq::execute() {
   Operator * selectionOperator;
   Operator * crossoverOperator;
 
+
   Comparator * comparator;
   comparator = new ObjectiveComparator(0); // Single objective comparator
 
@@ -66,23 +67,66 @@ SolutionSet * DESeq::execute() {
   //Read the parameters
   populationSize = *(int *) getInputParameter("populationSize");
   maxEvaluations = *(int *) getInputParameter("maxEvaluations");
+  // Maria: Use as an input the population:
+
+  //if (getInputParameter("population") == NULL) cout << "EXITO" << endl;
+  //cout << getInputParameter("population") << endl;
+
+  population = (SolutionSet *)getInputParameter("population");
+
+  //if (population==NULL) cout << "FRACASO (EXITO?)" << endl;
+
+  //cout << population << endl;
 
   selectionOperator = operators_["selection"];
   crossoverOperator = operators_["crossover"];
 
   //Initialize the variables
-  population  = new SolutionSet(populationSize);
+  
   evaluations = 0;
 
+  if (population) {
+
+    cout << "COMPROBEMOS QUE POPULATION LA HEMOS COGIDO OK" << endl;
+    cout << "TAMAÑO: " << population->size() << endl;
+    cout << population->get(0) << endl;
+
+    cout << "Maria: DESeq: Population does exist. We evaluate it:" << endl;
+    // Evaluate the input population
+    for (int i = 0; i < populationSize; i++) {
+      Solution * solution = population->get(i);
+      problem_->evaluate(solution);
+      problem_->evaluateConstraints(solution);
+      evaluations++;
+    } //for
+    
+  } else {
+
+    population  = new SolutionSet(populationSize);
+    cout << "Maria: DESeq: Population does not exist. We evaluate it:" << endl;
+    // Create the initial solutionSet
+    //cout << "AQUI" << endl;
+    Solution * newSolution;
+    for (int i = 0; i < populationSize; i++) {
+      //cout << i << endl;
+      newSolution = new Solution(problem_);
+      //cout << "AQUI "<< endl;
+      problem_->evaluate(newSolution);
+      //cout << "AQUI "<< endl;
+      problem_->evaluateConstraints(newSolution);
+      //cout << "AQUI "<< endl;
+      evaluations++;
+      //cout << "AQUI "<< endl;
+      population->add(newSolution);
+      //cout << "AQUI "<< endl;
+
+    } //for
+    
+  }
+
   // Create the initial solutionSet
-  Solution * newSolution;
-  for (int i = 0; i < populationSize; i++) {
-   newSolution = new Solution(problem_);
-   problem_->evaluate(newSolution);
-   problem_->evaluateConstraints(newSolution);
-   evaluations++;
-   population->add(newSolution);
-  } //for
+  //Solution * newSolution;
+  
 
   // Generations ...
   population->sort(comparator) ;
@@ -143,10 +187,10 @@ SolutionSet * DESeq::execute() {
   delete comparator;
 
   // Return a population with the best individual
-  SolutionSet * resultPopulation = new SolutionSet(1);
-  resultPopulation->add(new Solution(population->get(0)));
-  delete population;
+  //SolutionSet * resultPopulation = new SolutionSet(1);
+  //resultPopulation->add(new Solution(population->get(0)));
+  //delete population;
   
-  return resultPopulation;
+  return population;
 
 } // execute

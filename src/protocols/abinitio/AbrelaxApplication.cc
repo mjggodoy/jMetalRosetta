@@ -218,6 +218,7 @@
 #include <jmetalcpp/operators/crossover/DifferentialEvolutionCrossover.hh>
 #include <jmetalcpp/operators/selection/DifferentialEvolutionSelection.hh>
 #include <jmetalcpp/metaheuristics/singleObjective/differentialEvolution/DE.hh>
+#include <jmetalcpp/metaheuristics/singleObjective/differentialEvolution/DESeq.hh>
 
 
 
@@ -2400,44 +2401,94 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 
    			}else if(strategy == "JMETAL_SHORT"){
 
-				STAGE1_ITERATIONS = 200;
-				STAGE2_ITERATIONS = 200;
-				STAGE3_ITERATIONS = 200;
-				STAGE4_ITERATIONS = 400;
-				JMETAL_ITERATIONS_STAGE1 = 100;
-				JMETAL_ITERATIONS_STAGE2 = 100;
-				JMETAL_ITERATIONS_STAGE3 = 100;
-				JMETAL_ITERATIONS_STAGE4 = 100;
+				STAGE1_ITERATIONS = 2;
+				STAGE2_ITERATIONS = 2;
+				STAGE3_ITERATIONS = 2;
+				STAGE4_ITERATIONS = 4;
+				JMETAL_ITERATIONS_STAGE1 = 10;
+				JMETAL_ITERATIONS_STAGE2 = 10;
+				JMETAL_ITERATIONS_STAGE3 = 10;
+				JMETAL_ITERATIONS_STAGE4 = 10;
 			}
 			
 			// Maria 1-6-2017: Setting all the jMetal algorithms' parameters  
 
 			int populationSizeValue = 100;
 
-			iterations = JMETAL_ITERATIONS_STAGE1 + JMETAL_ITERATIONS_STAGE2 + JMETAL_ITERATIONS_STAGE3 + JMETAL_ITERATIONS_STAGE4 ;
-			int maxEvaluationsValue = populationSizeValue*iterations; //200.000 evaluations
+			//Maria: Number of evaluations per stage.
+			int maxEvaluationsValue1 = populationSizeValue*JMETAL_ITERATIONS_STAGE1; //20.000
+			int maxEvaluationsValue2 = populationSizeValue*JMETAL_ITERATIONS_STAGE2;  //20.000
+			int maxEvaluationsValue3 = populationSizeValue*JMETAL_ITERATIONS_STAGE3;  //20.000
+			int maxEvaluationsValue4 = populationSizeValue*JMETAL_ITERATIONS_STAGE4; // 40.000
+			//Maria: Total 100.000 evaluations
 
-			std::cout << "Se van a hacer " << maxEvaluationsValue << " evaluaciones." << std::endl;
+
+			//std::cout << "Se van a hacer " << maxEvaluationsValue << " evaluaciones." << std::endl;
 
 			// Maria 1-6-2017: Create all instances from jMetal
-  			Problem   * problem   ; // The problem to solve
-  			Algorithm * algorithm ; // The algorithm to use
+  			Problem   * problem_stage1; // The problem to solve
+			Problem   * problem_stage2; // The problem to solve
+			Problem   * problem_stage3; // The problem to solve
+			Problem   * problem_stage4; // The problem to solve
+  			
+			Algorithm * algorithm1; // The algorithm 1 to use
+			Algorithm * algorithm2; // The algorithm 2 to use
+			Algorithm * algorithm3; // The algorithm 3 to use
+  			Algorithm * algorithm4; // The algorithm 4 to use
+			
 			Operator  * crossover ; // Crossover operator
 			Operator  * mutation  ; // Mutation operator to use
   			Operator  * selection ; // Selection operator to use
 			
-			std::cout << "Maria:  Problem AbInitio: " << strategy << std::endl;
+			int stage1_rosetta = 1; // Stage 1 of Rosetta
+			int stage2_rosetta = 2; // Stage 2 of Rosetta
+			int stage3_rosetta = 3; // Stage 3 of Rosetta
+			int stage4_rosetta = 4; // Stage 4 of Rosetta
+
+
+			std::cout << "Maria: Problem AbInitio, Stage 1 " << strategy << " stage rosetta: " << stage1_rosetta << std::endl;
 			
-			problem = new AbInitio("Real", abinitio_protocol, fold_pose, sequence_, numberOfVariables, strategy, populationSizeValue, iterations, 
-			STAGE1_ITERATIONS, STAGE2_ITERATIONS, STAGE3_ITERATIONS, STAGE4_ITERATIONS, JMETAL_ITERATIONS_STAGE1, JMETAL_ITERATIONS_STAGE2,
-			JMETAL_ITERATIONS_STAGE3, JMETAL_ITERATIONS_STAGE4);
-			//algorithm = new gGA(problem);
-			algorithm = new DE(problem);
+			problem_stage1 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, STAGE1_ITERATIONS, stage1_rosetta);
 			
-			//std::cout << "Maria 9-5-2017: Everything is ok" << std::endl;
+			//Problem in stage1;
+			algorithm1 = new DESeq(problem_stage1);
+
+			std::cout << "Maria: Problem AbInitio, Stage 2" << " stage rosetta: " << stage2_rosetta << std::endl;
+
+			problem_stage2 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, STAGE2_ITERATIONS, stage2_rosetta);
+
+			//Problem in stage2;
 			
-			algorithm->setInputParameter("populationSize",&populationSizeValue);
-			algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
+			algorithm2 = new DESeq(problem_stage2);
+
+			std::cout << "Maria: Problem AbInitio, Stage 3 " << " stage rosetta: " << stage3_rosetta << std::endl;
+
+
+			problem_stage3 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, STAGE3_ITERATIONS, stage3_rosetta);
+						
+						
+			//Problem in stage3;
+			algorithm3 = new DESeq(problem_stage3);
+
+			problem_stage4 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, STAGE4_ITERATIONS, stage4_rosetta);
+
+			std::cout << "Maria: Problem AbInitio, Stage 4 " << " stage rosetta: " << stage4_rosetta << std::endl;
+
+			//Problem in stage4;
+			algorithm4 = new DESeq(problem_stage4);
+
+			
+			algorithm1->setInputParameter("populationSize",&populationSizeValue);
+			algorithm2->setInputParameter("populationSize",&populationSizeValue);
+			algorithm3->setInputParameter("populationSize",&populationSizeValue);
+			algorithm4->setInputParameter("populationSize",&populationSizeValue);
+
+			
+			algorithm1->setInputParameter("maxEvaluations",&maxEvaluationsValue1);
+			algorithm2->setInputParameter("maxEvaluations",&maxEvaluationsValue2);
+			algorithm3->setInputParameter("maxEvaluations",&maxEvaluationsValue3);
+			algorithm4->setInputParameter("maxEvaluations",&maxEvaluationsValue4);
+
 
 			// Mutation and Crossover for Real codification
 			map<string, void *> parameters;
@@ -2483,11 +2534,44 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			selection = new DifferentialEvolutionSelection(parameters) ;
 
 			// Add the operators to the algorithm
-			algorithm->addOperator("crossover",crossover);
-			algorithm->addOperator("selection",selection);
+			algorithm1->addOperator("crossover",crossover);
+			algorithm1->addOperator("selection",selection);
+
+			algorithm2->addOperator("crossover",crossover);
+			algorithm2->addOperator("selection",selection);
+
+			algorithm3->addOperator("crossover",crossover);
+			algorithm3->addOperator("selection",selection);
+
+			algorithm4->addOperator("crossover",crossover);
+			algorithm4->addOperator("selection",selection);
 
 			//Maria: Returning the results:
-			SolutionSet * solutions = algorithm->execute();
+			std::cout << "Execution of algorithm_1 " << strategy << std::endl;
+
+			SolutionSet * solutions = algorithm1->execute();
+
+			//Maria: Returning the results:
+
+			algorithm2->setInputParameter("population",solutions);
+
+			std::cout << "Execution of algorithm_2 " << strategy << std::endl;
+
+			solutions = algorithm2->execute();
+			
+			algorithm3->setInputParameter("population",solutions);
+			
+			std::cout << "Execution of algorithm_3 " << strategy << std::endl;
+
+			solutions = algorithm3->execute();
+			
+			algorithm4->setInputParameter("population",solutions);
+			
+			std::cout << "Execution of algorithm_4 " << strategy << std::endl;
+
+			solutions = algorithm4->execute();
+			
+
 			Solution* final_pose = solutions->get(0);
 			Variable **variables = final_pose->getDecisionVariables();
 
@@ -2503,13 +2587,10 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			delete crossover;
   			//delete mutation;
   			delete selection;
-  			delete algorithm;
-
-			//std::cout << "All things have finished ok!" << std::endl;
-			
-			//std::cout<< "SOL = " << solutions->get(0)->toString() << std::endl;
-			//std::cout << "OBJ = " << solutions->get(0)->getObjective(0) << std::endl;
-			//std::cout << "Maria: Estrategia jMetal" << strategy << std::endl;
+  			delete algorithm1;
+			delete algorithm2;
+			delete algorithm3;
+			delete algorithm4;
   			
 			delete solutions;
 

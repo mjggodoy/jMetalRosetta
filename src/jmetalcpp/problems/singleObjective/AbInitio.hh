@@ -44,16 +44,14 @@ class AbInitio : public Problem {
    
 public:
 	/// @brief Constructor 1 of the Abinito problem
-	AbInitio(string solutionType, ProtocolOP ab,  Pose & fold_pose, std::string const& sequence, int numberOfVariables, 
-	string const strategy, int population_size, int iterations, int STAGE1_ITERATIONS, int STAGE2_ITERATIONS, 
-	int STAGE3_ITERATIONS, int STAGE4_ITERATIONS, int JMETAL_ITERATIONS_STAGE1, int JMETAL_ITERATIONS_STAGE2,
-	int JMETAL_ITERATIONS_STAGE3, int JMETAL_ITERATIONS_STAGE4);
+	AbInitio(string solutionType, ProtocolOP ab,  Pose & fold_pose, int numberOfVariables, 
+	string const strategy, int stage_iterations, int rma_stage_sample);
     
 	/// @brief Destructor
 	~AbInitio();
 
 	void evaluate(Solution *solution);
-	void evaluateByRosetta(Solution *solution);
+	//void evaluateByRosetta(Solution *solution);
 
 public:
 	
@@ -61,37 +59,28 @@ public:
 	
 private: 
 
-    void configureEvaluation();
+    //void configureEvaluation();
 	//void revaluate(int evals, Solution *solution);
 	//void getRosettaSolution(Solution *solution);
 
 private:
 
-	int evals; 						//Number of Evaluations
-	int rma_stage_sample;           // Number of Rosetta's stage
-    int MAX_EVALUATIONS_STAGE1;		// Max allowed evaluations in stage1		
-	int MAX_EVALUATIONS_STAGE2;		// Max allowed evaluations in stage2		
-	int MAX_EVALUATIONS_STAGE3;		// Max allowed evaluations in stage3		
-	int MAX_EVALUATIONS_STAGE4;		// Max allowed evaluations in stage4
-	std::string sequence; 	// Maria: Input protein sequence
+	//int rma_stage_sample;
+	//int evals; 						//Number of Evaluations
+    //int MAX_EVALUATIONS_STAGE1;		// Max allowed evaluations in stage1		
+	//int MAX_EVALUATIONS_STAGE2;		// Max allowed evaluations in stage2		
+	//int MAX_EVALUATIONS_STAGE3;		// Max allowed evaluations in stage3		
+	//int MAX_EVALUATIONS_STAGE4;		// Max allowed evaluations in stage4
+	//std::string sequence; 	// Maria: Input protein sequence
 	int iterations; // Maria: do_recover: total number of iterations
 	double fitness; // Maria: Energy associated with each pose
 	bool do_recover = true; // Maria: do_recover
 	bool variable_temp;
 	string temp_strategy = "VT";
-	int population_size;
-
-
-
-public:
-	
+	int stage;	
 	Pose pose;	// Maria: fold_pose
 	ProtocolOP rosetta_abinitio;	// Maria: Protocol Rosetta Abinitio
-	int STAGE1_ITERATIONS; // Maria: Iterations in Stage1
-	int STAGE2_ITERATIONS; // Maria: Iterations in Stage2 (local search)
-	int STAGE3_ITERATIONS; // Maria: Iterations in Stage3
-	int STAGE4_ITERATIONS; // Maria: Iterations in Satge4
-	
+	int stage_iterations;
 };
 
 #endif

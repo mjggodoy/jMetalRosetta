@@ -87,7 +87,14 @@ void Algorithm::setInputParameter(string name, void *value) {
  * exist or the name is wrong
 **/
 void * Algorithm::getInputParameter(string name) {
-  return inputParameters_[name];
+
+  if (inputParameters_.find(name) == inputParameters_.end() ) {
+    return NULL;
+  } else {
+    // found
+    return inputParameters_[name];
+  }
+  
 }
 
 
