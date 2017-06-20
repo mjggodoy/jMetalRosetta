@@ -165,7 +165,7 @@ void SequenceMover::apply( core::pose::Pose & pose )
 	using protocols::moves::FAIL_BAD_INPUT;
 	using protocols::moves::FAIL_RETRY;
 
-	std::cout << "PUA: ESTOY EN SequenceMover::apply" << std::endl;
+	//std::cout << "PUA: ESTOY EN SequenceMover::apply" << std::endl;
 
 	type("");
 	if ( use_mover_status_ ) {
@@ -206,7 +206,7 @@ void SequenceMover::apply( core::pose::Pose & pose )
 
 		// set the mover status from the last mover applied, but do not act on the mover status
 		for ( Size i=0; i<movers_.size(); ++i ) {
-			std::cout << "PUA: NOMBRE DE MOVER: " << movers_[i]->get_name() << std::endl;
+			//std::cout << "PUA: NOMBRE DE MOVER: " << movers_[i]->get_name() << std::endl;
 
 
 			//std::cout << "XUXA: ESTOY EN SequenceMover::apply (SEGUNDA CONDICIÓN). Hay " << movers_[i] << " movers." << std::endl;

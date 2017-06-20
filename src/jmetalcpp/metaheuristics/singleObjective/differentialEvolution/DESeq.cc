@@ -160,6 +160,7 @@ SolutionSet * DESeq::execute() {
      problem_->evaluate(child);
 
      evaluations++;
+     cout << "EVALUATIONS = " << evaluations << endl;
 
      if (comparator->compare(population->get(i), child) < 0) {
        offspringPopulation->add(new Solution(population->get(i)));
@@ -181,7 +182,8 @@ SolutionSet * DESeq::execute() {
    delete offspringPopulation;
    population->sort(comparator);
 
-   cout << "DE: Mejor objetivo de esta iter -> " << population->get(0)->getObjective(0) << endl;
+   cout << "DE: Mejor objetivo de esta iter -> " << population->get(0)->getObjective(0) << 
+    " (EVALS = " << evaluations << ")" << endl;
   } // while
 
   delete comparator;

@@ -2279,9 +2279,9 @@ PcaEvaluator::apply( pose::Pose& pose, std::string , io::silent::SilentStruct &p
 
 void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose::Pose & fold_pose ){
 
-	int STAGE1_ITERATIONS = 2000;	
-	int RMA_ITERATIONS = 10;
-	int iterations =  STAGE1_ITERATIONS*RMA_ITERATIONS;
+	//int STAGE1_ITERATIONS = 2000;	
+	//int RMA_ITERATIONS = 10;
+	//int iterations =  STAGE1_ITERATIONS*RMA_ITERATIONS;
 	//iterations=0;
 
 	strategy_input = basic::options::option[ basic::options::OptionKeys::abinitio::jMetal_strategy ];
@@ -2390,10 +2390,10 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			
 			if( strategy == "JMETAL" ){
 
-	    		STAGE1_ITERATIONS = 2000;
-				STAGE2_ITERATIONS = 2000;	
-				STAGE3_ITERATIONS = 2000;	
-				STAGE4_ITERATIONS = 4000;
+	    		//STAGE1_ITERATIONS = 2000;
+				//STAGE2_ITERATIONS = 2000;	
+				//STAGE3_ITERATIONS = 2000;	
+				//STAGE4_ITERATIONS = 4000;
 				JMETAL_ITERATIONS_STAGE1= 1000;
 				JMETAL_ITERATIONS_STAGE2 = 1000;
 				JMETAL_ITERATIONS_STAGE3 = 1000;
@@ -2401,10 +2401,10 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 
    			}else if(strategy == "JMETAL_SHORT"){
 
-				STAGE1_ITERATIONS = 2;
-				STAGE2_ITERATIONS = 2;
-				STAGE3_ITERATIONS = 2;
-				STAGE4_ITERATIONS = 4;
+				//STAGE1_ITERATIONS = 200;
+				//STAGE2_ITERATIONS = 200;
+				//STAGE3_ITERATIONS = 200;
+				//STAGE4_ITERATIONS = 400;
 				JMETAL_ITERATIONS_STAGE1 = 10;
 				JMETAL_ITERATIONS_STAGE2 = 10;
 				JMETAL_ITERATIONS_STAGE3 = 10;
@@ -2413,7 +2413,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			
 			// Maria 1-6-2017: Setting all the jMetal algorithms' parameters  
 
-			int populationSizeValue = 100;
+			int populationSizeValue = 500;
 
 			//Maria: Number of evaluations per stage.
 			int maxEvaluationsValue1 = populationSizeValue*JMETAL_ITERATIONS_STAGE1; //20.000
@@ -2448,14 +2448,14 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 
 			std::cout << "Maria: Problem AbInitio, Stage 1 " << strategy << " stage rosetta: " << stage1_rosetta << std::endl;
 			
-			problem_stage1 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, STAGE1_ITERATIONS, stage1_rosetta);
+			problem_stage1 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, stage1_rosetta);
 			
 			//Problem in stage1;
 			algorithm1 = new DESeq(problem_stage1);
 
 			std::cout << "Maria: Problem AbInitio, Stage 2" << " stage rosetta: " << stage2_rosetta << std::endl;
 
-			problem_stage2 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, STAGE2_ITERATIONS, stage2_rosetta);
+			problem_stage2 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, stage2_rosetta);
 
 			//Problem in stage2;
 			
@@ -2464,13 +2464,13 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			std::cout << "Maria: Problem AbInitio, Stage 3 " << " stage rosetta: " << stage3_rosetta << std::endl;
 
 
-			problem_stage3 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, STAGE3_ITERATIONS, stage3_rosetta);
+			problem_stage3 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, stage3_rosetta);
 						
 						
 			//Problem in stage3;
 			algorithm3 = new DESeq(problem_stage3);
 
-			problem_stage4 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, STAGE4_ITERATIONS, stage4_rosetta);
+			problem_stage4 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, stage4_rosetta);
 
 			std::cout << "Maria: Problem AbInitio, Stage 4 " << " stage rosetta: " << stage4_rosetta << std::endl;
 

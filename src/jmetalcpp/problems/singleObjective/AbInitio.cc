@@ -50,7 +50,7 @@ using namespace core;
  */
 
  AbInitio::AbInitio(string solutionType, ProtocolOP ab,  Pose & fold_pose, int numberOfVariables, 
-	string const strategy, int stage_iterations, int rma_stage_sample) {
+	string const strategy, int rma_stage_sample) {
     stage = rma_stage_sample;
     pose = fold_pose;
     rosetta_abinitio = ab;
@@ -58,7 +58,30 @@ using namespace core;
 	numberOfObjectives_  = 1; // monoobjective problem so the number of objectives is just one.
 	numberOfConstraints_ = 0;
 	problemName_= "AbInitio";
-	
+
+    if(stage==1){
+
+        stage_iterations=200;
+    }
+
+    if(stage==2){
+
+        stage_iterations=10;
+
+    }
+
+    if(stage==3){
+
+        stage_iterations=10;
+
+    }
+
+    if(stage==4){
+
+        stage_iterations=40;
+
+    }
+
     lowerLimit_ = new double[numberOfVariables_];
 	if (lowerLimit_ == NULL) {
 		cout << "Abinitio::Abinitio. Error reserving memory for storing the array of lower limits" << endl;
@@ -106,6 +129,8 @@ AbInitio::~AbInitio() {
 void AbInitio::evaluate(Solution *solution) {
 
 
+//cout << stage_iterations << endl;
+
 if( temp_strategy != "FT" && temp_strategy != "VT"){
     
         std::cout << "\n\tERROR: Unrecognised format for temp_strategy " << temp_strategy << std::endl << std::endl;
@@ -147,15 +172,19 @@ if( temp_strategy != "FT" && temp_strategy != "VT"){
 
     if(stage==1){
 
-        std::cout << "Maria:  Evaluation in Stage 1: " << stage << std::endl;
+        //stage_iterations=200;
 
+        std::cout << "Maria:  Evaluation in Stage 1: " << stage << " stage_iterations " << stage_iterations << std::endl;
+        
         // Maria: Evaluation of pose (Stage1)
         rosetta_abinitio->mgf_apply_STAGE1(pose, stage_iterations, do_recover, variable_temp ); 
         
 
     }else if(stage==2){
 
-        std::cout << "Maria:  Evaluation in Stage 2: " << stage << std::endl;
+        //stage_iterations=200;
+        
+        std::cout << "Maria:  Evaluation in Stage 2: " << stage <<  " stage_iterations " << stage_iterations << std::endl;
 
          // Maria: Evaluation of pose (Stage2)
         rosetta_abinitio->mgf_apply_STAGE2(pose, stage_iterations, do_recover, variable_temp ); 
@@ -163,8 +192,9 @@ if( temp_strategy != "FT" && temp_strategy != "VT"){
 
     }else if(stage==3){
 
-        
-        std::cout << "Maria:  Evaluation in Stage 3: "  << stage << std::endl;
+        //stage_iterations=200;
+
+        std::cout << "Maria:  Evaluation in Stage 3: "  << stage << " stage_iterations " << stage_iterations << std::endl;
 
         // Maria: Evaluation of pose (Stage3)
         rosetta_abinitio->mgf_apply_STAGE3(pose, stage_iterations, do_recover, variable_temp ); 
@@ -172,7 +202,9 @@ if( temp_strategy != "FT" && temp_strategy != "VT"){
 
     }else if(stage==4){
 
-        std::cout << "Maria:  Evaluation in Stage 4: " << std::endl;
+        //stage_iterations=400;
+
+        std::cout << "Maria:  Evaluation in Stage 4: " << stage << " stage_iterations " << stage_iterations << std::endl;
 
         // Maria: Evaluation of pose (Stage4)
         rosetta_abinitio->mgf_apply_STAGE4(pose, stage_iterations, do_recover, variable_temp );

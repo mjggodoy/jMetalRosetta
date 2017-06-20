@@ -111,7 +111,7 @@ void Pose::init(void)
 	// have the Pose observe it's Conformation for XYZ changes
 	// we discard the Link because we own the Conformation
 
-	std::cout << "XUXA POSE: CONFORMACION" << conformation_ << std::endl;
+	//std::cout << "XUXA POSE: CONFORMACION" << conformation_ << std::endl;
 
 	conformation_->attach_xyz_obs( &Pose::on_conf_xyz_change, this );
 

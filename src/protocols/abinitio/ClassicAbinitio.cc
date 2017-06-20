@@ -907,7 +907,7 @@ bool ClassicAbinitio::do_stage1_cycles( pose::Pose &pose ) {
 		}
 	}
 	//TODO: Maria: MUY IMPORTANTE!!!!!
-	//tr.Warning << "Warning: extended chain may still remain after " << stage1_cycles() << " cycles!" << std::endl;
+	tr.Warning << "Warning: extended chain may still remain after " << stage1_cycles() << " cycles!" << std::endl;
 	done.show_unmoved( pose, tr.Warning );
 	mc().reset( pose ); // make sure that we keep the final structure
 	return true;
