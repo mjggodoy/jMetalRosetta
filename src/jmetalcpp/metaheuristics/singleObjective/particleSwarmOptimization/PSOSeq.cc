@@ -31,7 +31,7 @@
  * Constructor
  * @param problem Problem to solve
  */
-PSO::PSO(Problem *problem) : Algorithm(problem) {
+PSOSeq::PSOSeq(Problem *problem) : Algorithm(problem) {
 
   r1Max_ = 1.0;
   r1Min_ = 0.0;
@@ -60,7 +60,7 @@ PSO::PSO(Problem *problem) : Algorithm(problem) {
 /**
  * Initialize all parameter of the algorithm
  */
-void PSO::initParams() {
+void PSOSeq::initParams() {
   particlesSize_ = *(int *) getInputParameter("swarmSize");
   maxIterations_ = *(int *) getInputParameter("maxIterations");
   particles_ = (SolutionSet *)getInputParameter("population");
@@ -91,7 +91,7 @@ void PSO::initParams() {
 /**
  * Initialize all parameter of the algorithm
  */
-void PSO::deleteParams() {
+void PSOSeq::deleteParams() {
 
   for (int i = 0; i < particlesSize_; i++) {
     delete [] speed_[i];
@@ -112,14 +112,14 @@ void PSO::deleteParams() {
 
 
 // Adaptive inertia
-double PSO::inertiaWeight(int iter, int miter, double wmax, double wmin) {
+double PSOSeq::inertiaWeight(int iter, int miter, double wmax, double wmin) {
   //return wmax;
   return wmax - (((wmax-wmin)*(double)iter)/(double)miter);
 } // inertiaWeight
 
 
 // constriction coefficient (M. Clerc)
-double PSO::constrictionCoefficient(double c1, double c2) {
+double PSOSeq::constrictionCoefficient(double c1, double c2) {
   double rho = c1 + c2;
   //rho = 1.0 ;
   if (rho <= 4) {
@@ -131,7 +131,7 @@ double PSO::constrictionCoefficient(double c1, double c2) {
 
 
 // velocity bounds
-double PSO::velocityConstriction(double v, double * deltaMax,
+double PSOSeq::velocityConstriction(double v, double * deltaMax,
                                     double * deltaMin, int variableIndex,
                                     int particleIndex) {
 
@@ -160,7 +160,7 @@ double PSO::velocityConstriction(double v, double * deltaMax,
 /**
  * Update the speed of each particle
  */
-void PSO::computeSpeed(int iter, int miter) {
+void PSOSeq::computeSpeed(int iter, int miter) {
   double r1, r2;
   //double W ;
   double C1, C2;
@@ -216,7 +216,7 @@ void PSO::computeSpeed(int iter, int miter) {
 /**
  * Update the position of each particle
  */
-void PSO::computeNewPositions() {
+void PSOSeq::computeNewPositions() {
   for (int i = 0; i < particlesSize_; i++) {
     //Variable ** particle = particles_->get(i)->getDecisionVariables();
     XReal * particle = new XReal(particles_->get(i)) ;
@@ -242,7 +242,7 @@ void PSO::computeNewPositions() {
 /**
  * Apply a mutation operator to some particles in the swarm
  */
-void PSO::mopsoMutation(int actualIteration, int totalIterations) {
+void PSOSeq::mopsoMutation(int actualIteration, int totalIterations) {
   for (int i = 0; i < particles_->size(); i++) {
     if ( (i % 6) == 0)
       polynomialMutation_->execute(particles_->get(i));
@@ -261,7 +261,7 @@ void PSO::mopsoMutation(int actualIteration, int totalIterations) {
  * @return a <code>SolutionSet</code> that is a set of non dominated solutions
  * as a result of the algorithm execution
  */
-SolutionSet * PSO::execute() {
+SolutionSet * PSOSeq::execute() {
 
   initParams();
 
@@ -354,6 +354,9 @@ SolutionSet * PSO::execute() {
 
     }
     iteration_++;
+    cout << "PSO: Best objective from this iteration -> " << particles_->get(0)->getObjective(0) << 
+    " (EVALUATIONS = " << evaluations_ << ")" << endl;
+
   }
 
   // Return a population with the best individual

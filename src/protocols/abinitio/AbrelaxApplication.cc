@@ -221,7 +221,7 @@
 #include <jmetalcpp/operators/selection/DifferentialEvolutionSelection.hh>
 #include <jmetalcpp/metaheuristics/singleObjective/differentialEvolution/DE.hh>
 #include <jmetalcpp/metaheuristics/singleObjective/differentialEvolution/DESeq.hh>
-
+#include <jmetalcpp/metaheuristics/singleObjective/particleSwarmOptimization/PSOSeq.hh>
 
 
 // Maria 9/5/2017 Variables have been initialized
@@ -2415,15 +2415,15 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			
 			// Maria 1-6-2017: Setting all the jMetal algorithms' parameters  
 
-			int populationSizeValue = 100;
+			//int populationSizeValue = 100; //gGA, ssGA, DE
+			int swarmSize = 100;
 
 			//Maria: Number of evaluations per stage.
-			int maxEvaluationsValue1 = populationSizeValue*JMETAL_ITERATIONS_STAGE1; //20.000
-			int maxEvaluationsValue2 = populationSizeValue*JMETAL_ITERATIONS_STAGE2;  //20.000
-			int maxEvaluationsValue3 = populationSizeValue*JMETAL_ITERATIONS_STAGE3;  //20.000
-			int maxEvaluationsValue4 = populationSizeValue*JMETAL_ITERATIONS_STAGE4; // 40.000
+			//int maxEvaluationsValue1 = populationSizeValue*JMETAL_ITERATIONS_STAGE1; //20.000  //gGA, ssGA, DE
+			//int maxEvaluationsValue2 = populationSizeValue*JMETAL_ITERATIONS_STAGE2;  //20.000  //gGA, ssGA, DE
+			//int maxEvaluationsValue3 = populationSizeValue*JMETAL_ITERATIONS_STAGE3;  //20.000  //gGA, ssGA, DE
+			//int maxEvaluationsValue4 = populationSizeValue*JMETAL_ITERATIONS_STAGE4; // 40.000  //gGA, ssGA, DE
 			//Maria: Total 100.000 evaluations
-
 
 			//std::cout << "Se van a hacer " << maxEvaluationsValue << " evaluaciones." << std::endl;
 
@@ -2438,9 +2438,9 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			Algorithm * algorithm3; // The algorithm 3 to use
   			Algorithm * algorithm4; // The algorithm 4 to use
 			
-			Operator  * crossover ; // Crossover operator
+			//Operator  * crossover ; // Crossover operator
 			Operator  * mutation  ; // Mutation operator to use
-  			Operator  * selection ; // Selection operator to use
+  			//Operator  * selection ; // Selection operator to use
 
 			Comparator * comparator = new ObjectiveComparator(0) ;
 
@@ -2457,9 +2457,9 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			
 			//Problem in stage1;
 			//algorithm1 = new DESeq(problem_stage1);
-			algorithm1 = new ssGASeq(problem_stage1);
 			//algorithm1 = new ssGASeq(problem_stage1);
-			//algorithm1 = new PSOSeq(problem_stage1);
+			//algorithm1 = new ssGASeq(problem_stage1);
+			algorithm1 = new PSOSeq(problem_stage1);
 
 
 
@@ -2470,9 +2470,9 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			//Problem in stage2;
 			
 			//algorithm2 = new DESeq(problem_stage2);
-			algorithm2 = new ssGASeq(problem_stage2);
 			//algorithm2 = new ssGASeq(problem_stage2);
-			//algorithm2 = new PSOSeq(problem_stage2);
+			//algorithm2 = new ssGASeq(problem_stage2);
+			algorithm2 = new PSOSeq(problem_stage2);
 
 
 
@@ -2485,9 +2485,9 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 						
 			//Problem in stage3;
 			//algorithm3 = new DESeq(problem_stage3);
-			algorithm3 = new ssGASeq(problem_stage3);
 			//algorithm3 = new ssGASeq(problem_stage3);
-			//algorithm3 = new PSOSeq(problem_stage3);
+			//algorithm3 = new ssGASeq(problem_stage3);
+			algorithm3 = new PSOSeq(problem_stage3);
 
 
 
@@ -2497,20 +2497,26 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 
 			//Problem in stage4;
 			//algorithm4 = new DESeq(problem_stage4);
-			algorithm4 = new ssGASeq(problem_stage4);
 			//algorithm4 = new ssGASeq(problem_stage4);
-			//algorithm4 = new PSOSeq(problem_stage4);
+			//algorithm4 = new ssGASeq(problem_stage4);
+			algorithm4 = new PSOSeq(problem_stage4);
 
-			algorithm1->setInputParameter("populationSize",&populationSizeValue);
-			algorithm2->setInputParameter("populationSize",&populationSizeValue);
-			algorithm3->setInputParameter("populationSize",&populationSizeValue);
-			algorithm4->setInputParameter("populationSize",&populationSizeValue);
+			algorithm1->setInputParameter("swarmSize",&swarmSize);
+			algorithm2->setInputParameter("swarmSize",&swarmSize);
+			algorithm3->setInputParameter("swarmSize",&swarmSize);
+			algorithm4->setInputParameter("swarmSize",&swarmSize);
+
+
+			//algorithm1->setInputParameter("populationSize",&populationSizeValue); //gGA, ssGA, DE
+			//algorithm2->setInputParameter("populationSize",&populationSizeValue); //gGA, ssGA, DE
+			//algorithm3->setInputParameter("populationSize",&populationSizeValue); //gGA, ssGA, DE
+			//algorithm4->setInputParameter("populationSize",&populationSizeValue); //gGA, ssGA, DE
 
 			
-			algorithm1->setInputParameter("maxEvaluations",&maxEvaluationsValue1);
-			algorithm2->setInputParameter("maxEvaluations",&maxEvaluationsValue2);
-			algorithm3->setInputParameter("maxEvaluations",&maxEvaluationsValue3);
-			algorithm4->setInputParameter("maxEvaluations",&maxEvaluationsValue4);
+			algorithm1->setInputParameter("maxIterations",&JMETAL_ITERATIONS_STAGE1); //PSO
+			algorithm2->setInputParameter("maxIterations",&JMETAL_ITERATIONS_STAGE2); //PSO
+			algorithm3->setInputParameter("maxIterations",&JMETAL_ITERATIONS_STAGE3); //PSO
+			algorithm4->setInputParameter("maxIterations",&JMETAL_ITERATIONS_STAGE4); //PSO
 
 
 			// Mutation and Crossover for Real codification
@@ -2523,7 +2529,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 
   			// Mutation and Crossover for Real codification
   			//map<string, void *> parameters;
-  			double crossoverProbability = 0.9;
+  			/*double crossoverProbability = 0.9;
   			double distributionIndex1 = 20.0;
   			parameters["probability"] =  &crossoverProbability ;
   			parameters["distributionIndex"] = &distributionIndex1 ;
@@ -2539,10 +2545,12 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
   			// Selection Operator
  			parameters.clear();
   			selection = new BinaryTournament2(parameters) ;
+			*/
 			
 
 			//gGA configuration
-			/*double crossoverProbability = 0.9;
+			/*
+			double crossoverProbability = 0.9;
 			double distributionIndexValue1 = 20.0;
 			parameters["probability"] =  &crossoverProbability ;
 			parameters["distributionIndex"] = &distributionIndexValue1 ;
@@ -2562,21 +2570,17 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			selection = new BinaryTournament2(parameters) ;
 			*/
 			
-
-			
-			/*
 			//PSO algorithm
 			// Algorithm parameters			  
 			// Mutation operator
-			map<string, void *> parameters;
-  			double probability = 1.0/problem->getNumberOfVariables();
+			//map<string, void *> parameters;
+  			double probability = 1.0/problem_stage1->getNumberOfVariables();
   			double distributionIndex = 20.0;
   			parameters["probability"] = &probability;
   			parameters["distributionIndex"] = &distributionIndex;
   			mutation = new PolynomialMutation(parameters);
 
-			*/
-
+			
 			// Crossover operator
 			/*double crParameter = 1; //0.5
 			double fParameter  = 0.5;
@@ -2592,22 +2596,22 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			*/
 
 			// Add the operators to the algorithm
-			algorithm1->addOperator("crossover",crossover);
-			algorithm1->addOperator("selection",selection);
-			algorithm1->addOperator("mutation",mutation);
 
+			//algorithm1->addOperator("crossover",crossover); //DE, ssGA, gGA
+			//algorithm1->addOperator("selection",selection); //DE, ssGA, gGA
+			algorithm1->addOperator("mutation",mutation); //DE, ssGA, gGA, PSO
 
-			algorithm2->addOperator("crossover",crossover);
-			algorithm2->addOperator("selection",selection);
-			algorithm2->addOperator("mutation",mutation);
+			//algorithm2->addOperator("crossover",crossover); //DE, ssGA, gGA
+			//algorithm2->addOperator("selection",selection); //DE, ssGA, gGA
+			algorithm2->addOperator("mutation",mutation); //DE, ssGA, gGA, PSO
 
-			algorithm3->addOperator("crossover",crossover);
-			algorithm3->addOperator("selection",selection);
-			algorithm3->addOperator("mutation",mutation);
+			//algorithm3->addOperator("crossover",crossover);  //DE, ssGA, gGA
+			//algorithm3->addOperator("selection",selection);  //DE, ssGA, gGA
+			algorithm3->addOperator("mutation",mutation);  //DE, ssGA, gGA, PSO
 
-			algorithm4->addOperator("crossover",crossover);
-			algorithm4->addOperator("selection",selection);
-			algorithm4->addOperator("mutation",mutation);
+			//algorithm4->addOperator("crossover",crossover);  //DE, ssGA, gGA
+			//algorithm4->addOperator("selection",selection);  //DE, ssGA, gGA
+			algorithm4->addOperator("mutation",mutation);  //DE, ssGA, gGA, PSO
 
 
 			//Maria: Returning the results:
@@ -2616,8 +2620,8 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			SolutionSet * solutions = algorithm1->execute();
 			std::cout << "Printing objectives and variables " << std::endl;
 
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/ssGA_standard_settings_LS_2/Stage1/FUN_stage1_ssGA.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/ssGA_standard_settings_LS_2/Stage1/VAR_stage1_ssGA.txt",true);
+			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage1/FUN_stage1_ssGA.txt",true);
+			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage1/VAR_stage1_ssGA.txt",true);
 			//Maria: Returning the results:
 
 			algorithm2->setInputParameter("population",solutions);
@@ -2627,8 +2631,8 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			solutions = algorithm2->execute();
 			std::cout << "Printing objectives and variables " << std::endl;
 
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/ssGA_standard_settings_LS_2/Stage2/FUN_stage2_ssGA.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/ssGA_standard_settings_LS_2/Stage2/VAR_stage2_ssGA.txt",true);
+			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage2/FUN_stage2_ssGA.txt",true);
+			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage2/VAR_stage2_ssGA.txt",true);
 
 			
 			algorithm3->setInputParameter("population",solutions);
@@ -2638,8 +2642,8 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			solutions = algorithm3->execute();
 			std::cout << "Printing objectives and variables " << std::endl;
 
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/ssGA_standard_settings_LS_2/Stage3/FUN_stage3_ssGA.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/ssGA_standard_settings_LS_2/Stage3/VAR_stage3_ssGA.txt",true);
+			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage3/FUN_stage3_ssGA.txt",true);
+			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage3/VAR_stage3_ssGA.txt",true);
 
 			
 			algorithm4->setInputParameter("population",solutions);
@@ -2649,8 +2653,8 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			solutions = algorithm4->execute();
 			std::cout << "Printing objectives and variables " << std::endl;
 
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/ssGA_standard_settings_LS_2/Stage4/FUN_stage4_ssGA.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/ssGA_standard_settings_LS_2/Stage4/VAR_stage4_ssGA.txt",true);
+			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage4/FUN_stage4_ssGA.txt",true);
+			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage4/VAR_stage4_ssGA.txt",true);
 
 			//Maria: PSO
 			solutions->sort(comparator);
@@ -2666,9 +2670,9 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 				fold_pose.set_omega(pos+1,variables[pos*3+2]->getValue());
     		}
 			
-			delete crossover;
+			//delete crossover;
   			delete mutation;
-  			delete selection;
+  			//delete selection;
   			delete algorithm1;
 			delete algorithm2;
 			delete algorithm3;

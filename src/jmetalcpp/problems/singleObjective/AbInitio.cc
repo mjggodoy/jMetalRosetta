@@ -66,17 +66,17 @@ using namespace core;
 
     if(stage==2){
 
-        stage_iterations=10;
+        stage_iterations=1;
     }
 
     if(stage==3){
 
-        stage_iterations=10;
+        stage_iterations=1;
     }
 
     if(stage==4){
 
-        stage_iterations=40;
+        stage_iterations=4;
     }
 
     lowerLimit_ = new double[numberOfVariables_];

@@ -18,8 +18,8 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __PSO__
-#define __PSO__
+#ifndef __PSOSeq__
+#define __PSOSeq__
 
 #include <jmetalcpp/core/Algorithm.hh>
 #include <jmetalcpp/operators/selection/BestSolutionSelection.hh>
@@ -36,7 +36,7 @@
  * Class implementing a single-objective PSO algorithm
  */
 
-class PSO : public Algorithm {
+class PSOSeq : public Algorithm {
 
 private:
 
@@ -114,7 +114,7 @@ private:
   void deleteParams();
 
 public:
-  PSO(Problem * problem);
+  PSOSeq(Problem * problem);
   SolutionSet * execute();
 
 };
