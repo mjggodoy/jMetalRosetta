@@ -50,12 +50,14 @@ sources = {
 		],
 	"jmetalcpp/metaheuristics/singleObjective/differentialEvolution" : [
 		"DE",
-		"DESeq"
+		"DESeq",
 		],
 	
 	"jmetalcpp/metaheuristics/singleObjective/geneticAlgorithm" : [
 		"gGA",
+		"gGASeq",
 		"ssGA",
+		"ssGASeq"
 		],
 	"jmetalcpp/metaheuristics/singleObjective/particleSwarmOptimization" : [
 		"PSO",

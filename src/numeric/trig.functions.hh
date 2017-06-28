@@ -108,6 +108,7 @@ sin_cos_range( T const & x, T const & tol = T( .001 ) )
 	} else if ( ( x >= T( 1.0 ) ) && ( x <= T( 1.0 ) + tol ) ) { // Within tolerance
 		return T( 1.0 ); // Adjusted value
 	} else { // Out of range
+		cout << "X=" << x << endl;
 		cout << "sin_cos_range ERROR: " << setprecision( 8 ) << showpoint << x << " is outside of [-1,+1] sin and cos value legal range" << endl;
 		cerr << "sin_cos_range ERROR: " << setprecision( 8 ) << showpoint << x << " is outside of [-1,+1] sin and cos value legal range" << endl;
 #ifdef BOINC

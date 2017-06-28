@@ -67,19 +67,16 @@ using namespace core;
     if(stage==2){
 
         stage_iterations=10;
-
     }
 
     if(stage==3){
 
         stage_iterations=10;
-
     }
 
     if(stage==4){
 
         stage_iterations=40;
-
     }
 
     lowerLimit_ = new double[numberOfVariables_];
@@ -98,17 +95,14 @@ using namespace core;
     
     for (int i=0; i<numberOfVariables_; i++) {
         
-        lowerLimit_[i] = -180;
-        upperLimit_[i] = 180;    
+        lowerLimit_[i] = -360;
+        upperLimit_[i] = 360;    
     }
 	
     // TODO: Solution type initialization
     solutionType_ = new RealSolutionType(this);	
     
     //Inizialite number of evaluations:
-
-     
-    
     //MAX_EVALUATIONS_STAGE1 = JMETAL_ITERATIONS_STAGE1 * population_size; //500*100=50000
     //MAX_EVALUATIONS_STAGE3 = JMETAL_ITERATIONS_STAGE3 * population_size; // 150000
     //MAX_EVALUATIONS_STAGE4 = JMETAL_ITERATIONS_STAGE4 * population_size; // 200000
@@ -160,6 +154,31 @@ if( temp_strategy != "FT" && temp_strategy != "VT"){
 
         //std::cout << "pos = " << pos << std::endl;
         //Sstd::cout << 
+        if (variables[pos*3]->getValue() < -360 || variables[pos*3]->getValue()>360) {
+            cout << "JMETAL HA GENERADO UN VALOR ERRONEO!: " << variables[pos*3]->getValue() << endl;
+            //exit(-1);
+        }
+        if (variables[pos*3+1]->getValue() < -360 || variables[pos*3+1]->getValue()>360) {
+            cout << "JMETAL HA GENERADO UN VALOR ERRONEO!: " << variables[pos*3+1]->getValue() << endl;
+            //exit(-1);
+        }
+        if (variables[pos*3+2]->getValue() < -360 || variables[pos*3+2]->getValue()>360) {
+            cout << "JMETAL HA GENERADO UN VALOR ERRONEO!: " << variables[pos*3+2]->getValue() << endl;
+            //exit(-1);
+        }
+
+        if (isnan(variables[pos*3]->getValue())) {
+            cout << "JMETAL HA GENERADO UN VALOR ERRONEO!: " << variables[pos*3]->getValue() << endl;
+            exit(-1);
+        }
+        if (isnan(variables[pos*3+1]->getValue())) {
+            cout << "JMETAL HA GENERADO UN VALOR ERRONEO!: " << variables[pos*3+1]->getValue() << endl;
+            exit(-1);
+        }
+        if (isnan(variables[pos*3+2]->getValue())) {
+            cout << "JMETAL HA GENERADO UN VALOR ERRONEO!: " << variables[pos*3+2]->getValue() << endl;
+            exit(-1);
+        }
 
         pose.set_phi(pos+1, variables[pos*3]->getValue());
         pose.set_psi(pos+1, variables[pos*3+1]->getValue());
@@ -230,6 +249,69 @@ if( temp_strategy != "FT" && temp_strategy != "VT"){
 
     for ( int pos = 0; pos < (int)pose.size(); pos++ ) {
 
+        // COGER DESDE AQUI
+
+        if (pose.phi(pos+1) < -360) {
+
+             variables[pos*3]->setValue(pose.phi(pos+1)+360);
+            cout << "ROSETTA HA GENERADO UN VALOR ERRONEO!: " << pose.phi(pos+1) << endl;
+            //exit(-1);
+        }
+        
+        if (pose.psi(pos+1) < -360) {
+            
+            cout << "ROSETTA HA GENERADO UN VALOR ERRONEO!: " << pose.psi(pos+1) << endl;
+            variables[pos*3]->setValue(pose.psi(pos+1)+360);
+
+            //exit(-1);
+        }
+        
+        if (pose.omega(pos+1) < -360) {
+
+            cout << "ROSETTA HA GENERADO UN VALOR ERRONEO!: " << pose.omega(pos+1) << endl;
+            variables[pos*3]->setValue(pose.omega(pos+1)+360);
+            //exit(-1);
+        }
+
+        if(pose.phi(pos+1)>360){
+
+            cout << "ROSETTA HA GENERADO UN VALOR ERRONEO!: " << pose.phi(pos+1) << endl;
+            variables[pos*3]->setValue(pose.phi(pos+1)-360);
+
+        }
+
+        if(pose.psi(pos+1)>360){
+        
+            cout << "ROSETTA HA GENERADO UN VALOR ERRONEO!: " << pose.psi(pos+1) << endl;
+            variables[pos*3]->setValue(pose.psi(pos+1)-360);
+
+        }
+
+        if(pose.omega(pos+1)>360){
+
+            cout << "ROSETTA HA GENERADO UN VALOR ERRONEO!: " << pose.omega(pos+1) << endl;
+            variables[pos*3]->setValue(pose.omega(pos+1)-360);
+
+        }
+
+        // HASTA AQUI
+
+        //TODO: Hacer 6 ifs (o mejor whiles) para asegurarnos de que los valores de los angulos
+        // estan dentro del rango que hemos definido (mirar el PolynomialMutatiopn)
+
+        if (isnan(pose.phi(pos+1))) {
+            cout << "ROSETTA HA GENERADO UN VALOR ERRONEO!: " << pose.phi(pos+1) << endl;
+            exit(-1);
+        }
+        if (isnan(pose.psi(pos+1))) {
+            cout << "ROSETTA HA GENERADO UN VALOR ERRONEO!: " << pose.psi(pos+1) << endl;
+            exit(-1);
+        }
+        if (isnan(pose.omega(pos+1))) {
+            cout << "ROSETTA HA GENERADO UN VALOR ERRONEO!: " << pose.omega(pos+1) << endl;
+            exit(-1);
+        }
+
         variables[pos*3]->setValue(pose.phi(pos+1));
         variables[pos*3+1]->setValue(pose.psi(pos+1));
         variables[pos*3+2]->setValue(pose.omega(pos+1));
@@ -264,6 +346,8 @@ if( temp_strategy != "FT" && temp_strategy != "VT"){
 
     //return pose;
 //}
+
+int AbInitio::getStage() { return stage; }
 
 
 

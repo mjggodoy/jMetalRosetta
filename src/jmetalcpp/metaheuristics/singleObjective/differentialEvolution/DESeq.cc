@@ -87,10 +87,9 @@ SolutionSet * DESeq::execute() {
 
   if (population) {
 
-    cout << "COMPROBEMOS QUE POPULATION LA HEMOS COGIDO OK" << endl;
-    cout << "TAMAÑO: " << population->size() << endl;
+    cout << "Testing if the population is getting correctly" << endl;
+    cout << "Population's size: " << population->size() << endl;
     cout << population->get(0) << endl;
-
     cout << "Maria: DESeq: Population does exist. We evaluate it:" << endl;
     // Evaluate the input population
     for (int i = 0; i < populationSize; i++) {
@@ -182,8 +181,8 @@ SolutionSet * DESeq::execute() {
    delete offspringPopulation;
    population->sort(comparator);
 
-   cout << "DE: Mejor objetivo de esta iter -> " << population->get(0)->getObjective(0) << 
-    " (EVALS = " << evaluations << ")" << endl;
+   cout << "DE: Best objective from this iteration -> " << population->get(0)->getObjective(0) << 
+    " (EVALUATIONS = " << evaluations << ")" << endl;
   } // while
 
   delete comparator;

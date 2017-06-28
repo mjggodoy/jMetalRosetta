@@ -57,7 +57,9 @@ public:
 	
 	core::pose::PoseOP createPose(std::string const& sequence);
 	
-public: 
+public:
+
+	int getStage();
 
 
 

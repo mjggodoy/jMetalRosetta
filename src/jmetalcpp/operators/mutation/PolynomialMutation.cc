@@ -78,10 +78,13 @@ void PolynomialMutation::doMutation(double probability, Solution *solution) {
         deltaq = 1.0 - (pow(val,mut_pow));
       }
       y = y + deltaq*(yu-yl);
-      if (y<yl)
+      if (y<yl) {
         y = yl;
+        //y += yu -yl;
+      }
       if (y>yu)
         y = yu;
+        //y -= yu -yl;
       x->setValue(var, y);
     }
   } // for
