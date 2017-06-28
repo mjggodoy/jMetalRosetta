@@ -2620,8 +2620,8 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			SolutionSet * solutions = algorithm1->execute();
 			std::cout << "Printing objectives and variables " << std::endl;
 
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage1/FUN_stage1_ssGA.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage1/VAR_stage1_ssGA.txt",true);
+			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage1/FUN_stage1_ssGA.txt",true);
+			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage1/VAR_stage1_ssGA.txt",true);
 			//Maria: Returning the results:
 
 			algorithm2->setInputParameter("population",solutions);
@@ -2631,8 +2631,8 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			solutions = algorithm2->execute();
 			std::cout << "Printing objectives and variables " << std::endl;
 
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage2/FUN_stage2_ssGA.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage2/VAR_stage2_ssGA.txt",true);
+			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage2/FUN_stage2_ssGA.txt",true);
+			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage2/VAR_stage2_ssGA.txt",true);
 
 			
 			algorithm3->setInputParameter("population",solutions);
@@ -2642,8 +2642,8 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			solutions = algorithm3->execute();
 			std::cout << "Printing objectives and variables " << std::endl;
 
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage3/FUN_stage3_ssGA.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage3/VAR_stage3_ssGA.txt",true);
+			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage3/FUN_stage3_ssGA.txt",true);
+			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage3/VAR_stage3_ssGA.txt",true);
 
 			
 			algorithm4->setInputParameter("population",solutions);
@@ -2653,8 +2653,8 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			solutions = algorithm4->execute();
 			std::cout << "Printing objectives and variables " << std::endl;
 
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage4/FUN_stage4_ssGA.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings/Stage4/VAR_stage4_ssGA.txt",true);
+			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage4/FUN_stage4_ssGA.txt",true);
+			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage4/VAR_stage4_ssGA.txt",true);
 
 			//Maria: PSO
 			solutions->sort(comparator);

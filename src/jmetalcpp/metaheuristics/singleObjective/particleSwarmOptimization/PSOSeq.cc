@@ -276,7 +276,6 @@ SolutionSet * PSOSeq::execute() {
       Solution * particle = particles_->get(i);
       problem_->evaluate(particle);
       evaluations_ ++;
-      particles_->add(particle);
       if ((globalBest_ == NULL) || (particle->getObjective(0) < globalBest_->getObjective(0))) {
         if (globalBest_!= NULL) {
           delete globalBest_;
@@ -288,9 +287,10 @@ SolutionSet * PSOSeq::execute() {
   }else{
 
       particles_ = new SolutionSet(particlesSize_);
-     
+      Solution * particle;
+
       for (int i = 0; i < particlesSize_; i++) {
-        Solution * particle = new Solution(problem_);
+        particle = new Solution(problem_);
         problem_->evaluate(particle);
         evaluations_ ++;
         particles_->add(particle);
@@ -318,6 +318,7 @@ SolutionSet * PSOSeq::execute() {
   }
 
   //-> Step 7. Iterations ..
+  int * bestIndexPtr;
   while (iteration_ < maxIterations_) {
     int * bestIndividualPtr = (int*)findBestSolution_->execute(particles_);
     int bestIndividual = *bestIndividualPtr;
@@ -354,16 +355,19 @@ SolutionSet * PSOSeq::execute() {
 
     }
     iteration_++;
-    cout << "PSO: Best objective from this iteration -> " << particles_->get(0)->getObjective(0) << 
+    bestIndexPtr = (int *)findBestSolution_->execute(particles_);
+    int bestIndex = *bestIndexPtr;
+    delete bestIndexPtr;
+    cout << "PSO: Best objective from this iteration -> " << particles_->get(bestIndex)->getObjective(0) << 
     " (EVALUATIONS = " << evaluations_ << ")" << endl;
 
   }
 
   // Return a population with the best individual
-  SolutionSet * resultPopulation = new SolutionSet(1);
-  int * bestIndexPtr = (int *)findBestSolution_->execute(particles_);
-  int bestIndex = *bestIndexPtr;
-  delete bestIndexPtr;
+  //SolutionSet * resultPopulation = new SolutionSet(1);
+  //int * bestIndexPtr = (int *)findBestSolution_->execute(particles_);
+  //int bestIndex = *bestIndexPtr;
+  //delete bestIndexPtr;
   
   //Maria:
   //Solution * s = particles_->get(bestIndex);
