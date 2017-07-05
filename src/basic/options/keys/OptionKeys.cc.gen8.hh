@@ -1,3 +1,4 @@
+namespace DomainAssembly { FileOptionKey const da_linker_file_rna( "DomainAssembly:da_linker_file_rna" );  }
 namespace DomainAssembly { StringOptionKey const residues_repack_only( "DomainAssembly:residues_repack_only" );  }
 namespace DomainAssembly { FileOptionKey const da_eval_pose_map( "DomainAssembly:da_eval_pose_map" );  }
 namespace edensity { BooleanOptionKey const edensity( "edensity" );  }
@@ -243,4 +244,3 @@ namespace fold_from_loops { BooleanOptionKey const output_centroid( "fold_from_l
 namespace fold_from_loops { BooleanOptionKey const add_cst_loop( "fold_from_loops:add_cst_loop" );  }
 namespace frags { BooleanOptionKey const frags( "frags" );  }
 namespace frags { IntegerOptionKey const j( "frags:j" );  }
-namespace frags { BooleanOptionKey const filter_JC( "frags:filter_JC" );  }

@@ -1,3 +1,4 @@
+namespace frags { BooleanOptionKey const filter_JC( "frags:filter_JC" );  }
 namespace frags { BooleanOptionKey const bounded_protocol( "frags:bounded_protocol" );  }
 namespace frags { BooleanOptionKey const keep_all_protocol( "frags:keep_all_protocol" );  }
 namespace frags { BooleanOptionKey const quota_protocol( "frags:quota_protocol" );  }
@@ -243,4 +244,3 @@ namespace matdes { namespace dock { BooleanOptionKey const dock( "matdes:dock" )
 namespace matdes { namespace dock { RealOptionKey const neg_r( "matdes:dock:neg_r" );  } }
 namespace matdes { namespace dock { BooleanOptionKey const dump_pdb( "matdes:dock:dump_pdb" );  } }
 namespace matdes { namespace dock { BooleanOptionKey const dump_chainA_only( "matdes:dock:dump_chainA_only" );  } }
-namespace matdes { namespace design { BooleanOptionKey const design( "matdes:design" );  } }

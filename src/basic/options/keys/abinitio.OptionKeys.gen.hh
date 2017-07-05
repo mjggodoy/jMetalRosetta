@@ -39,6 +39,7 @@ namespace abinitio { extern BooleanOptionKey const explicit_pdb_debug; }
 namespace abinitio { extern BooleanOptionKey const use_filters; }
 namespace abinitio { extern RealOptionKey const increase_cycles; }
 namespace abinitio { extern StringOptionKey const jMetal_strategy; }
+namespace abinitio { extern StringOptionKey const Algorithm_strategy; }
 namespace abinitio { extern IntegerOptionKey const number_3mer_frags; }
 namespace abinitio { extern IntegerOptionKey const number_9mer_frags; }
 namespace abinitio { extern RealOptionKey const temperature; }

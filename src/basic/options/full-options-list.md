@@ -1,7 +1,7 @@
 # List of Rosetta command line options.
 
 _(This is an automatically generated file, do not edit!)_
-Generated: 2017-06-28
+Generated: 2017-07-05
 
 _Note that some application specific options may not be present in this list._
 
@@ -2684,10 +2684,12 @@ _Note that some application specific options may not be present in this list._
 <dd>Increase number of cycles at each stage of fold_abinitio (or pose_abinitio) by this factor<br/>Range: 0.001-<br/>Default: 1.0<br/></dd>
 <dt><b>-jMetal_strategy</b> \<String\></dt>
 <dd>Specifies search strategy and parameters to use - Maria 8/05/2017<br/>Default: "ROSETTA"<br/></dd>
+<dt><b>-Algorithm_strategy</b> \<String\></dt>
+<dd>Specifies search method to use - Maria 3/07/2017<br/>Default: "DE"<br/></dd>
 <dt><b>-number_3mer_frags</b> \<Integer\></dt>
 <dd>Number of top 3mer fragments to use in fold_abinitio protocol<br/>Range: 0-<br/>Default: 200<br/></dd>
 <dt><b>-number_9mer_frags</b> \<Integer\></dt>
-<dd>Number of top 9mer fragments to use in fold_abinitio protocol<br/>Range: 0-<br/>Default: 25<br/></dd>
+<dd>Number of top 9mer fragments to use in fold_abinitio protocol<br/>Range: 0-<br/>Default: 5<br/></dd>
 <dt><b>-temperature</b> \<Real\></dt>
 <dd>Temperature used in fold_abinitio<br/>Default: 2.0<br/></dd>
 <dt><b>-rg_reweight</b> \<Real\></dt>

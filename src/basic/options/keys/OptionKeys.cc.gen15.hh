@@ -1,3 +1,4 @@
+namespace templates { BooleanOptionKey const force_native_topology( "templates:force_native_topology" );  }
 namespace templates { RealOptionKey const topology_rank_cutoff( "templates:topology_rank_cutoff" );  }
 namespace templates { IntegerOptionKey const min_frag_size( "templates:min_frag_size" );  }
 namespace templates { IntegerOptionKey const max_shrink( "templates:max_shrink" );  }

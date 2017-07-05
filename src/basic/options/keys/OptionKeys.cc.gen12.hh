@@ -1,3 +1,4 @@
+namespace pocket_grid { BooleanOptionKey const dump_connollySurface( "pocket_grid:dump_connollySurface" );  }
 namespace pocket_grid { RealOptionKey const esp_buffer_dist( "pocket_grid:esp_buffer_dist" );  }
 namespace pocket_grid { BooleanOptionKey const round_pocketGrid_center( "pocket_grid:round_pocketGrid_center" );  }
 namespace gen_pharmacophore { BooleanOptionKey const gen_pharmacophore( "gen_pharmacophore" );  }
@@ -243,4 +244,3 @@ namespace remodel { namespace domainFusion { FileOptionKey const insert_segment2
 namespace remodel { namespace design { BooleanOptionKey const design( "remodel:design" );  } }
 namespace remodel { namespace design { BooleanOptionKey const no_design ( "remodel:design:no_design " );  } }
 namespace remodel { namespace design { BooleanOptionKey const design_all( "remodel:design:design_all" );  } }
-namespace remodel { namespace design { BooleanOptionKey const allow_rare_aro_chi( "remodel:design:allow_rare_aro_chi" );  } }

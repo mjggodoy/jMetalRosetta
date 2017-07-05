@@ -3197,13 +3197,19 @@ EX_SIX_QUARTER_STEP_STDDEVS   7          +/- 0.25, 0.5, 0.75, 1, 1.25 & 1.5 sd; 
 			desc='Specifies search strategy and parameters to use - Maria 8/05/2017',
 			default='ROSETTA',
 		),
+
+		Option( 'Algorithm_strategy', 'String',
+			desc='Specifies search method to use - Maria 3/07/2017',
+			default='DE',
+		),
+
 		Option( 'number_3mer_frags', 'Integer',
 			desc="Number of top 3mer fragments to use in fold_abinitio protocol",
 			lower='0', default='200'
 			),
 		Option( 'number_9mer_frags', 'Integer',
 			desc='Number of top 9mer fragments to use in fold_abinitio protocol',
-			lower='0', default='25'
+			lower='0', default='5'
 			),
 		Option( 'temperature', 'Real', oldName='abinitio_temperature',
 			desc='Temperature used in fold_abinitio',

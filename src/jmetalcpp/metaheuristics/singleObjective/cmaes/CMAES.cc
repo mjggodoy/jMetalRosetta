@@ -210,8 +210,8 @@ void CMAES::init() {
 
 SolutionSet * CMAES::samplePopulation() {
   
-  default_random_engine generator;
-  normal_distribution<double> distribution(0.0,1.0);
+  //default_random_engine generator;
+  //normal_distribution<double> distribution(0.0,1.0);
   
   int N = problem_->getNumberOfVariables();
   double * artmp = new double[N];
@@ -221,7 +221,8 @@ SolutionSet * CMAES::samplePopulation() {
     
     for (int i = 0; i < N; i++) {
       //artmp[i] = diagD[i] * PseudoRandom::randDouble(-2, 2);
-      artmp[i] = diagD[i] * distribution(generator);
+      //artmp[i] = diagD[i] * distribution(generator);
+      artmp[i] = 0.0;
     }
     for (int i = 0; i < N; i++) {
       sum = 0.0;

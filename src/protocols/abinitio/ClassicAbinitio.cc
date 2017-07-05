@@ -1254,7 +1254,7 @@ void ClassicAbinitio::extractAngles(core::pose::Pose &pose) {
 		phi = pose.phi(pos);
 		psi= pose.psi(pos);
 		omega = pose.omega(pos);
-		//std::cout << "XUXA: ANGLES TO MODIFY" << " phi: "<< phi << " psi: " << psi << " omega: " << omega << std::endl;
+		std::cout << "XUXA: ANGLES TO MODIFY" << " phi: "<< phi << " psi: " << psi << " omega: " << omega << std::endl;
 
 	}
 }

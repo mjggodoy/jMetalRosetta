@@ -226,6 +226,7 @@
 
 // Maria 9/5/2017 Variables have been initialized
 std::string strategy_input;
+std::string algorithm;
 std::string strategy;
 int ABINITIO_ITERATIONS = 0;
 
@@ -2281,12 +2282,40 @@ PcaEvaluator::apply( pose::Pose& pose, std::string , io::silent::SilentStruct &p
 
 void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose::Pose & fold_pose ){
 
-	//int STAGE1_ITERATIONS = 2000;	
-	//int RMA_ITERATIONS = 10;
-	//int iterations =  STAGE1_ITERATIONS*RMA_ITERATIONS;
-	//iterations=0;
+	int populationSizeValue = 100; 
+	int swarmSize = 100;
+
+	int maxEvaluationsValue1 = 0;
+	int maxEvaluationsValue2 = 0;
+	int maxEvaluationsValue3 = 0;
+	int maxEvaluationsValue4 = 0;
+
+	Problem   * problem_stage1; // The problem to solve
+	Problem   * problem_stage2; // The problem to solve
+	Problem   * problem_stage3; // The problem to solve
+	Problem   * problem_stage4; // The problem to solve
+  			
+	Algorithm * algorithm1 = nullptr; // The algorithm 1 to use
+	Algorithm * algorithm2 = nullptr; // The algorithm 2 to use
+	Algorithm * algorithm3 = nullptr; // The algorithm 3 to use
+  	Algorithm * algorithm4 = nullptr; // The algorithm 4 to use
+
+	Operator  * crossover = nullptr; // Crossover operator
+	Operator  * selection = nullptr ; // Selection operator to use
+	Operator * mutation = nullptr;
+		
+	Comparator * comparator = new ObjectiveComparator(0) ;
+
+	int stage1_rosetta = 1; // Stage 1 of Rosetta
+	int stage2_rosetta = 2; // Stage 2 of Rosetta
+	int stage3_rosetta = 3; // Stage 3 of Rosetta
+	int stage4_rosetta = 4; // Stage 4 of Rosetta
+
+	map<string, void *> parameters;
 
 	strategy_input = basic::options::option[ basic::options::OptionKeys::abinitio::jMetal_strategy ];
+	algorithm = basic::options::option[ basic::options::OptionKeys::abinitio::Algorithm_strategy ];
+
 	std::stringstream sstream( strategy_input );
 	std::getline(sstream, strategy, '*');
 
@@ -2411,208 +2440,241 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 				JMETAL_ITERATIONS_STAGE2 = 100;
 				JMETAL_ITERATIONS_STAGE3 = 100;
 				JMETAL_ITERATIONS_STAGE4 = 100;
+
 			}
-			
-			// Maria 1-6-2017: Setting all the jMetal algorithms' parameters  
-
-			//int populationSizeValue = 100; //gGA, ssGA, DE
-			int swarmSize = 100;
-
-			//Maria: Number of evaluations per stage.
-			//int maxEvaluationsValue1 = populationSizeValue*JMETAL_ITERATIONS_STAGE1; //20.000  //gGA, ssGA, DE
-			//int maxEvaluationsValue2 = populationSizeValue*JMETAL_ITERATIONS_STAGE2;  //20.000  //gGA, ssGA, DE
-			//int maxEvaluationsValue3 = populationSizeValue*JMETAL_ITERATIONS_STAGE3;  //20.000  //gGA, ssGA, DE
-			//int maxEvaluationsValue4 = populationSizeValue*JMETAL_ITERATIONS_STAGE4; // 40.000  //gGA, ssGA, DE
-			//Maria: Total 100.000 evaluations
-
-			//std::cout << "Se van a hacer " << maxEvaluationsValue << " evaluaciones." << std::endl;
-
-			// Maria 1-6-2017: Create all instances from jMetal
-  			Problem   * problem_stage1; // The problem to solve
-			Problem   * problem_stage2; // The problem to solve
-			Problem   * problem_stage3; // The problem to solve
-			Problem   * problem_stage4; // The problem to solve
-  			
-			Algorithm * algorithm1; // The algorithm 1 to use
-			Algorithm * algorithm2; // The algorithm 2 to use
-			Algorithm * algorithm3; // The algorithm 3 to use
-  			Algorithm * algorithm4; // The algorithm 4 to use
-			
-			//Operator  * crossover ; // Crossover operator
-			Operator  * mutation  ; // Mutation operator to use
-  			//Operator  * selection ; // Selection operator to use
-
-			Comparator * comparator = new ObjectiveComparator(0) ;
-
-			
-			int stage1_rosetta = 1; // Stage 1 of Rosetta
-			int stage2_rosetta = 2; // Stage 2 of Rosetta
-			int stage3_rosetta = 3; // Stage 3 of Rosetta
-			int stage4_rosetta = 4; // Stage 4 of Rosetta
-
 
 			std::cout << "Maria: Problem AbInitio, Stage 1 " << strategy << " stage rosetta: " << stage1_rosetta << std::endl;
 			
 			problem_stage1 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, stage1_rosetta);
-			
-			//Problem in stage1;
-			//algorithm1 = new DESeq(problem_stage1);
-			//algorithm1 = new ssGASeq(problem_stage1);
-			//algorithm1 = new ssGASeq(problem_stage1);
-			algorithm1 = new PSOSeq(problem_stage1);
-
-
 
 			std::cout << "Maria: Problem AbInitio, Stage 2" << " stage rosetta: " << stage2_rosetta << std::endl;
 
 			problem_stage2 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, stage2_rosetta);
 
-			//Problem in stage2;
-			
-			//algorithm2 = new DESeq(problem_stage2);
-			//algorithm2 = new ssGASeq(problem_stage2);
-			//algorithm2 = new ssGASeq(problem_stage2);
-			algorithm2 = new PSOSeq(problem_stage2);
-
-
-
 
 			std::cout << "Maria: Problem AbInitio, Stage 3 " << " stage rosetta: " << stage3_rosetta << std::endl;
 
-
 			problem_stage3 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, stage3_rosetta);
-						
-						
-			//Problem in stage3;
-			//algorithm3 = new DESeq(problem_stage3);
-			//algorithm3 = new ssGASeq(problem_stage3);
-			//algorithm3 = new ssGASeq(problem_stage3);
-			algorithm3 = new PSOSeq(problem_stage3);
-
-
-
+			
+			
 			problem_stage4 = new AbInitio("Real", abinitio_protocol, fold_pose, numberOfVariables, strategy, stage4_rosetta);
 
 			std::cout << "Maria: Problem AbInitio, Stage 4 " << " stage rosetta: " << stage4_rosetta << std::endl;
+			
+			
+			if(algorithm=="DE"){
 
-			//Problem in stage4;
-			//algorithm4 = new DESeq(problem_stage4);
-			//algorithm4 = new ssGASeq(problem_stage4);
-			//algorithm4 = new ssGASeq(problem_stage4);
-			algorithm4 = new PSOSeq(problem_stage4);
+					std::cout << "Maria: Algorithm used for the AbInitio problem: " << algorithm << std::endl;
 
+					maxEvaluationsValue1 = populationSizeValue*JMETAL_ITERATIONS_STAGE1; //gGA, ssGA, DE
+					maxEvaluationsValue2 = populationSizeValue*JMETAL_ITERATIONS_STAGE2; //gGA, ssGA, DE
+					maxEvaluationsValue3 = populationSizeValue*JMETAL_ITERATIONS_STAGE3; //gGA, ssGA, DE
+					maxEvaluationsValue4 = populationSizeValue*JMETAL_ITERATIONS_STAGE4; //gGA, ssGA, DE
+
+					//Problem in stage1;
+					algorithm1 = new DESeq(problem_stage1);
+					//Problem in stage2;
+					algorithm2 = new DESeq(problem_stage2);	
+					//Problem in stage3;
+					algorithm3 = new DESeq(problem_stage3);
+					//Problem in stage4;
+					algorithm4 = new DESeq(problem_stage4);
+
+					algorithm1->setInputParameter("maxEvaluations",&maxEvaluationsValue1); //gGA, ssGA, DE
+					algorithm2->setInputParameter("maxEvaluations",&maxEvaluationsValue2); //gGA, ssGA, DE
+					algorithm3->setInputParameter("maxEvaluations",&maxEvaluationsValue3); //gGA, ssGA, DE
+					algorithm4->setInputParameter("maxEvaluations",&maxEvaluationsValue4); //gGA, ssGA, DE
+
+
+					double crParameter = 1; //0.5
+					double fParameter  = 0.5;
+					parameters["CR"] =  &crParameter;
+					parameters["F"] = &fParameter;
+					string deVariantParameter = "rand/1/bin";
+					parameters["DE_VARIANT"] = &deVariantParameter;
+					crossover = new DifferentialEvolutionCrossover(parameters);
+
+					// Selection operator
+					parameters.clear();
+					selection = new DifferentialEvolutionSelection(parameters) ;
+
+					algorithm1->addOperator("crossover",crossover); //DE, ssGA, gGA
+					algorithm1->addOperator("selection",selection); //DE, ssGA, gGA
+
+					algorithm2->addOperator("crossover",crossover); //DE, ssGA, gGA
+					algorithm2->addOperator("selection",selection); //DE, ssGA, gGA
+
+					algorithm3->addOperator("crossover",crossover); //DE, ssGA, gGA
+					algorithm3->addOperator("selection",selection); //DE, ssGA, gGA
+					
+					algorithm4->addOperator("crossover",crossover); //DE, ssGA, gGA
+					algorithm4->addOperator("crossover",crossover); //DE, ssGA, gGA
+
+			}else if(algorithm == "gGA"){
+
+				std::cout << "Maria: Algorithm used for the AbInitio problem: " << algorithm << std::endl;
+
+				maxEvaluationsValue1 = populationSizeValue*JMETAL_ITERATIONS_STAGE1; //gGA, ssGA, DE
+				maxEvaluationsValue2 = populationSizeValue*JMETAL_ITERATIONS_STAGE2; //gGA, ssGA, DE
+				maxEvaluationsValue3 = populationSizeValue*JMETAL_ITERATIONS_STAGE3; //gGA, ssGA, DE
+				maxEvaluationsValue4 = populationSizeValue*JMETAL_ITERATIONS_STAGE4; //gGA, ssGA, DE
+
+				//Problem in stage1;
+				algorithm1 = new gGASeq(problem_stage1);
+				//Problem in stage2;
+				algorithm2 = new gGASeq(problem_stage2);	
+				//Problem in stage3;
+				algorithm3 = new gGASeq(problem_stage3);
+				//Problem in stage4;
+				algorithm4 = new gGASeq(problem_stage4);
+
+				algorithm1->setInputParameter("maxEvaluations",&maxEvaluationsValue1); //gGA, ssGA, DE
+				algorithm2->setInputParameter("maxEvaluations",&maxEvaluationsValue2); //gGA, ssGA, DE
+				algorithm3->setInputParameter("maxEvaluations",&maxEvaluationsValue3); //gGA, ssGA, DE
+				algorithm4->setInputParameter("maxEvaluations",&maxEvaluationsValue4); //gGA, ssGA, DE
+
+			
+				double crossoverProbability = 0.9;
+				double distributionIndexValue1 = 20.0;
+				parameters["probability"] =  &crossoverProbability ;
+				parameters["distributionIndex"] = &distributionIndexValue1 ;
+				crossover = new SBXCrossover(parameters);
+
+				parameters.clear();
+				double mutationProbability = 1.0/problem_stage1->getNumberOfVariables();
+				double distributionIndexValue2 = 20.0;
+				parameters["probability"] = &mutationProbability;
+				parameters["distributionIndex"] = &distributionIndexValue2 ;
+				mutation = new PolynomialMutation(parameters);
+
+				// Selection Operator
+				parameters.clear();
+				selection = new BinaryTournament2(parameters) ;
+
+				algorithm1->addOperator("crossover",crossover); //DE, ssGA, gGA
+				algorithm1->addOperator("selection",selection); //DE, ssGA, gGA
+				algorithm1->addOperator("mutation",mutation); //DE, ssGA, gGA, PSO
+				
+				algorithm2->addOperator("crossover",crossover); //DE, ssGA, gGA
+				algorithm2->addOperator("selection",selection); //DE, ssGA, gGA
+				algorithm2->addOperator("mutation",mutation); //DE, ssGA, gGA, PSO
+
+				algorithm3->addOperator("crossover",crossover); //DE, ssGA, gGA
+				algorithm3->addOperator("selection",selection); //DE, ssGA, gGA
+				algorithm3->addOperator("mutation",mutation); //DE, ssGA, gGA, PSO
+
+				algorithm4->addOperator("crossover",crossover); //DE, ssGA, gGA
+				algorithm4->addOperator("selection",selection); //DE, ssGA, gGA
+				algorithm4->addOperator("mutation",mutation); //DE, ssGA, gGA, PSO
+
+
+			}else if(algorithm == "ssGA"){
+
+				std::cout << "Maria: Algorithm used for the AbInitio problem: " << algorithm << std::endl;
+
+				maxEvaluationsValue1 = populationSizeValue*JMETAL_ITERATIONS_STAGE1; //gGA, ssGA, DE
+				maxEvaluationsValue2 = populationSizeValue*JMETAL_ITERATIONS_STAGE2; //gGA, ssGA, DE
+				maxEvaluationsValue3 = populationSizeValue*JMETAL_ITERATIONS_STAGE3; //gGA, ssGA, DE
+				maxEvaluationsValue4 = populationSizeValue*JMETAL_ITERATIONS_STAGE4; //gGA, ssGA, DE
+
+				//Problem in stage1;
+				algorithm1 = new ssGASeq(problem_stage1);
+				//Problem in stage2;
+				algorithm2 = new ssGASeq(problem_stage2);	
+				//Problem in stage3;
+				algorithm3 = new ssGASeq(problem_stage3);
+				//Problem in stage4;
+				algorithm4 = new ssGASeq(problem_stage4);
+
+
+				algorithm1->setInputParameter("maxEvaluations",&maxEvaluationsValue1); //gGA, ssGA, DE
+				algorithm2->setInputParameter("maxEvaluations",&maxEvaluationsValue2); //gGA, ssGA, DE
+				algorithm3->setInputParameter("maxEvaluations",&maxEvaluationsValue3); //gGA, ssGA, DE
+				algorithm4->setInputParameter("maxEvaluations",&maxEvaluationsValue4); //gGA, ssGA, DE
+
+			
+				double crossoverProbability = 0.9;
+  				double distributionIndex1 = 20.0;
+  				parameters["probability"] =  &crossoverProbability ;
+  				parameters["distributionIndex"] = &distributionIndex1 ;
+  				crossover = new SBXCrossover(parameters);
+
+  				parameters.clear();
+  				double mutationProbability = 1.0/problem_stage1->getNumberOfVariables();
+  				double distributionIndex2 = 20.0;
+  				parameters["probability"] = &mutationProbability;
+  				parameters["distributionIndex"] = &distributionIndex2 ;
+  				mutation = new PolynomialMutation(parameters);
+
+  				// Selection Operator
+ 				parameters.clear();
+  				selection = new BinaryTournament2(parameters) ;
+			
+				algorithm1->addOperator("crossover",crossover); //DE, ssGA, gGA
+				algorithm1->addOperator("selection",selection); //DE, ssGA, gGA
+				algorithm1->addOperator("mutation",mutation); //DE, ssGA, gGA, PSO
+				
+				algorithm2->addOperator("crossover",crossover); //DE, ssGA, gGA
+				algorithm2->addOperator("selection",selection); //DE, ssGA, gGA
+				algorithm2->addOperator("mutation",mutation); //DE, ssGA, gGA, PSO
+
+				algorithm3->addOperator("crossover",crossover); //DE, ssGA, gGA
+				algorithm3->addOperator("selection",selection); //DE, ssGA, gGA
+				algorithm3->addOperator("mutation",mutation); // DE, ssGA, gGA, PSO
+
+				algorithm4->addOperator("crossover",crossover); //DE, ssGA, gGA
+				algorithm4->addOperator("selection",selection); //DE, ssGA, gGA
+				algorithm4->addOperator("mutation",mutation); //DE, ssGA, gGA, PSO
+
+			}else if(algorithm == "PSO"){
+
+				std::cout << "Maria: Algorithm used for the AbInitio problem: " << algorithm << std::endl;
+
+				//Problem in stage1;
+				algorithm1 = new PSOSeq(problem_stage1);
+				//Problem in stage2;
+				algorithm2 = new PSOSeq(problem_stage2);	
+				//Problem in stage3;
+				algorithm3 = new PSOSeq(problem_stage3);
+				//Problem in stage4;
+				algorithm4 = new PSOSeq(problem_stage4);
+
+				algorithm1->setInputParameter("maxIterations",&JMETAL_ITERATIONS_STAGE1); //PSO
+				algorithm2->setInputParameter("maxIterations",&JMETAL_ITERATIONS_STAGE2); //PSO
+				algorithm3->setInputParameter("maxIterations",&JMETAL_ITERATIONS_STAGE3); //PSO
+				algorithm4->setInputParameter("maxIterations",&JMETAL_ITERATIONS_STAGE4); //PSO
+
+				double probability = 1.0/problem_stage1->getNumberOfVariables();
+  				double distributionIndex = 20.0;
+  				parameters["probability"] = &probability;
+  				parameters["distributionIndex"] = &distributionIndex;
+  				mutation = new PolynomialMutation(parameters);
+
+				algorithm1->addOperator("mutation",mutation); // ssGA, gGA, PSO
+				algorithm2->addOperator("mutation",mutation); // ssGA, gGA, PSO
+				algorithm3->addOperator("mutation",mutation); // ssGA, gGA, PSO
+				algorithm4->addOperator("mutation",mutation); // ssGA, gGA, PSO
+
+			}else{
+
+				std::cout << "\n\tERROR: The algorithm provided is not valid. Please provide a valid name: " << algorithm << std::endl << std::endl;
+				exit(1);
+
+			}
+	
+	
 			algorithm1->setInputParameter("swarmSize",&swarmSize);
 			algorithm2->setInputParameter("swarmSize",&swarmSize);
 			algorithm3->setInputParameter("swarmSize",&swarmSize);
 			algorithm4->setInputParameter("swarmSize",&swarmSize);
 
 
-			//algorithm1->setInputParameter("populationSize",&populationSizeValue); //gGA, ssGA, DE
-			//algorithm2->setInputParameter("populationSize",&populationSizeValue); //gGA, ssGA, DE
-			//algorithm3->setInputParameter("populationSize",&populationSizeValue); //gGA, ssGA, DE
-			//algorithm4->setInputParameter("populationSize",&populationSizeValue); //gGA, ssGA, DE
+			algorithm1->setInputParameter("populationSize",&populationSizeValue); //gGA, ssGA, DE
+			algorithm2->setInputParameter("populationSize",&populationSizeValue); //gGA, ssGA, DE
+			algorithm3->setInputParameter("populationSize",&populationSizeValue); //gGA, ssGA, DE
+			algorithm4->setInputParameter("populationSize",&populationSizeValue); //gGA, ssGA, DE
 
-			
-			algorithm1->setInputParameter("maxIterations",&JMETAL_ITERATIONS_STAGE1); //PSO
-			algorithm2->setInputParameter("maxIterations",&JMETAL_ITERATIONS_STAGE2); //PSO
-			algorithm3->setInputParameter("maxIterations",&JMETAL_ITERATIONS_STAGE3); //PSO
-			algorithm4->setInputParameter("maxIterations",&JMETAL_ITERATIONS_STAGE4); //PSO
-
-
-			// Mutation and Crossover for Real codification
-			map<string, void *> parameters;
-
-
-
-			//ssGA
-  			// Algorithm parameters
-
-  			// Mutation and Crossover for Real codification
-  			//map<string, void *> parameters;
-  			/*double crossoverProbability = 0.9;
-  			double distributionIndex1 = 20.0;
-  			parameters["probability"] =  &crossoverProbability ;
-  			parameters["distributionIndex"] = &distributionIndex1 ;
-  			crossover = new SBXCrossover(parameters);
-
-  			parameters.clear();
-  			double mutationProbability = 1.0/problem_stage1->getNumberOfVariables();
-  			double distributionIndex2 = 20.0;
-  			parameters["probability"] = &mutationProbability;
-  			parameters["distributionIndex"] = &distributionIndex2 ;
-  			mutation = new PolynomialMutation(parameters);
-
-  			// Selection Operator
- 			parameters.clear();
-  			selection = new BinaryTournament2(parameters) ;
-			*/
-			
-
-			//gGA configuration
-			/*
-			double crossoverProbability = 0.9;
-			double distributionIndexValue1 = 20.0;
-			parameters["probability"] =  &crossoverProbability ;
-			parameters["distributionIndex"] = &distributionIndexValue1 ;
-			crossover = new SBXCrossover(parameters);
-
-			parameters.clear();
-			//double mutationProbability = 0);
-			//double distributionIndexValue2 = 0;
-			double mutationProbability = 1.0/problem_stage1->getNumberOfVariables();
-			double distributionIndexValue2 = 20.0;
-			parameters["probability"] = &mutationProbability;
-			parameters["distributionIndex"] = &distributionIndexValue2 ;
-			mutation = new PolynomialMutation(parameters);
-
-			// Selection Operator
-			parameters.clear();
-			selection = new BinaryTournament2(parameters) ;
-			*/
-			
-			//PSO algorithm
-			// Algorithm parameters			  
-			// Mutation operator
-			//map<string, void *> parameters;
-  			double probability = 1.0/problem_stage1->getNumberOfVariables();
-  			double distributionIndex = 20.0;
-  			parameters["probability"] = &probability;
-  			parameters["distributionIndex"] = &distributionIndex;
-  			mutation = new PolynomialMutation(parameters);
-
-			
-			// Crossover operator
-			/*double crParameter = 1; //0.5
-			double fParameter  = 0.5;
-			parameters["CR"] =  &crParameter;
-			parameters["F"] = &fParameter;
-			string deVariantParameter = "rand/1/bin";
-			parameters["DE_VARIANT"] = &deVariantParameter;
-			crossover = new DifferentialEvolutionCrossover(parameters);
-
-			// Selection operator
-			parameters.clear();
-			selection = new DifferentialEvolutionSelection(parameters) ;
-			*/
-
-			// Add the operators to the algorithm
-
-			//algorithm1->addOperator("crossover",crossover); //DE, ssGA, gGA
-			//algorithm1->addOperator("selection",selection); //DE, ssGA, gGA
-			algorithm1->addOperator("mutation",mutation); //DE, ssGA, gGA, PSO
-
-			//algorithm2->addOperator("crossover",crossover); //DE, ssGA, gGA
-			//algorithm2->addOperator("selection",selection); //DE, ssGA, gGA
-			algorithm2->addOperator("mutation",mutation); //DE, ssGA, gGA, PSO
-
-			//algorithm3->addOperator("crossover",crossover);  //DE, ssGA, gGA
-			//algorithm3->addOperator("selection",selection);  //DE, ssGA, gGA
-			algorithm3->addOperator("mutation",mutation);  //DE, ssGA, gGA, PSO
-
-			//algorithm4->addOperator("crossover",crossover);  //DE, ssGA, gGA
-			//algorithm4->addOperator("selection",selection);  //DE, ssGA, gGA
-			algorithm4->addOperator("mutation",mutation);  //DE, ssGA, gGA, PSO
-
+	
 
 			//Maria: Returning the results:
 			std::cout << "Execution of algorithm_1 " << strategy << std::endl;
@@ -2620,8 +2682,9 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			SolutionSet * solutions = algorithm1->execute();
 			std::cout << "Printing objectives and variables " << std::endl;
 
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage1/FUN_stage1_ssGA.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage1/VAR_stage1_ssGA.txt",true);
+			//solutions->sort(comparator);
+			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/FinalExecutions/DE/9mer_frag_5/DE_05_05/Run_1/stage1/FUN_stage1_DE.txt",true);
+			solutions->printVariablesToFile("VAR_stage1_DE.txt",true);
 			//Maria: Returning the results:
 
 			algorithm2->setInputParameter("population",solutions);
@@ -2631,19 +2694,21 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			solutions = algorithm2->execute();
 			std::cout << "Printing objectives and variables " << std::endl;
 
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage2/FUN_stage2_ssGA.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage2/VAR_stage2_ssGA.txt",true);
+			//solutions->sort(comparator);
+			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/FinalExecutions/DE/9mer_frag_5/DE_05_05/Run_1/stage2/FUN_stage2_DE.txt",true);
+			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/FinalExecutions/DE/9mer_frag_5/DE_05_05/Run_1/stage2/VAR_stage2_DE.txt",true);
 
 			
 			algorithm3->setInputParameter("population",solutions);
 			
 			std::cout << "Execution of algorithm_3 " << strategy << std::endl;
 
-			solutions = algorithm3->execute();
+			//solutions = algorithm3->execute();
 			std::cout << "Printing objectives and variables " << std::endl;
-
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage3/FUN_stage3_ssGA.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage3/VAR_stage3_ssGA.txt",true);
+			
+			//solutions->sort(comparator);
+			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/FinalExecutions/DE/9mer_frag_5/DE_05_05/Run_1/stage3/FUN_stage3_DE.txt",true);
+			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/FinalExecutions/DE/9mer_frag_5/DE_05_05/Run_1/stage3/FUN_stage3_DE.txt",true);
 
 			
 			algorithm4->setInputParameter("population",solutions);
@@ -2652,9 +2717,10 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 
 			solutions = algorithm4->execute();
 			std::cout << "Printing objectives and variables " << std::endl;
-
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage4/FUN_stage4_ssGA.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/Executions/PSO_standard_settings_LS/Stage4/VAR_stage4_ssGA.txt",true);
+			
+			//solutions->sort(comparator);
+			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/FinalExecutions/DE/9mer_frag_5/DE_05_05/Run_1/stage4/FUN_stage4_DE.txt",true);
+			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/FinalExecutions/DE/9mer_frag_5/DE_05_05/Run_1/stage4/FUN_stage4_DE.txt",true);
 
 			//Maria: PSO
 			solutions->sort(comparator);
@@ -2670,10 +2736,20 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 				fold_pose.set_omega(pos+1,variables[pos*3+2]->getValue());
     		}
 			
-			//delete crossover;
-  			delete mutation;
-  			//delete selection;
-  			delete algorithm1;
+
+			if(mutation != nullptr){
+  				delete mutation;
+			}
+			
+			if(selection != nullptr){
+  				delete selection;
+			}
+
+			if(crossover != nullptr){
+				delete crossover;
+			}
+  			
+			delete algorithm1;
 			delete algorithm2;
 			delete algorithm3;
 			delete algorithm4;

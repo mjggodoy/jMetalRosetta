@@ -1,3 +1,4 @@
+namespace abinitio { StringOptionKey const Algorithm_strategy( "abinitio:Algorithm_strategy" );  }
 namespace abinitio { IntegerOptionKey const number_3mer_frags( "abinitio:number_3mer_frags" );  }
 namespace abinitio { IntegerOptionKey const number_9mer_frags( "abinitio:number_9mer_frags" );  }
 namespace abinitio { RealOptionKey const temperature( "abinitio:temperature" );  }
@@ -243,4 +244,3 @@ namespace boinc { BooleanOptionKey const watchdog( "boinc:watchdog" );  }
 namespace boinc { IntegerOptionKey const watchdog_time( "boinc:watchdog_time" );  }
 namespace boinc { IntegerOptionKey const cpu_run_timeout( "boinc:cpu_run_timeout" );  }
 namespace boinc { FileOptionKey const description_file( "boinc:description_file" );  }
-namespace boinc { RealOptionKey const score_cut_pct( "boinc:score_cut_pct" );  }

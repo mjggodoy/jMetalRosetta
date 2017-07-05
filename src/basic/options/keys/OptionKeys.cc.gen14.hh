@@ -1,3 +1,4 @@
+namespace stepwise { BooleanOptionKey const skip_preminimize( "stepwise:skip_preminimize" );  }
 namespace stepwise { BooleanOptionKey const minimize_waters( "stepwise:minimize_waters" );  }
 namespace stepwise { BooleanOptionKey const test_all_moves( "stepwise:test_all_moves" );  }
 namespace stepwise { BooleanOptionKey const new_move_selector( "stepwise:new_move_selector" );  }
@@ -243,4 +244,3 @@ namespace templates { BooleanOptionKey const no_culling( "templates:no_culling" 
 namespace templates { FileOptionKey const helix_pairings( "templates:helix_pairings" );  }
 namespace templates { FileOptionKey const prefix( "templates:prefix" );  }
 namespace templates { IntegerOptionKey const change_movemap( "templates:change_movemap" );  }
-namespace templates { BooleanOptionKey const force_native_topology( "templates:force_native_topology" );  }

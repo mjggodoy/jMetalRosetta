@@ -1,6 +1,6 @@
 /*!
 @page full_options_list Rosetta command line option descriptions.
-<i>(This is an automatically generated file, do not edit!)</i> Generated: 2017-06-28
+<i>(This is an automatically generated file, do not edit!)</i> Generated: 2017-07-05
 <ul>
 <li><h2>in</h2>
 <dl>
@@ -5960,6 +5960,11 @@
 <dd>Default: "ROSETTA"</dd><br>
 </dl>
 <dl>
+<dt><b>-Algorithm_strategy</b> \<String\><dt>
+<dd>Specifies search method to use - Maria 3/07/2017</dd><br>
+<dd>Default: "DE"</dd><br>
+</dl>
+<dl>
 <dt><b>-number_3mer_frags</b> \<Integer\><dt>
 <dd>Number of top 3mer fragments to use in fold_abinitio protocol</dd><br>
 <dd>Range: 0-</dd><br>
@@ -5969,7 +5974,7 @@
 <dt><b>-number_9mer_frags</b> \<Integer\><dt>
 <dd>Number of top 9mer fragments to use in fold_abinitio protocol</dd><br>
 <dd>Range: 0-</dd><br>
-<dd>Default: 25</dd><br>
+<dd>Default: 5</dd><br>
 </dl>
 <dl>
 <dt><b>-temperature</b> \<Real\><dt>

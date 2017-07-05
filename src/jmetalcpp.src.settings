@@ -118,7 +118,7 @@ sources = {
 		],
 
 	"jmetalcpp/util/wrapper" : [
-		"Xreal",
+		"XReal",
 		],
 
 	"jmetalcpp/util" : [

@@ -164,7 +164,7 @@ void PSOSeq::computeSpeed(int iter, int miter) {
   double r1, r2;
   //double W ;
   double C1, C2;
-  double wmax, wmin, deltaMax, deltaMin;
+  double deltaMax, deltaMin;
   XReal * bestGlobal;
 
   bestGlobal = new XReal(globalBest_) ;
@@ -183,8 +183,8 @@ void PSOSeq::computeSpeed(int iter, int miter) {
     C2 = 2.05;
     //W =  PseudoRandom.randDouble(WMin_, WMax_);
 
-    wmax = WMax_;
-    wmin = WMin_;
+    //wmax = WMax_;
+    //wmin = WMin_;
     
     for (int var = 0; var < particle->size(); var++) {
       //Computing the velocity of this particle

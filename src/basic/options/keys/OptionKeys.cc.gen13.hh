@@ -1,3 +1,4 @@
+namespace remodel { namespace design { BooleanOptionKey const allow_rare_aro_chi( "remodel:design:allow_rare_aro_chi" );  } }
 namespace remodel { namespace design { BooleanOptionKey const skip_partial( "remodel:design:skip_partial" );  } }
 namespace remodel { namespace design { BooleanOptionKey const design_neighbors( "remodel:design:design_neighbors" );  } }
 namespace remodel { namespace design { BooleanOptionKey const find_neighbors( "remodel:design:find_neighbors" );  } }
@@ -243,4 +244,3 @@ namespace stepwise { BooleanOptionKey const atr_rep_screen_for_docking( "stepwis
 namespace stepwise { StringOptionKey const align_pdb( "stepwise:align_pdb" );  }
 namespace stepwise { BooleanOptionKey const enumerate( "stepwise:enumerate" );  }
 namespace stepwise { BooleanOptionKey const preminimize( "stepwise:preminimize" );  }
-namespace stepwise { BooleanOptionKey const skip_preminimize( "stepwise:skip_preminimize" );  }

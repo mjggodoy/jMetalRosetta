@@ -1,3 +1,4 @@
+namespace matdes { namespace design { BooleanOptionKey const design( "matdes:design" );  } }
 namespace matdes { namespace design { RealOptionKey const contact_dist( "matdes:design:contact_dist" );  } }
 namespace matdes { namespace design { RealOptionKey const grid_size_angle( "matdes:design:grid_size_angle" );  } }
 namespace matdes { namespace design { RealOptionKey const grid_size_radius( "matdes:design:grid_size_radius" );  } }
@@ -243,4 +244,3 @@ namespace ms { IntegerOptionKey const pop_from_ss( "ms:pop_from_ss" );  }
 namespace ms { IntegerOptionKey const pop_size( "ms:pop_size" );  }
 namespace ms { IntegerOptionKey const generations( "ms:generations" );  }
 namespace ms { IntegerOptionKey const num_packs( "ms:num_packs" );  }
-namespace ms { IntegerOptionKey const numresults( "ms:numresults" );  }

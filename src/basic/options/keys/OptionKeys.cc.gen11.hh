@@ -1,3 +1,4 @@
+namespace ms { IntegerOptionKey const numresults( "ms:numresults" );  }
 namespace ms { RealOptionKey const anchor_offset( "ms:anchor_offset" );  }
 namespace ms { RealOptionKey const Boltz_temp( "ms:Boltz_temp" );  }
 namespace ms { RealOptionKey const mutate_rate( "ms:mutate_rate" );  }
@@ -243,4 +244,3 @@ namespace pocket_grid { RealOptionKey const eggshell_dist( "pocket_grid:eggshell
 namespace pocket_grid { BooleanOptionKey const reduce_rays( "pocket_grid:reduce_rays" );  }
 namespace pocket_grid { BooleanOptionKey const pocket_static_grid( "pocket_grid:pocket_static_grid" );  }
 namespace pocket_grid { BooleanOptionKey const dump_espGrid( "pocket_grid:dump_espGrid" );  }
-namespace pocket_grid { BooleanOptionKey const dump_connollySurface( "pocket_grid:dump_connollySurface" );  }
