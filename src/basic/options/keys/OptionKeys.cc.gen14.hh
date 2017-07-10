@@ -1,3 +1,5 @@
+namespace stepwise { BooleanOptionKey const enumerate( "stepwise:enumerate" );  }
+namespace stepwise { BooleanOptionKey const preminimize( "stepwise:preminimize" );  }
 namespace stepwise { BooleanOptionKey const skip_preminimize( "stepwise:skip_preminimize" );  }
 namespace stepwise { BooleanOptionKey const minimize_waters( "stepwise:minimize_waters" );  }
 namespace stepwise { BooleanOptionKey const test_all_moves( "stepwise:test_all_moves" );  }
@@ -242,5 +244,3 @@ namespace templates { BooleanOptionKey const strand_constraint( "templates:stran
 namespace templates { BooleanOptionKey const vary_frag_size( "templates:vary_frag_size" );  }
 namespace templates { BooleanOptionKey const no_culling( "templates:no_culling" );  }
 namespace templates { FileOptionKey const helix_pairings( "templates:helix_pairings" );  }
-namespace templates { FileOptionKey const prefix( "templates:prefix" );  }
-namespace templates { IntegerOptionKey const change_movemap( "templates:change_movemap" );  }

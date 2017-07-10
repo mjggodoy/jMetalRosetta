@@ -1,7 +1,7 @@
 # List of Rosetta command line options.
 
 _(This is an automatically generated file, do not edit!)_
-Generated: 2017-07-05
+Generated: 2017-07-10
 
 _Note that some application specific options may not be present in this list._
 
@@ -2685,7 +2685,11 @@ _Note that some application specific options may not be present in this list._
 <dt><b>-jMetal_strategy</b> \<String\></dt>
 <dd>Specifies search strategy and parameters to use - Maria 8/05/2017<br/>Default: "ROSETTA"<br/></dd>
 <dt><b>-Algorithm_strategy</b> \<String\></dt>
-<dd>Specifies search method to use - Maria 3/07/2017<br/>Default: "DE"<br/></dd>
+<dd>Specifies search method to use - Maria 10/07/2017<br/>Default: "DE"<br/></dd>
+<dt><b>-de_crParameter</b> \<Real\></dt>
+<dd>Specifies the crossover parameter - Maria 10/07/2017<br/>Default: 0.5<br/></dd>
+<dt><b>-de_fParameter</b> \<Real\></dt>
+<dd>Specifies the F parameter - Maria 3/07/2017<br/>Default: 0.5<br/></dd>
 <dt><b>-number_3mer_frags</b> \<Integer\></dt>
 <dd>Number of top 3mer fragments to use in fold_abinitio protocol<br/>Range: 0-<br/>Default: 200<br/></dd>
 <dt><b>-number_9mer_frags</b> \<Integer\></dt>

@@ -1,3 +1,5 @@
+namespace DomainAssembly { IntegerOptionKey const da_nruns( "DomainAssembly:da_nruns" );  }
+namespace DomainAssembly { IntegerOptionKey const da_start_pdb_num( "DomainAssembly:da_start_pdb_num" );  }
 namespace DomainAssembly { FileOptionKey const da_linker_file_rna( "DomainAssembly:da_linker_file_rna" );  }
 namespace DomainAssembly { StringOptionKey const residues_repack_only( "DomainAssembly:residues_repack_only" );  }
 namespace DomainAssembly { FileOptionKey const da_eval_pose_map( "DomainAssembly:da_eval_pose_map" );  }
@@ -242,5 +244,3 @@ namespace fold_from_loops { IntegerVectorOptionKey const res_design_bs( "fold_fr
 namespace fold_from_loops { FileOptionKey const clear_csts( "fold_from_loops:clear_csts" );  }
 namespace fold_from_loops { BooleanOptionKey const output_centroid( "fold_from_loops:output_centroid" );  }
 namespace fold_from_loops { BooleanOptionKey const add_cst_loop( "fold_from_loops:add_cst_loop" );  }
-namespace frags { BooleanOptionKey const frags( "frags" );  }
-namespace frags { IntegerOptionKey const j( "frags:j" );  }

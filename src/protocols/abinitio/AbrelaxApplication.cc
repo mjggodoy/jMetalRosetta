@@ -1097,6 +1097,9 @@ void AbrelaxApplication::setup_fragments() {// FragSetOP& fragsetA, FragSetOP& f
 		option[ OptionKeys::frags::nr_large_copies ](),
 		option[ OptionKeys::frags::annotate ]()
 		).read_data( frag_large_file );
+	
+	int number_of_9mer_frag = option[ OptionKeys::abinitio::number_9mer_frags ]();
+	std::cout << "XUXA: SETUP FRAGMENTS: " << number_of_9mer_frag << std::endl;
 
 	if ( option[OptionKeys::abinitio::membrane] ) { //bw stupied way of get top25 frags for 3mer.
 		fragset_small_top25_ = FragmentIO(
@@ -2313,9 +2316,11 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 
 	map<string, void *> parameters;
 
-	strategy_input = basic::options::option[ basic::options::OptionKeys::abinitio::jMetal_strategy ];
-	algorithm = basic::options::option[ basic::options::OptionKeys::abinitio::Algorithm_strategy ];
-
+	strategy_input = basic::options::option[ basic::options::OptionKeys::abinitio::jMetal_strategy ]; // jMETAL OR ROSETTA
+	algorithm = basic::options::option[ basic::options::OptionKeys::abinitio::Algorithm_strategy ]; // ALGORITHM
+	double crParameter = basic::options::option[ basic::options::OptionKeys::abinitio::de_crParameter ]; //Crossover parameter
+	double fParameter = basic::options::option[ basic::options::OptionKeys::abinitio::de_fParameter ]; // F parameter
+	
 	std::stringstream sstream( strategy_input );
 	std::getline(sstream, strategy, '*');
 
@@ -2465,6 +2470,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			if(algorithm=="DE"){
 
 					std::cout << "Maria: Algorithm used for the AbInitio problem: " << algorithm << std::endl;
+					std::cout << "Maria: Parameters for " <<  algorithm << " used for the AbInitio problem: " << " CR: " << crParameter << " " << " F: " << fParameter << std::endl;
 
 					maxEvaluationsValue1 = populationSizeValue*JMETAL_ITERATIONS_STAGE1; //gGA, ssGA, DE
 					maxEvaluationsValue2 = populationSizeValue*JMETAL_ITERATIONS_STAGE2; //gGA, ssGA, DE
@@ -2486,8 +2492,6 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 					algorithm4->setInputParameter("maxEvaluations",&maxEvaluationsValue4); //gGA, ssGA, DE
 
 
-					double crParameter = 1; //0.5
-					double fParameter  = 0.5;
 					parameters["CR"] =  &crParameter;
 					parameters["F"] = &fParameter;
 					string deVariantParameter = "rand/1/bin";

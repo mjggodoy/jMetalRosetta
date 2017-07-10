@@ -1,3 +1,5 @@
+namespace ms { IntegerOptionKey const generations( "ms:generations" );  }
+namespace ms { IntegerOptionKey const num_packs( "ms:num_packs" );  }
 namespace ms { IntegerOptionKey const numresults( "ms:numresults" );  }
 namespace ms { RealOptionKey const anchor_offset( "ms:anchor_offset" );  }
 namespace ms { RealOptionKey const Boltz_temp( "ms:Boltz_temp" );  }
@@ -242,5 +244,3 @@ namespace pocket_grid { RealOptionKey const extend_eggshell_dist( "pocket_grid:e
 namespace pocket_grid { RealOptionKey const extra_eggshell_dist( "pocket_grid:extra_eggshell_dist" );  }
 namespace pocket_grid { RealOptionKey const eggshell_dist( "pocket_grid:eggshell_dist" );  }
 namespace pocket_grid { BooleanOptionKey const reduce_rays( "pocket_grid:reduce_rays" );  }
-namespace pocket_grid { BooleanOptionKey const pocket_static_grid( "pocket_grid:pocket_static_grid" );  }
-namespace pocket_grid { BooleanOptionKey const dump_espGrid( "pocket_grid:dump_espGrid" );  }

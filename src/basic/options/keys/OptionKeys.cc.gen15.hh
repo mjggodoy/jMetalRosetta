@@ -1,3 +1,5 @@
+namespace templates { FileOptionKey const prefix( "templates:prefix" );  }
+namespace templates { IntegerOptionKey const change_movemap( "templates:change_movemap" );  }
 namespace templates { BooleanOptionKey const force_native_topology( "templates:force_native_topology" );  }
 namespace templates { RealOptionKey const topology_rank_cutoff( "templates:topology_rank_cutoff" );  }
 namespace templates { IntegerOptionKey const min_frag_size( "templates:min_frag_size" );  }

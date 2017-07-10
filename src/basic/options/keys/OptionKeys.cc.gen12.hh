@@ -1,3 +1,5 @@
+namespace pocket_grid { BooleanOptionKey const pocket_static_grid( "pocket_grid:pocket_static_grid" );  }
+namespace pocket_grid { BooleanOptionKey const dump_espGrid( "pocket_grid:dump_espGrid" );  }
 namespace pocket_grid { BooleanOptionKey const dump_connollySurface( "pocket_grid:dump_connollySurface" );  }
 namespace pocket_grid { RealOptionKey const esp_buffer_dist( "pocket_grid:esp_buffer_dist" );  }
 namespace pocket_grid { BooleanOptionKey const round_pocketGrid_center( "pocket_grid:round_pocketGrid_center" );  }
@@ -242,5 +244,3 @@ namespace remodel { namespace domainFusion { BooleanOptionKey const domainFusion
 namespace remodel { namespace domainFusion { FileOptionKey const insert_segment_from_pdb( "remodel:domainFusion:insert_segment_from_pdb" );  } }
 namespace remodel { namespace domainFusion { FileOptionKey const insert_segment2_from_pdb( "remodel:domainFusion:insert_segment2_from_pdb" );  } }
 namespace remodel { namespace design { BooleanOptionKey const design( "remodel:design" );  } }
-namespace remodel { namespace design { BooleanOptionKey const no_design ( "remodel:design:no_design " );  } }
-namespace remodel { namespace design { BooleanOptionKey const design_all( "remodel:design:design_all" );  } }

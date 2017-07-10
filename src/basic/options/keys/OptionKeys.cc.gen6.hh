@@ -1,3 +1,5 @@
+namespace boinc { IntegerOptionKey const cpu_run_timeout( "boinc:cpu_run_timeout" );  }
+namespace boinc { FileOptionKey const description_file( "boinc:description_file" );  }
 namespace boinc { RealOptionKey const score_cut_pct( "boinc:score_cut_pct" );  }
 namespace boinc { FileOptionKey const score_cut_fl( "boinc:score_cut_fl" );  }
 namespace boinc { BooleanOptionKey const score_cut_smart_throttle( "boinc:score_cut_smart_throttle" );  }
@@ -242,5 +244,3 @@ namespace cyclic_peptide { RealOptionKey const total_energy_cutoff( "cyclic_pept
 namespace cyclic_peptide { RealOptionKey const hbond_energy_cutoff( "cyclic_peptide:hbond_energy_cutoff" );  }
 namespace cyclic_peptide { BooleanOptionKey const do_not_count_adjacent_res_hbonds( "cyclic_peptide:do_not_count_adjacent_res_hbonds" );  }
 namespace cyclic_peptide { IntegerOptionKey const fast_relax_rounds( "cyclic_peptide:fast_relax_rounds" );  }
-namespace cyclic_peptide { BooleanOptionKey const count_sc_hbonds( "cyclic_peptide:count_sc_hbonds" );  }
-namespace cyclic_peptide { BooleanOptionKey const require_disulfides( "cyclic_peptide:require_disulfides" );  }

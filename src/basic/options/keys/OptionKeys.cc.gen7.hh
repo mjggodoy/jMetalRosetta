@@ -1,3 +1,5 @@
+namespace cyclic_peptide { BooleanOptionKey const count_sc_hbonds( "cyclic_peptide:count_sc_hbonds" );  }
+namespace cyclic_peptide { BooleanOptionKey const require_disulfides( "cyclic_peptide:require_disulfides" );  }
 namespace cyclic_peptide { RealOptionKey const disulf_cutoff_prerelax( "cyclic_peptide:disulf_cutoff_prerelax" );  }
 namespace cyclic_peptide { RealOptionKey const disulf_cutoff_postrelax( "cyclic_peptide:disulf_cutoff_postrelax" );  }
 namespace cyclic_peptide { RealVectorOptionKey const user_set_alpha_dihedrals( "cyclic_peptide:user_set_alpha_dihedrals" );  }
@@ -242,5 +244,3 @@ namespace DomainAssembly { FileOptionKey const da_start_pdb( "DomainAssembly:da_
 namespace DomainAssembly { BooleanOptionKey const run_fullatom( "DomainAssembly:run_fullatom" );  }
 namespace DomainAssembly { BooleanOptionKey const run_centroid( "DomainAssembly:run_centroid" );  }
 namespace DomainAssembly { BooleanOptionKey const run_centroid_abinitio( "DomainAssembly:run_centroid_abinitio" );  }
-namespace DomainAssembly { IntegerOptionKey const da_nruns( "DomainAssembly:da_nruns" );  }
-namespace DomainAssembly { IntegerOptionKey const da_start_pdb_num( "DomainAssembly:da_start_pdb_num" );  }

@@ -1,3 +1,5 @@
+namespace frags { BooleanOptionKey const frags( "frags" );  }
+namespace frags { IntegerOptionKey const j( "frags:j" );  }
 namespace frags { BooleanOptionKey const filter_JC( "frags:filter_JC" );  }
 namespace frags { BooleanOptionKey const bounded_protocol( "frags:bounded_protocol" );  }
 namespace frags { BooleanOptionKey const keep_all_protocol( "frags:keep_all_protocol" );  }
@@ -242,5 +244,3 @@ namespace matdes { RealVectorOptionKey const angle( "matdes:angle" );  }
 namespace matdes { StringOptionKey const tag( "matdes:tag" );  }
 namespace matdes { namespace dock { BooleanOptionKey const dock( "matdes:dock" );  } }
 namespace matdes { namespace dock { RealOptionKey const neg_r( "matdes:dock:neg_r" );  } }
-namespace matdes { namespace dock { BooleanOptionKey const dump_pdb( "matdes:dock:dump_pdb" );  } }
-namespace matdes { namespace dock { BooleanOptionKey const dump_chainA_only( "matdes:dock:dump_chainA_only" );  } }

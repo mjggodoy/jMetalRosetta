@@ -1,4 +1,6 @@
 namespace abinitio { StringOptionKey const Algorithm_strategy( "abinitio:Algorithm_strategy" );  }
+namespace abinitio { RealOptionKey const de_crParameter( "abinitio:de_crParameter" );  }
+namespace abinitio { RealOptionKey const de_fParameter( "abinitio:de_fParameter" );  }
 namespace abinitio { IntegerOptionKey const number_3mer_frags( "abinitio:number_3mer_frags" );  }
 namespace abinitio { IntegerOptionKey const number_9mer_frags( "abinitio:number_9mer_frags" );  }
 namespace abinitio { RealOptionKey const temperature( "abinitio:temperature" );  }
@@ -242,5 +244,3 @@ namespace boinc { RealOptionKey const cpu_frac( "boinc:cpu_frac" );  }
 namespace boinc { RealOptionKey const frame_rate( "boinc:frame_rate" );  }
 namespace boinc { BooleanOptionKey const watchdog( "boinc:watchdog" );  }
 namespace boinc { IntegerOptionKey const watchdog_time( "boinc:watchdog_time" );  }
-namespace boinc { IntegerOptionKey const cpu_run_timeout( "boinc:cpu_run_timeout" );  }
-namespace boinc { FileOptionKey const description_file( "boinc:description_file" );  }

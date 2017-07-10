@@ -1,6 +1,6 @@
 /*!
 @page full_options_list Rosetta command line option descriptions.
-<i>(This is an automatically generated file, do not edit!)</i> Generated: 2017-07-05
+<i>(This is an automatically generated file, do not edit!)</i> Generated: 2017-07-10
 <ul>
 <li><h2>in</h2>
 <dl>
@@ -5961,8 +5961,18 @@
 </dl>
 <dl>
 <dt><b>-Algorithm_strategy</b> \<String\><dt>
-<dd>Specifies search method to use - Maria 3/07/2017</dd><br>
+<dd>Specifies search method to use - Maria 10/07/2017</dd><br>
 <dd>Default: "DE"</dd><br>
+</dl>
+<dl>
+<dt><b>-de_crParameter</b> \<Real\><dt>
+<dd>Specifies the crossover parameter - Maria 10/07/2017</dd><br>
+<dd>Default: 0.5</dd><br>
+</dl>
+<dl>
+<dt><b>-de_fParameter</b> \<Real\><dt>
+<dd>Specifies the F parameter - Maria 3/07/2017</dd><br>
+<dd>Default: 0.5</dd><br>
 </dl>
 <dl>
 <dt><b>-number_3mer_frags</b> \<Integer\><dt>

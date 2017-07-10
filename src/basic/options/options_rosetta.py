@@ -3199,10 +3199,20 @@ EX_SIX_QUARTER_STEP_STDDEVS   7          +/- 0.25, 0.5, 0.75, 1, 1.25 & 1.5 sd; 
 		),
 
 		Option( 'Algorithm_strategy', 'String',
-			desc='Specifies search method to use - Maria 3/07/2017',
+			desc='Specifies search method to use - Maria 10/07/2017',
 			default='DE',
 		),
 
+		Option( 'de_crParameter', 'Real',
+			desc='Specifies the crossover parameter - Maria 10/07/2017',
+			default='0.5',
+		),
+		
+		Option( 'de_fParameter', 'Real',
+			desc='Specifies the F parameter - Maria 3/07/2017',
+			default='0.5',
+		),
+		
 		Option( 'number_3mer_frags', 'Integer',
 			desc="Number of top 3mer fragments to use in fold_abinitio protocol",
 			lower='0', default='200'
