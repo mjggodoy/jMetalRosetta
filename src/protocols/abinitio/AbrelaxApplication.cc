@@ -2512,7 +2512,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 					algorithm3->addOperator("selection",selection); //DE, ssGA, gGA
 					
 					algorithm4->addOperator("crossover",crossover); //DE, ssGA, gGA
-					algorithm4->addOperator("crossover",crossover); //DE, ssGA, gGA
+					algorithm4->addOperator("selection",selection); //DE, ssGA, gGA
 
 			}else if(algorithm == "gGA"){
 
@@ -2687,8 +2687,8 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			std::cout << "Printing objectives and variables " << std::endl;
 
 			//solutions->sort(comparator);
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/FinalExecutions/DE/9mer_frag_5/DE_05_05/Run_1/stage1/FUN_stage1_DE.txt",true);
-			solutions->printVariablesToFile("VAR_stage1_DE.txt",true);
+			solutions->printObjectivesToFile("/STAGE_1/FUN_stage1_DE.txt",true);
+			solutions->printVariablesToFile("/STAGE_1/VAR_stage1_DE.txt",true);
 			//Maria: Returning the results:
 
 			algorithm2->setInputParameter("population",solutions);
@@ -2699,20 +2699,20 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			std::cout << "Printing objectives and variables " << std::endl;
 
 			//solutions->sort(comparator);
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/FinalExecutions/DE/9mer_frag_5/DE_05_05/Run_1/stage2/FUN_stage2_DE.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/FinalExecutions/DE/9mer_frag_5/DE_05_05/Run_1/stage2/VAR_stage2_DE.txt",true);
+			solutions->printObjectivesToFile("/STAGE_2/FUN_stage2_DE.txt",true);
+			solutions->printVariablesToFile("/STAGE_2/VAR_stage2_DE.txt",true);
 
 			
 			algorithm3->setInputParameter("population",solutions);
 			
 			std::cout << "Execution of algorithm_3 " << strategy << std::endl;
 
-			//solutions = algorithm3->execute();
+			solutions = algorithm3->execute();
 			std::cout << "Printing objectives and variables " << std::endl;
 			
 			//solutions->sort(comparator);
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/FinalExecutions/DE/9mer_frag_5/DE_05_05/Run_1/stage3/FUN_stage3_DE.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/FinalExecutions/DE/9mer_frag_5/DE_05_05/Run_1/stage3/FUN_stage3_DE.txt",true);
+			solutions->printObjectivesToFile("/STAGE_3/FUN_stage3_DE.txt",true);
+			solutions->printVariablesToFile("/STAGE_3/FUN_stage3_DE.txt",true);
 
 			
 			algorithm4->setInputParameter("population",solutions);
@@ -2723,8 +2723,8 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
 			std::cout << "Printing objectives and variables " << std::endl;
 			
 			//solutions->sort(comparator);
-			solutions->printObjectivesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/FinalExecutions/DE/9mer_frag_5/DE_05_05/Run_1/stage4/FUN_stage4_DE.txt",true);
-			solutions->printVariablesToFile("/Users/mariajesus/Desktop/Rosetta_copia/rosetta_src_2017.08.59291_bundle/demos/tutorials/denovo_structure_prediction/FinalExecutions/DE/9mer_frag_5/DE_05_05/Run_1/stage4/FUN_stage4_DE.txt",true);
+			solutions->printObjectivesToFile("/STAGE_4/FUN_stage4_DE.txt",true);
+			solutions->printVariablesToFile("/STAGE_4/FUN_stage4_DE.txt",true);
 
 			//Maria: PSO
 			solutions->sort(comparator);
@@ -2749,7 +2749,7 @@ void AbrelaxApplication::jMetal_optimization( ProtocolOP abinitio_protocol, pose
   				delete selection;
 			}
 
-			if(crossover != nullptr){
+			if(crossover != nullptr){ 
 				delete crossover;
 			}
   			

@@ -57,10 +57,7 @@ SolutionSet * DESeq::execute() {
   comparator = new ObjectiveComparator(0); // Single objective comparator
 
   // Differential evolution parameters
-  int r1;
-  int r2;
-  int r3;
-  int jrand;
+
 
   Solution ** parent;
 
